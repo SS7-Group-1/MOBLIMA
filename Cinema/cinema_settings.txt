@@ -9,4 +9,5 @@ ticket_price,type,class,age,weekday
 7.50,3D,Poor,adult,0
 7.25,3D,Poor,senior,0
 8.00,Blockbuster,Poor,child,0
+8.50,Blockbuster,Poor,adult,0
 8.25,Blockbuster,Poor,senior,0
