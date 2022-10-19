@@ -1,0 +1,24 @@
+#For the cineplex.txt
+
+#Cineplex name
+#Amount of cinemas
+#Cinema 1 name
+#Cinema 1 class
+#Cinema 1 amount of halls
+#Amount of seats per hall.
+...
+
+
+#For the movie.txt
+
+#Amount of movies
+#Movie title.
+#Movie status
+#Movie director
+#Movie cast
+#Movie rating
+#Movie pastreviews
+#Movie reviewerrating (/10)
+
+#For the cinema_settings.txt
+ticket_price

@@ -1,0 +1,4 @@
+Cinema_Name,Cinema_class,Cinema_halls,cinema_seatsperhall
+Newtown,Premium,2,20
+Ridgewater,Economy,4,14
+PoorLand,Poor,3,25

@@ -1,0 +1,15 @@
+Cathay
+3
+Newtown
+Premium
+2
+20
+Ridgewater
+Economy
+4
+14
+PoorLand
+Poor
+3
+25
+

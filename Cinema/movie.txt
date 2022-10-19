@@ -1,0 +1,7 @@
+name,status,synopsis,director,cast,rating,review,reviewrating,type
+avengers,End Of Showing,avenging the world,Joss whendon,Chris evans:Chrishemsworth,PG13,nice show,8.0,Blockbuster
+minions,Showing,yellow people,Kyle balda,Steve Carrel:Pierre Coffin,Unrated,nice yellow people show,6.0,3D
+James bond 007,Showing,man with gun and spy,james cameron,james bond,PG13,car fast man shot,8.0,Blockbuster
+avatar,Showing,blue stuff,idk,bluemen,PG13,blue men war,7,3D
+minions2,Showing,yellowting,idk,yellowmen,PG13,yellowmen protect,9,Blockbuster
+Hello,Showing,test,test,test,test,test,9.0,3D
