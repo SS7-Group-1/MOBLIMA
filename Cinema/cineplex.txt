@@ -1,4 +1,4 @@
-Cinema_Name,Cinema_class,Cinema_halls,cinema_seatsperhall
-Newtown,Premium,2,20
-Ridgewater,Economy,4,14
-PoorLand,Poor,3,25
+Cinema_Name,Cinema_Code,Cinema_class,Cinema_rows,cinema_seats
+GOLDEN_VILLAGE,GV1X,Platinum,5,8
+CATHAY,C11,Economy,4,14
+SHAW,SW,Economy,3,25

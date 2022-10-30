@@ -1,7 +1,8 @@
-name,status,synopsis,director,cast,rating,review,reviewrating,type
-avengers,End Of Showing,avenging the world,Joss whendon,Chris evans:Chrishemsworth,PG13,nice show,8.0,Blockbuster
-minions,Showing,yellow people,Kyle balda,Steve Carrel:Pierre Coffin,Unrated,nice yellow people show,6.0,3D
-James bond 007,Showing,man with gun and spy,james cameron,james bond,PG13,car fast man shot,8.0,Blockbuster
-avatar,Showing,blue stuff,idk,bluemen,PG13,blue men war,7,3D
-minions2,Showing,yellowting,idk,yellowmen,PG13,yellowmen protect,9,Blockbuster
-Hello,Showing,test,test,test,test,test,9.0,3D
+name,status,synopsis,director,movie_cast_amt,cast,review_amt,review,rating,rating_amt,reviewrating,type,sales
+avengers,End Of Showing,avenging the world,Joss whendon,2,Chris evans,Chrishemsworth,2,nice show,horrible,PG13,5,8.0,8.2,1.0,4.0,5.0,Blockbuster,5
+minions,Showing,yellow people,Kyle balda,3,Steve Carrel,Pierre Coffin,tax_Evade,3,nice yellow people show,hate yellow,bad,G,3,6.0,2.3,8.2,3D,1
+spyxfamily,End Of Showing,avenging the world,Joss whendon,2,Chris evans,Chrishemsworth,2,nice show,horrible,PG13,4,8.0,8.2,7.0,9.0,Blockbuster,3
+my hero academia,Showing,yellow people,Kyle balda,3,Steve Carrel,Pierre Coffin,tax_Evade,3,nice yellow people show,hate yellow,bad,G,3,9.9,9.5,9.2,3D,2
+chainsaw man,End Of Showing,avenging the world,Joss whendon,2,Chris evans,Chrishemsworth,2,nice show,horrible,PG13,2,8.0,8.2,Blockbuster,3
+blackadams,Showing,yellow people,Kyle balda,3,Steve Carrel,Pierre Coffin,tax_Evade,3,nice yellow people show,hate yellow,bad,G,3,0.5,2.5,3.2,3D,2
+titanic,Showing,ship sink sad,steven spielberg,2,leonard,dicap,2,sad,was crying the whole time,PG13,2,9.8,7.2,Blockbuster,3
