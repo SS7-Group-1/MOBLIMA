@@ -1,4 +1,4 @@
-package MOBLIMA;
+package MOBLIMA.Displays;
 
 public class SystemSettingStaff {
 

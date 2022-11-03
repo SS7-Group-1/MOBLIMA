@@ -1,4 +1,6 @@
-package MOBLIMA;
+package MOBLIMA.Displays;
+
+import MOBLIMA.Movie;
 
 import java.util.Scanner;
 

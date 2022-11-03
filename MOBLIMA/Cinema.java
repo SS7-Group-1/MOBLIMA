@@ -1,6 +1,8 @@
 package MOBLIMA;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
     private boolean isPlatinum;
     private String cinemaCode;
     private Cineplex cineplex;

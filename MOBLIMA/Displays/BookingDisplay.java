@@ -1,4 +1,6 @@
-package MOBLIMA;
+package MOBLIMA.Displays;
+
+import MOBLIMA.*;
 
 import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files

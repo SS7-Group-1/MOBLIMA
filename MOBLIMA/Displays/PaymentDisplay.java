@@ -1,4 +1,6 @@
-package MOBLIMA;
+package MOBLIMA.Displays;
+import MOBLIMA.ShowTime;
+
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.text.SimpleDateFormat;
 import java.util.Date;

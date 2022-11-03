@@ -1,4 +1,6 @@
-package MOBLIMA;
+package MOBLIMA.Displays;
+
+import MOBLIMA.ShowTime;
 
 import java.util.ArrayList;
 import java.util.Scanner;
