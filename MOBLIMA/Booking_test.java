@@ -146,19 +146,6 @@ public class Booking_test {
                     movie  = new Movie(movie_title,status,movie_synopsis,movie_director,movie_cast,rating,age,review_list,type,sale);
                     //test class
                     movie_list.add(movie);
-
-                    System.out.println("ADded to serialize");
-                    FileOutputStream fos = null;
-                    ObjectOutputStream out = null;
-                    try {
-                        fos = new FileOutputStream("movie.dat");
-                        out = new ObjectOutputStream(fos);
-                        out.writeObject(movie);
-                        out.close();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-
                 }
 
                 // System.out.println(data);
