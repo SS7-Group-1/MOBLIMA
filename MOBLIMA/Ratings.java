@@ -1,7 +1,8 @@
 package MOBLIMA;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ratings {
+public class Ratings implements Serializable {
 
     private ArrayList<Float> rating;
 

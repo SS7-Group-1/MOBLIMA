@@ -1,8 +1,9 @@
 package MOBLIMA;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Reviews {
+public class Reviews implements Serializable {
     private ArrayList<String> review;
 
     public Reviews(){ //constructor

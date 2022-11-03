@@ -1,9 +1,7 @@
 package MOBLIMA;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,10 +21,10 @@ public class Booking_test {
         // Populating Movie database
         try {
             System.out.println("Trying to populate the Movie database");
-            File myObj = new File("C:\\Users\\Ryan\\Documents\\Cinema\\movie.txt");
+            File myObj = new File("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\movie.txt");
             Scanner myReader = new Scanner(myObj);
             try {
-                lines = Files.readAllLines(Paths.get("C:\\Users\\Ryan\\Documents\\Cinema\\movie.txt"), Charset.defaultCharset());
+                lines = Files.readAllLines(Paths.get("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\movie.txt"), Charset.defaultCharset());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -149,6 +147,18 @@ public class Booking_test {
                     //test class
                     movie_list.add(movie);
 
+                    System.out.println("ADded to serialize");
+                    FileOutputStream fos = null;
+                    ObjectOutputStream out = null;
+                    try {
+                        fos = new FileOutputStream("movie.dat");
+                        out = new ObjectOutputStream(fos);
+                        out.writeObject(movie);
+                        out.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
                 }
 
                 // System.out.println(data);
@@ -166,14 +176,14 @@ public class Booking_test {
         }
         //Populating Cinemas.
         try {
-            File myObj = new File("C:\\Users\\Ryan\\Documents\\Cinema\\cineplex.txt");
+            File myObj = new File("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\cineplex.txt");
             Scanner myReader = new Scanner(myObj);
             int count =0;
-            //Path file = Paths.get("C:\\Users\\Ryan\\Documents\\Cinema\\test.txt");
+            //Path file = Paths.get("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\test.txt");
 
             //find amount of lines in the file.
             try {
-                lines = Files.readAllLines(Paths.get("C:\\Users\\Ryan\\Documents\\Cinema\\cineplex.txt"), Charset.defaultCharset());
+                lines = Files.readAllLines(Paths.get("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\cineplex.txt"), Charset.defaultCharset());
             } catch (IOException e) {
                 e.printStackTrace();
             }

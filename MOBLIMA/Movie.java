@@ -1,9 +1,10 @@
 package MOBLIMA;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Movie {
+public class Movie implements Serializable {
     private String title;
     private MovieStatus status;
     private String synopsis;

@@ -24,10 +24,10 @@ public class MovieListingStaff {
         //populate Movie database
         try {
             //System.out.println("Trying to populate the Movie database");
-            File myObj = new File("C:\\Users\\Ryan\\Documents\\Cinema\\movie.txt");
+            File myObj = new File("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\movie.txt");
             Scanner myReader = new Scanner(myObj);
             try {
-                lines = Files.readAllLines(Paths.get("C:\\Users\\Ryan\\Documents\\Cinema\\movie.txt"), Charset.defaultCharset());
+                lines = Files.readAllLines(Paths.get("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\movie.txt"), Charset.defaultCharset());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -526,8 +526,8 @@ public class MovieListingStaff {
             System.out.println(lineToRemove);
             //find movie in the movie text.
 
-            File input_file = new File("C:\\Users\\Ryan\\Documents\\Cinema\\movie.txt");
-            File temp_file = new File("C:\\Users\\Ryan\\Documents\\Cinema\\temp.txt");
+            File input_file = new File("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\movie.txt");
+            File temp_file = new File("C:\\Users\\jwlim\\Documents\\GitHub\\MOBLIMA\\Cinema\\temp.txt");
             BufferedReader my_reader = new BufferedReader(new FileReader(input_file));
             BufferedWriter my_writer = new BufferedWriter(new FileWriter(temp_file));
             //String lineToRemove = "string to remove";
