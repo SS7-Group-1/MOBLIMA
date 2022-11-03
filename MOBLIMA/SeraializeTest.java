@@ -1,6 +1,5 @@
 package MOBLIMA;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,29 +30,11 @@ public class SeraializeTest {
         // Add the created movie to the list
         list.add(test_movie);
 
-        // Write the list of movies to a file
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
-        try {
-            fos = new FileOutputStream("movie.dat");
-            out = new ObjectOutputStream(fos);
-            out.writeObject(list);
-            out.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        // Add list to file
+        FileHelper.write(list, "movie.dat");
 
-        // Read list of movies from file
-        FileInputStream fis = null;
-        ObjectInputStream in = null;
-        try {
-            fis = new FileInputStream("movie.dat");
-            in = new ObjectInputStream(fis);
-            list = (ArrayList<Movie>) in.readObject();
-            in.close();
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        // Read from file
+        list = FileHelper.read("movie.dat");
 
         // Print out all movies in file
         for (Movie movie : list) {
