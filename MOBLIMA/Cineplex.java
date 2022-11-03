@@ -6,9 +6,9 @@ public enum Cineplex {
     SHAW("SHAW");
 
     private String name;
+
     Cineplex(String name){
         this.name = name;
-
     }
 
     @Override

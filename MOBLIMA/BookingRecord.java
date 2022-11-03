@@ -5,8 +5,6 @@ public class BookingRecord {
     private String transactionID;
     private Seat seat;
 
-
-
     public BookingRecord(Customer customer, String tid, Seat seat){
         this.customer=customer;
         this.transactionID=tid;

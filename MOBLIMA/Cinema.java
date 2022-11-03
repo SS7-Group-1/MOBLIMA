@@ -4,7 +4,6 @@ public class Cinema {
     private boolean isPlatinum;
     private String cinemaCode;
     private Cineplex cineplex;
-
     private int seats_col;
     private int seats_row;
 
@@ -19,19 +18,9 @@ public class Cinema {
     public boolean isPlatinum(){
         return isPlatinum;
     }
+
     public String getCinemaCode(){
         return cinemaCode;
-    }
-
-    @Override
-    public String toString() {
-        return "Cinema{" +
-                "isPlatinum=" + isPlatinum +
-                ", cinemaCode='" + cinemaCode + '\'' +
-                ", cineplex=" + cineplex +
-                ", seats_col=" + seats_col +
-                ", seats_row=" + seats_row +
-                '}';
     }
 
     public int getSeats_col() {
@@ -46,4 +35,14 @@ public class Cinema {
         return cineplex.toString();
     }
 
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "isPlatinum=" + isPlatinum +
+                ", cinemaCode='" + cinemaCode + '\'' +
+                ", cineplex=" + cineplex +
+                ", seats_col=" + seats_col +
+                ", seats_row=" + seats_row +
+                '}';
+    }
 }

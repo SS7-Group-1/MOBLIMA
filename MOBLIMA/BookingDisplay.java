@@ -7,7 +7,6 @@ import java.lang.*;
 
 public class BookingDisplay {
     Scanner sc = new Scanner(System.in);
-
     private float ticketPrice;
     private boolean bookingFinished;
     private ShowTime showtime;
@@ -16,8 +15,6 @@ public class BookingDisplay {
     public BookingDisplay(ArrayList<ShowTime> showtime_list){
         this.showtime_List=showtime_list;
         this.bookingFinished=false;
-
-
     }
     public void computePrice(){
         // from showtime class
@@ -60,17 +57,12 @@ public class BookingDisplay {
                             }
                         } else {
                             //filter by movie only.
-
                             for (int i = 0; i < showtime_List.size(); i++) {
                                 if (showtime_List.get(i).getMovie().getTitle().equals(chosen_movie)) {
                                     System.out.println(showtime_List.get(i));
-
                                 }
                             }
-
                         }
-
-
                     } else {
                         System.out.println("Filter by Cinema? Y/N?");
                         c = sc.next().charAt(0);
@@ -86,17 +78,12 @@ public class BookingDisplay {
 
                                 }
                             }
-
                         } else {
                             //nofilter
                             for (int i = 0; i < showtime_List.size(); i++) {
-
                                 System.out.println(showtime_List.get(i));
-
-
                             }
                         }
-
                     }
                     break;
                 case 2:
@@ -159,12 +146,8 @@ public class BookingDisplay {
                     } else {
                         System.out.println("That seat is already taken.");
                     }
-
-
             }
         }
-
-
     }
 
 
@@ -198,16 +181,10 @@ public class BookingDisplay {
         }
         Customer cust = new Customer(name,phone,Email,isSenior,isChild);
         return cust;
-
-
-
-
-
     }
+
     public void printSeatAvailability(ShowTime showtime){ //show seat availability.
         showtime.getAllSeats();
 
     }
-
-
 }

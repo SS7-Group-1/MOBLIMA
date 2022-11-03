@@ -6,9 +6,9 @@ public enum Day {
     PUBLIC_HOLIDAY("PUBLIC_HOLIDAY");
 
     private String day;
+
     Day(String day){
         this.day=day;
-
     }
 
     @Override

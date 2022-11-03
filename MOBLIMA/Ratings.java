@@ -10,7 +10,6 @@ public class Ratings implements Serializable {
         rating = new ArrayList<Float>();
     }
 
-
     public void addRating(Float rat){
         rating.add(rat);
         System.out.println("Rating successfully added");
@@ -18,12 +17,12 @@ public class Ratings implements Serializable {
 
     public Float getAverageRating(){
         Float sum=0.0f;
+
         for(int i=0;i<rating.size();i++){
             sum+=rating.get(i);
         }
 
         return sum/rating.size();
-
     }
     public void printRatings(){
         for(int i=0;i<rating.size();i++){

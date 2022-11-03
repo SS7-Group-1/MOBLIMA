@@ -1,7 +1,6 @@
 package MOBLIMA;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Movie implements Serializable {
@@ -16,13 +15,12 @@ public class Movie implements Serializable {
     private Reviews review;
     private MovieType movieType;
 
-
     public Movie(){
         this.sales =0;
     }
 
-    public Movie(String titl, MovieStatus stat, String synopsis, String director, ArrayList<String>cast, Ratings rating, AgeRating ageRating,Reviews review,MovieType movieType, int sales) {
-        this.title=titl;
+    public Movie(String title, MovieStatus stat, String synopsis, String director, ArrayList<String>cast, Ratings rating, AgeRating ageRating,Reviews review,MovieType movieType, int sales) {
+        this.title=title;
         this.status=stat;
         this.synopsis=synopsis;
         this.director=director;
@@ -38,9 +36,11 @@ public class Movie implements Serializable {
     public String getTitle() {
         return title;
     }
+
     public void addSales(){
         this.sales= this.sales+1;
     }
+
     public int getSales(){
         return this.sales;
     }
@@ -48,6 +48,7 @@ public class Movie implements Serializable {
     public Ratings getRating() {
         return rating;
     }
+
     public Reviews getReview(){
         return review;
     }
@@ -55,6 +56,7 @@ public class Movie implements Serializable {
     public MovieStatus getStatus() {
         return status;
     }
+
     public String getDirector(){
         return director;
     }
@@ -66,13 +68,14 @@ public class Movie implements Serializable {
     public String getSynopsis() {
         return synopsis;
     }
+
     public ArrayList<String> getcast(){
         return cast;
     }
+
     public String getAgeRating(){
         return String.valueOf(ageRating);
     }
-
 
     @Override
     public String toString() {

@@ -10,7 +10,6 @@ public class ShowTime {
     private Day day;
     private Cinema cinema;
 
-
     public ShowTime(){
 
     }
@@ -20,7 +19,6 @@ public class ShowTime {
         this.seats=seats;
         this.day=day;
         this.cinema=cinema;
-
     }
 
     @Override
@@ -60,8 +58,6 @@ public class ShowTime {
     public void setTime(String time) {
         this.time = time;
     }
-
-
 
     public boolean getSpecificSeats(int row, int col) {
         return seats[row][col].getOccupied();

@@ -7,7 +7,7 @@ public class Reviews implements Serializable {
     private ArrayList<String> review;
 
     public Reviews(){ //constructor
-        review = new ArrayList<String>();
+        review = new ArrayList<>();
 
     }
     //add review will add into the arraylist/
@@ -17,7 +17,6 @@ public class Reviews implements Serializable {
     }
 
     //print reviews.
-
     public void printReview(){
         for(int i=0;i<review.size();i++){
             System.out.println(review.get(i));

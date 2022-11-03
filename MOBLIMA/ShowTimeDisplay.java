@@ -21,17 +21,11 @@ public class ShowTimeDisplay {
 
             choice = sc.nextInt();
             switch (choice) {
-
                 case 1:
                     for (int i=0;i < showtime_list.size();i++){
                         //create new SHOWTIME FILE TMR.
-
                     }
-
-
             }
         }
     }
-
-
 }

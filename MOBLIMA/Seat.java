@@ -6,20 +6,20 @@ public class Seat {
     private boolean isOccupied;
 
     public Seat(){
-
-
     }
+
     public Seat(int row, int col){
         this.row=row;
         this.col=col;
         this.isOccupied=false;
-
     }
+
     public boolean getOccupied(){
         return isOccupied;
     }
+
     public void setOccupied(){
-        if (isOccupied==false){
+        if (!isOccupied){
             isOccupied=true;
         }
     }

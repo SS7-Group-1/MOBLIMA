@@ -8,11 +8,10 @@ public enum MovieType {
 
     MovieType(String typ){
         this.type = typ;
-
     }
+
 @Override
     public String toString(){
         return type;
     }
-
 }

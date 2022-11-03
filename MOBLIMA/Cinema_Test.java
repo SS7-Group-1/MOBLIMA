@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Cinema_Test {
-
-
         public static void main(String args[]) {
             ArrayList<ShowTime> showtime_list = new ArrayList<ShowTime>();
             ArrayList<Cinema> cinema_list =new ArrayList<Cinema>();
@@ -269,16 +267,6 @@ public class Cinema_Test {
 
                 System.out.println(showtime_list.get(i).getSpecificSeats(1,1));
             }
-
-
-
-
-
-
-
-
-
         }
     }
-
 
