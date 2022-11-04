@@ -30,11 +30,14 @@ public class Movie implements Serializable {
         this.sales=sales;
         this.review=review;
         this.movieType=movieType;
-
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void addSales(){
@@ -49,32 +52,64 @@ public class Movie implements Serializable {
         return rating;
     }
 
+    public void setRating(Ratings rating) {
+        this.rating = rating;
+    }
+
     public Reviews getReview(){
         return review;
+    }
+
+    public void setReview(Reviews review){
+        this.review=review;
     }
 
     public MovieStatus getStatus() {
         return status;
     }
 
+    public void setStatus(MovieStatus status) {
+        this.status = status;
+    }
+
     public String getDirector(){
         return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
     }
 
     public MovieType getMovieType() {
         return movieType;
     }
 
+    public void setMovieType(MovieType movieType) {
+        this.movieType = movieType;
+    }
+
     public String getSynopsis() {
         return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     public ArrayList<String> getcast(){
         return cast;
     }
 
+    public void setCast(ArrayList<String> cast) {
+        this.cast = cast;
+    }
+
     public String getAgeRating(){
         return String.valueOf(ageRating);
+    }
+
+    public void setAgeRating(AgeRating ageRating) {
+        this.ageRating = ageRating;
     }
 
     @Override

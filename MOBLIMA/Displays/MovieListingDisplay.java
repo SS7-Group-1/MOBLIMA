@@ -12,27 +12,30 @@ public class MovieListingDisplay {
     public void DisplayMenu() {
         // Populating Movie database
         movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
-        for (Movie movie : movie_list) {
-            System.out.println(movie);
-        }
-
         Scanner sc = new Scanner(System.in);
+        System.out.println("*".repeat(40));
+        System.out.println("Movie Listing Menu");
 
         int choice;
         while (true) {
-            System.out.println("1. Display All movies");
-            System.out.println("2. Top 5 Movies by rating");
-            System.out.println("3. Top 5 Movies by ticket sales");
-            System.out.println("4. Search Movie");
-            System.out.println("5. Exit");
+            System.out.println("*".repeat(40));
+            System.out.println("[1] Display All movies");
+            System.out.println("[2] Top 5 Movies by rating");
+            System.out.println("[3] Top 5 Movies by ticket sales");
+            System.out.println("[4] Search Movie");
+            System.out.println("[5] Exit");
             choice = sc.nextInt();
             switch (choice) {
                 case 1: // Display All movies
+                    System.out.println("*".repeat(40));
+                    System.out.println("List of all movies");
                     for (Movie movie : movie_list) {
-                        System.out.println(movie.getTitle());
+                        System.out.println(" - " + movie.getTitle());
                     }
                     break;
                 case 2: // Top 5 Movies by rating
+                    System.out.println("*".repeat(40));
+                    System.out.println("Top 5 movies by rating");
                     HashMap<String,Float>Map = new HashMap<>();
                     LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<>();
                     ArrayList<Float> list = new ArrayList<>();
@@ -51,18 +54,19 @@ public class MovieListingDisplay {
                             }
                         }
                     }
-                    System.out.println(sortedMap);
+                    //System.out.println(sortedMap);
                     int print_count =0;
                     for (SortedMap.Entry<String, Float> entry : sortedMap.entrySet()) {
                         if (print_count!=5) {
-                            System.out.println("Movie : " + entry.getKey());
-                            print_count++;
+                            System.out.println(" " + ++print_count + ". " + entry.getKey());
                         }else{
                             break;
                         }
                     }
                     break;
                 case 3: // Top 5 Movies by ticket sales
+                    System.out.println("*".repeat(40));
+                    System.out.println("Top 5 movies by sales");
                     HashMap<String, Integer> map1 = new HashMap<>();
                     LinkedHashMap<String, Integer> sortedMap1 = new LinkedHashMap<>();
                     ArrayList<Integer> list1 = new ArrayList<>();
@@ -83,11 +87,10 @@ public class MovieListingDisplay {
                         }
                     }
                     int print_count1=0;
-                    System.out.println(sortedMap1);
+                    //System.out.println(sortedMap1);
                     for (SortedMap.Entry<String, Integer> entry : sortedMap1.entrySet()) {
                         if (print_count1!=5) {
-                            System.out.println("Movie : " + entry.getKey());
-                            print_count1++;
+                            System.out.println(" " + ++print_count1 + ". " + entry.getKey());
                         }else{
                             break;
                         }
