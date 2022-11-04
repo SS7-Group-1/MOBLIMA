@@ -6,8 +6,8 @@ public enum MovieType {
 
     private String type;
 
-    MovieType(String typ){
-        this.type = typ;
+    MovieType(String type){
+        this.type = type;
     }
 
 @Override

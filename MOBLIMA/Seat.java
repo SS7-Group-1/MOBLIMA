@@ -1,17 +1,17 @@
 package MOBLIMA;
 
-public class Seat {
-    private int row;
-    private int col;
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     private boolean isOccupied;
+    private boolean isPremium;
 
     public Seat(){
     }
 
-    public Seat(int row, int col){
-        this.row=row;
-        this.col=col;
+    public Seat(boolean isPremium){
         this.isOccupied=false;
+        this.isPremium = isPremium;
     }
 
     public boolean getOccupied(){
@@ -29,8 +29,6 @@ public class Seat {
         int occupy = isOccupied ? 1 : 0;
 
         return "Seat{" +
-                "row=" + row +
-                ", col=" + col +
                 ", isOccupied=" + occupy +
                 '}';
     }

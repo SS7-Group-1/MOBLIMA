@@ -16,6 +16,16 @@ public class MovieListingStaff {
         movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
 
         System.out.println("*".repeat(40));
+        System.out.println("       SCREEN     ");
+        System.out.println(" A  ▢ ▢ ▢ ▢ ▢ ▢ ▢  A");
+        System.out.println(" B  ▢ ▢ ▢ ▢ ▢ ▢ ▢  B   ▢ Available");
+        System.out.println(" C  ▢ ▢ ▤ ▤ ▤ ▢ ▢  C   ▤ Premium Seat");
+        System.out.println(" D  ▢ ▢ ▤ ▤ ▤ ▢ ▢  D   ■ Booked");
+        System.out.println(" E  ▢ ▢ ▢ ▢ ▢ ▢ ▢  E");
+        System.out.println("    1 2 3 4 5 6 7  ");
+
+
+        System.out.println("*".repeat(40));
         System.out.println("Movie Listing Staff Menu");
         int choice = 0;
         while (choice != 4) {

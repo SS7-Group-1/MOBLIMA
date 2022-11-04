@@ -1,24 +1,30 @@
 package MOBLIMA;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
-public class ShowTime {
+public class ShowTime implements Serializable {
 
-    private String time;
+    private LocalTime time;
     private Movie movie;
     private Seat[][] seats;
-    private Day day;
+    private LocalDate date;
     private Cinema cinema;
 
-    public ShowTime(){
-
+    private int duration;
+    public ShowTime(Movie movie){
+        this.movie = movie;
     }
-    public ShowTime(String time, Movie movie, Seat[][] seats, Day day, Cinema cinema){
+
+    public ShowTime(LocalTime time, Movie movie, Seat[][] seats, LocalDate date, Cinema cinema, int duration){
         this.time=time;
         this.movie=movie;
         this.seats=seats;
-        this.day=day;
+        this.date=date;
         this.cinema=cinema;
+        this.duration = duration;
     }
 
     @Override
@@ -27,12 +33,12 @@ public class ShowTime {
                 "time='" + time + '\'' +
                 ", movie=" + movie +
                 ", seats=" + Arrays.toString(seats) +
-                ", day=" + day +
+                ", day=" + date +
                 '}';
     }
 
-    public void setDay(Day day) {
-        this.day = day;
+    public void setDay(LocalDate day) {
+        this.date = date;
     }
 
     public void setMovie(Movie movie) {
@@ -51,23 +57,39 @@ public class ShowTime {
         return cinema;
     }
 
-    public String getTime() {
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
+    }
+
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     public boolean getSpecificSeats(int row, int col) {
         return seats[row][col].getOccupied();
     }
     public void getAllSeats(){
-        for (int i=0;i<cinema.getSeats_row();i++){
-            for (int j=0;j< cinema.getSeats_col();j++) {
-                System.out.println(seats[i][j]);
-            }
-        }
+        //for (int i=0;i<cinema.getSeats_row();i++){
+        //    for (int j=0;j< cinema.getSeats_col();j++) {
+        //        System.out.println(seats[i][j]);
+        //    }
+        //}
 
 
     }

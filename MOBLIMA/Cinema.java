@@ -6,15 +6,13 @@ public class Cinema implements Serializable {
     private boolean isPlatinum;
     private String cinemaCode;
     private Cineplex cineplex;
-    private int seats_col;
-    private int seats_row;
+    private Seat[][] seatLayout;
 
-    public Cinema(Cineplex cineplex, boolean isplat, String code,int seats_col,int seats_row){
+    public Cinema(Cineplex cineplex, boolean isplat, String code,Seat[][] seatLayout){
         this.cineplex =cineplex;
         this.isPlatinum=isplat;
         this.cinemaCode=code;
-        this.seats_col=seats_col;
-        this.seats_row=seats_row;
+        this.seatLayout=seatLayout;
     }
 
     public boolean isPlatinum(){
@@ -25,12 +23,8 @@ public class Cinema implements Serializable {
         return cinemaCode;
     }
 
-    public int getSeats_col() {
-        return seats_col;
-    }
-
-    public int getSeats_row() {
-        return seats_row;
+    public Seat[][] getSeatLayout() {
+        return seatLayout;
     }
 
     public String getName() {
@@ -39,12 +33,6 @@ public class Cinema implements Serializable {
 
     @Override
     public String toString() {
-        return "Cinema{" +
-                "isPlatinum=" + isPlatinum +
-                ", cinemaCode='" + cinemaCode + '\'' +
-                ", cineplex=" + cineplex +
-                ", seats_col=" + seats_col +
-                ", seats_row=" + seats_row +
-                '}';
+        return cineplex + " (" + cinemaCode + ")" + (isPlatinum ? " (Platinum)" : "");
     }
 }
