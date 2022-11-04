@@ -155,7 +155,7 @@ public class ShowTimeStaff {
                 case 3: // Update showtime
                 case 4: // Remove showtime
                     System.out.println("*".repeat(40));
-                    System.out.println(choice == 3? "Update" : "Remove" + " showtime for " + movie.getTitle());
+                    System.out.println((choice == 3? "Update" : "Remove") + " showtime for " + movie.getTitle());
 
                     // set cinema
                     System.out.println("*".repeat(40));

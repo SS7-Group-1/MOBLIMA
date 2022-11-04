@@ -24,6 +24,14 @@ public class Seat implements Serializable {
         }
     }
 
+    public void setPremium(boolean premium) {
+        isPremium = premium;
+    }
+
+    public boolean isPremium(){
+        return isPremium;
+    }
+
     @Override
     public String toString() {
         int occupy = isOccupied ? 1 : 0;
