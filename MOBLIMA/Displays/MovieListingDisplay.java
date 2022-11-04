@@ -16,8 +16,8 @@ public class MovieListingDisplay {
         System.out.println("*".repeat(40));
         System.out.println("Movie Listing Menu");
 
-        int choice;
-        while (true) {
+        int choice = 0;
+        while (choice != 5) {
             System.out.println("*".repeat(40));
             System.out.println("[1] Display All movies");
             System.out.println("[2] Top 5 Movies by rating");
@@ -115,12 +115,10 @@ public class MovieListingDisplay {
                         System.out.println("Movie doesn't exist.");
                     }
                     break;
-                case 5: // Exit
-                    System.out.println("Exiting application...");
-                    System.exit(69);
+                case 5:
                     break;
                 default:
-                    System.out.println("Invalid choice woi");
+                    System.out.println("Invalid choice. Please try again.");
                     break;
             }
         }

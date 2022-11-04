@@ -209,9 +209,7 @@ public class MovieListingStaff {
                         }
                     }
                     break;
-                case 4: // Exit
-                    System.out.println("Exiting application...");
-                    System.exit(69);
+                case 4:
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
