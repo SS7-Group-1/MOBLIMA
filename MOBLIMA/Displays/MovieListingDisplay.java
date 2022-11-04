@@ -12,6 +12,9 @@ public class MovieListingDisplay {
     public void DisplayMenu() {
         // Populating Movie database
         movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
+        for (Movie movie : movie_list) {
+            System.out.println(movie);
+        }
 
         Scanner sc = new Scanner(System.in);
 
@@ -26,7 +29,7 @@ public class MovieListingDisplay {
             switch (choice) {
                 case 1: // Display All movies
                     for (Movie movie : movie_list) {
-                        System.out.println(movie);
+                        System.out.println(movie.getTitle());
                     }
                     break;
                 case 2: // Top 5 Movies by rating
