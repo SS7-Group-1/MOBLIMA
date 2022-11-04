@@ -211,16 +211,13 @@ public class MovieListingStaff {
                     found =0;
                     for (int i=0;i< movie_list.size();i++){
                         if (movie_list.get(i).getTitle().equals(chosen_movie)){
-                            chosen_remove = movie_list.get(i);
+                            //chosen_remove = movie_list.get(i);
                             found =1;
                         }
                     }
                     if (found ==1) {
-                        System.out.println("Found movie.");
-                        removeMovie(chosen_remove);
-
-
-
+                        System.out.println("Removed movie.");
+                        //removeMovie(chosen_remove);
                     }
                     else{
                         System.out.println("Movie doesn't exist.");

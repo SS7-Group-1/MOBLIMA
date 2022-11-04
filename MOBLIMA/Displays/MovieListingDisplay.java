@@ -1,8 +1,8 @@
 package MOBLIMA.Displays;
 
-import MOBLIMA.FileHelper;
-import MOBLIMA.Movie;
+import MOBLIMA.*;
 
+import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -24,12 +24,12 @@ public class MovieListingDisplay {
             System.out.println("5. Exit");
             choice = sc.nextInt();
             switch (choice) {
-                case 1:
+                case 1: // Display All movies
                     for (Movie movie : movie_list) {
-                        System.out.println(movie.getTitle());
+                        System.out.println(movie);
                     }
                     break;
-                case 2:
+                case 2: // Top 5 Movies by rating
                     HashMap<String,Float>Map = new HashMap<>();
                     LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<>();
                     ArrayList<Float> list = new ArrayList<>();
@@ -59,7 +59,7 @@ public class MovieListingDisplay {
                         }
                     }
                     break;
-                case 3:
+                case 3: // Top 5 Movies by ticket sales
                     HashMap<String, Integer> map1 = new HashMap<>();
                     LinkedHashMap<String, Integer> sortedMap1 = new LinkedHashMap<>();
                     ArrayList<Integer> list1 = new ArrayList<>();
@@ -90,13 +90,14 @@ public class MovieListingDisplay {
                         }
                     }
                     break;
-                case 4:
+                case 4: // Search Movie
                     System.out.println("Which Movie?");
                     sc.skip("\\R?");
                     String chosen_movie = sc.nextLine();
                     int found =0;
                     for (Movie movie : movie_list) {
                         if (movie.getTitle().equals(chosen_movie)) {
+                            System.out.println(movie);
                             found = 1;
                             break;
                         }
@@ -108,7 +109,7 @@ public class MovieListingDisplay {
                         System.out.println("Movie doesn't exist.");
                     }
                     break;
-                case 5:
+                case 5: // Exit
                     System.out.println("Exiting application...");
                     System.exit(69);
                     break;
