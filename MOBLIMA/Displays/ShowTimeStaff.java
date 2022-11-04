@@ -22,7 +22,7 @@ public class ShowTimeStaff {
     public void DisplayMenu() {
         movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
         cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinema.dat");
-        showtime_list = (ArrayList<ShowTime>) FileHelper.read("data/showtime.dat");
+        showtime_list = new ArrayList<>();//(ArrayList<ShowTime>) FileHelper.read("data/showtime.dat");
 
         System.out.println("*".repeat(40));
         System.out.println("Showtime management staff menu");
@@ -110,6 +110,7 @@ public class ShowTimeStaff {
                             System.out.println("Invalid option. Please try again.");
                         } else {
                             showTime.setCinema(cinema_list.get(add_choice - 1));
+                            showTime.setSeats(cinema_list.get(add_choice - 1).getSeatLayout().clone());
                             break;
                         }
                     }
@@ -150,6 +151,7 @@ public class ShowTimeStaff {
 
                     //print
                     System.out.println(showTime);
+
                     addShowTime(showTime);
                     break;
                 case 3: // Update showtime

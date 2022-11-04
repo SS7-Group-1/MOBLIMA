@@ -34,6 +34,7 @@ public class ShowTime implements Serializable {
                 ", movie=" + movie +
                 ", seats=" + Arrays.toString(seats) +
                 ", day=" + date +
+                ", cinema=" + cinema +
                 '}';
     }
 
