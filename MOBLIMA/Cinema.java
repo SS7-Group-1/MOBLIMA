@@ -9,6 +9,9 @@ public class Cinema implements Serializable {
     private Cineplex cineplex;
     private Seat[][] seatLayout;
 
+    public Cinema() {
+    }
+
     public Cinema(Cineplex cineplex, boolean isplat, String code, Seat[][] seatLayout) {
         this.cineplex = cineplex;
         this.isPlatinum = isplat;
@@ -49,5 +52,17 @@ public class Cinema implements Serializable {
 
     public void setSeatPremium (int row, int col, boolean isPremium) {
         seatLayout[row][col].setPremium(isPremium);
+    }
+
+    public void setCinemaCode(String cinemaCode) {
+        this.cinemaCode = cinemaCode;
+    }
+
+    public void setPremium(boolean isPremium) {
+        this.isPlatinum = isPremium;
+    }
+
+    public void setCineplex(Cineplex cineplex) {
+        this.cineplex = cineplex;
     }
 }

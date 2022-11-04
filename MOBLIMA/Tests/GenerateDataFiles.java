@@ -21,7 +21,7 @@ public class GenerateDataFiles {
                 seats[i][j] = new Seat(false);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.CATHAY, false, "C01", seats));
+        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "C01", seats));
         FileHelper.write(cinema_list, "data/cinema.dat");
     }
 }
