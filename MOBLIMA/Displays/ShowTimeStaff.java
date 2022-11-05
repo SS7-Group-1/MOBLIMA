@@ -154,7 +154,7 @@ public class ShowTimeStaff {
 
                     //print
                     System.out.println(showTime);
-
+                    System.out.println("Showtime added successfully.");
                     addShowTime(showTime);
                     break;
                 case 3: // Update showtime
