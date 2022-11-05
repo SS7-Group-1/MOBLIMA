@@ -26,8 +26,10 @@ public class AllGuestDisplay {
             choice = sc.nextInt();
             switch(choice){
                 case 1:
-                    MovieListingDisplay menu1 = new MovieListingDisplay();
-                    menu1.DisplayMenu();
+                    System.out.println("Movie listing menu");
+                    //create Array list
+                    //MovieListingDisplay menu1 = new MovieListingDisplay();
+                    //menu1.DisplayMenu();
                     break;
                 case 2:
                     System.out.println("Show time Menu");
