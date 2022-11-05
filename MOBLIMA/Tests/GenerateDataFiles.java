@@ -10,7 +10,6 @@ public class GenerateDataFiles {
     }
 
     public static void generateCinema() {
-        //ArrayList<Cinema> cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinema.dat");
         ArrayList<Cinema> cinema_list = new ArrayList<>();
         Seat[][] seats = new Seat[10][10];
         for (int i = 0; i < 10; i++) {

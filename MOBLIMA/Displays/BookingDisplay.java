@@ -2,6 +2,8 @@ package MOBLIMA.Displays;
 
 import MOBLIMA.*;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +54,7 @@ public class BookingDisplay {
                         for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
                             System.out.println("  [" + entryz.getKey() + "]");
                             for (ShowTime showtimez : entryz.getValue()) {
-                                System.out.println("    " + showtimez.getDate() + " " + showtimez.getTime());
+                                System.out.println("    " + showtimez.getDay() + ", " + showtimez.getDate() + ", " + showtimez.getTime());
                             }
                         }
                     }

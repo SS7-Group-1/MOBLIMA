@@ -1,9 +1,13 @@
 package MOBLIMA;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class ShowTime implements Serializable {
 
@@ -96,6 +100,12 @@ public class ShowTime implements Serializable {
     }
 
     public String getDate() {
-        return date.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy");
+        return formatter.format(date);
+    }
+
+    public String getDay() {
+        String day = date.getDayOfWeek().toString();
+        return day.substring(0,1).toUpperCase() + day.substring(1).toLowerCase();
     }
 }
