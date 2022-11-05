@@ -9,9 +9,10 @@ import java.util.Map.Entry;
 public class MovieListingDisplay {
     ArrayList<Movie> movie_list = new ArrayList<>();
 
+    public MovieListingDisplay(ArrayList<Movie> movie_list){
+        this.movie_list=movie_list;
+    }
     public void DisplayMenu() {
-        // Populating Movie database
-        movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
         Scanner sc = new Scanner(System.in);
         System.out.println("*".repeat(40));
         System.out.println("Movie Listing Menu");

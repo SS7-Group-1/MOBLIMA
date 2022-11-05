@@ -28,7 +28,9 @@ public class Ratings implements Serializable {
         for(int i=0;i<rating.size();i++){
             System.out.println(rating.get(i));
         }
-    }public void printTopFive(){
+    }
+
+    public void printTopFive(){
         for(int i=0;i<5;i++){
             System.out.println(rating.get(i));
         }

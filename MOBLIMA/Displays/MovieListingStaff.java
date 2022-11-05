@@ -11,10 +11,11 @@ public class MovieListingStaff {
 
     ArrayList<Movie> movie_list = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
+    public MovieListingStaff(ArrayList<Movie> movie_list){
+        this.movie_list=movie_list;
+    }
 
     public void DisplayMenu() throws IOException {
-        movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
-
         System.out.println("*".repeat(40));
         System.out.println("       SCREEN     ");
         System.out.println(" A  ▢ ▢ ▢ ▢ ▢ ▢ ▢  A");

@@ -2,9 +2,14 @@ package MOBLIMA.Displays;
 
 import MOBLIMA.*;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.lang.*;
+import java.util.stream.Collectors;
 //NIGEL WAS HERE
 
 public class BookingDisplay {
@@ -25,129 +30,61 @@ public class BookingDisplay {
     }
     public void DisplayMenu(){
         Character c;
-        System.out.println("1. See All ShowTimes");
-        System.out.println("2. New Booking");
-        System.out.println("3. Previous Booking Records");
-        System.out.println("4. Exit Booking Menu");
         int choice = 0;
-        while (choice !=4) {
+        while (choice !=5) {
+            System.out.println("*".repeat(40));
+            System.out.println("[1] View all showtimes");
+            System.out.println("[2] Select movie");
+            System.out.println("[3] Select cinema");
+            System.out.println("[4] View Booking History");
+            System.out.println("[5] Exit");
             choice = sc.nextInt();
             switch (choice) {
-                case 1:
-                    System.out.println("Filter by Movie? Y/N?");
-                    c = sc.next().charAt(0);
-                    if (c.equals('Y')) {
-                        System.out.println("Which Movie?");
-                        sc.skip("\\R?");
-                        String chosen_movie = sc.nextLine();
-                        //filter for movie
-                        System.out.println("Filter by Cinema? Y/N?");
-                        c = sc.next().charAt(0);
-                        if (c.equals('Y')) {
-                            System.out.println("Which Cinema?");
-                            sc.skip("\\R?");
-                            String chosen_cinema = sc.nextLine();
+                case 1 -> {
+                    System.out.println("*".repeat(40));
+                    System.out.println("All showtimes");
+                    System.out.println("*".repeat(40));
+                    Map<String, List<ShowTime>> movie_group =
+                            showtime_List.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
+                    for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
+                        System.out.println("■ " + entry.getKey());
+                        Map<String, List<ShowTime>> cinema_group =
+                                entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getName()));
 
-                            //Filter by both cinema and movie;
-                            for (int i = 0; i < showtime_List.size(); i++) {
-                                // System.out.format("chosen %s, list %s\n",chosen_cinema,showtime_List.get(i).getCinema().getName());
-                                //System.out.format("chosen %s, list %s\n",chosen_movie,showtime_List.get(i).getMovie().getTitle());
-                                if (showtime_List.get(i).getCinema().getName().equals(chosen_cinema) && showtime_List.get(i).getMovie().getTitle().equals(chosen_movie)) {
-                                    System.out.println(showtime_List.get(i));
-
-                                }
-                            }
-                        } else {
-                            //filter by movie only.
-                            for (int i = 0; i < showtime_List.size(); i++) {
-                                if (showtime_List.get(i).getMovie().getTitle().equals(chosen_movie)) {
-                                    System.out.println(showtime_List.get(i));
-                                }
-                            }
-                        }
-                    } else {
-                        System.out.println("Filter by Cinema? Y/N?");
-                        c = sc.next().charAt(0);
-                        if (c.equals('Y')) {
-                            System.out.println("Which Cinema?");
-                            sc.skip("\\R?");
-                            String chosen_cinema = sc.nextLine();
-
-                            //Filter by both cinema;
-                            for (int i = 0; i < showtime_List.size(); i++) {
-                                if (showtime_List.get(i).getCinema().getName().equals(chosen_cinema)) {
-                                    System.out.println(showtime_List.get(i));
-
-                                }
-                            }
-                        } else {
-                            //nofilter
-                            for (int i = 0; i < showtime_List.size(); i++) {
-                                System.out.println(showtime_List.get(i));
+                        for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
+                            System.out.println("  [" + entryz.getKey() + "]");
+                            for (ShowTime showtimez : entryz.getValue()) {
+                                System.out.println("    " + showtimez.getDay() + ", " + showtimez.getDate() + ", " + showtimez.getTime());
                             }
                         }
                     }
-                    break;
-                case 2:
-                    ShowTime chosen = null;
-                    //create new booking.
-                    System.out.println("Which Movie?");
-                    sc.skip("\\R?");
-                    String chosen_movie = sc.nextLine();
-                    //filter for movie
-                    System.out.println("Which Cinema?");
-                    sc.skip("\\R?");
-                    String chosen_cinema = sc.nextLine();
-                    //timing.
-                    System.out.println("Which Timing? (YYYYMMDDhhmm)");
-                    sc.skip("\\R?");
-                    String chosen_timing = sc.nextLine();
-
-
-                    for (int i = 0; i < showtime_List.size(); i++) {
-                        // System.out.format("chosen %s, list %s\n",chosen_cinema,showtime_List.get(i).getCinema().getName());
-                        //System.out.format("chosen %s, list %s\n",chosen_movie,showtime_List.get(i).getMovie().getTitle());
-                        if (showtime_List.get(i).getCinema().getName().equals(chosen_cinema) && showtime_List.get(i).getMovie().getTitle().equals(chosen_movie) && showtime_List.get(i).getTime().equals(chosen_timing)) {
-                            System.out.println(showtime_List.get(i));
-                            chosen = showtime_List.get(i);
-
-                        }
+                }
+                case 2 -> {
+                    System.out.println("*".repeat(40));
+                    System.out.println("Currently showing movies");
+                    System.out.println("*".repeat(40));
+                    Map<String, List<ShowTime>> movie_group =
+                            showtime_List.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
+                    for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
+                        System.out.println("[0] " + entry.getKey());
                     }
-                    //call printseatavail
-                    printSeatAvailability(chosen);
-                    //Choose seats;
-                    System.out.println("Which row?");
-                    int row = sc.nextInt();
-                    System.out.println("Which number?");
-                    int col = sc.nextInt();
-
-                    //double check seat availability
-                    if (chosen.getSpecificSeats(row, col) == false) {
-                        //compute price
-                        computePrice();
-                        //make new seat object.
-                        Seat seat = new Seat(false);
-                        //if available, get customer info
-                        System.out.println("Seat is available.");
-                        Customer cust = getCustomerInfo(); //customer info to be saved into customer object.
-                        // call payment display.
-                        PaymentDisplay payment = new PaymentDisplay(this.ticketPrice, chosen);
-                        String tid = payment.generateTid();
-                        payment.displayMenu();
-                        if (payment.isPaymentSuccessful() == true) { //payment went through.
-                            //make seats occupied.
-                            seat.setOccupied();
-                            //call bookingrecord
-                            BookingRecord bk = new BookingRecord(cust, tid, seat);
-                            //test print booking record.
-                            System.out.println(bk);
-                            //UPdate ticket sale by 1
-                            chosen.getMovie().addSales();
-                        }
-
-                    } else {
-                        System.out.println("That seat is already taken.");
+                }
+                case 3 -> {
+                    System.out.println("*".repeat(40));
+                    System.out.println("Cinema outlet locations");
+                    System.out.println("*".repeat(40));
+                    Map<String, List<ShowTime>> cinema_group =
+                            showtime_List.stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getName()));
+                    for (Map.Entry<String, List<ShowTime>> entry : cinema_group.entrySet()) {
+                        System.out.println("[0] " + entry.getKey());
                     }
+                }
+                case 4 -> {
+                    System.out.println("Booking History");
+                }
+                default -> {
+                    System.out.println("Invalid choice");
+                }
             }
         }
     }
