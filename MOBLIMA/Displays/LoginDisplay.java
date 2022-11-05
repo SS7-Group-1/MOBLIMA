@@ -14,53 +14,55 @@ public class LoginDisplay {
         int validStaff = 0;
 
         Scanner sc = new Scanner(System.in);
-
-        System.out.println("*".repeat(40));
-        System.out.println("Welcome to MOBLIMA");
-        System.out.println("Where Dreams Become Reality");
-
         int choice = 0;
-        while (choice != 4){
-            System.out.println("[1] Staff Login");
-            System.out.println("[2] Create New Staff Account");
-            System.out.println("[3] Continue as Guest");
-            System.out.println("[4] Exit");
+        while (choice != 3){
+            System.out.println("*".repeat(40));
+            System.out.println("Welcome to MOBLIMA");
+            System.out.println("Where Dreams Become Reality apa ini sia");
+            System.out.println("*".repeat(40));
+            System.out.println("[1] Continue as user");
+            System.out.println("[2] Staff login");
+            System.out.println("[3] Exit");
+            System.out.print("Enter option: ");
 
             choice = sc.nextInt();
             switch(choice){
                 case 1:
+                    UserMenuDisplay oompaloompa = new UserMenuDisplay();
+                    oompaloompa.displayMenu();
+                    break;
+                case 2:
+                    System.out.println("*".repeat(40));
+                    System.out.println("Staff login");
                     System.out.print("Username: ");
                     String user = sc.next();
                     System.out.print("Password: ");
                     String password = sc.next();
                     String userpass = user + ":" + password;
-                    System.out.println("Logging in....");
+                    System.out.println("*".repeat(40));
                     try {
-                        Scanner reader = new Scanner(new File("C:\\Users\\yinji\\Documents\\GitHub\\MOBLIMA\\Cinema.old\\cinema_staff_login.txt"));
+                        Scanner reader = new Scanner(new File("data/cinema_staff_login.txt"));
                         while (reader.hasNext()) {
                             String line = reader.nextLine();
                             if (line.equals(userpass)) {
-                                System.out.println("Successful Login");
                                 System.out.println("Welcome " + user + "!");
                                 valid = 1;
                                 break;
                             }
                         }
                         if (valid == 0){
-                            System.out.println("No valid account found.");
-                            System.out.println("Try again or Create an account");
+                            System.out.println("Invalid login credentials. Please try again");
                         }
                         reader.close();
                     } catch(IOException e){
                         e.printStackTrace();
                     }
                     if (valid == 1){
-                        //call display that lists all staff displays menu
-                        AllStaffDisplay.displayMenu();
+                        StaffMenuDisplay.displayMenu();
                         choice = 4;
                     }
                     break;
-                case 2:
+                case 69:
                     System.out.println("Enter New Username: ");
                     String newUser = sc.next();
                     System.out.println("Enter New Password");
@@ -99,11 +101,6 @@ public class LoginDisplay {
                             e.printStackTrace();
                         }
                     }
-                    break;
-                case 3:
-                    //call class that displays all guest displays?
-
-                    choice = 4;
                     break;
             }
         }

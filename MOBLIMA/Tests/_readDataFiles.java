@@ -8,7 +8,7 @@ import MOBLIMA.ShowTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class test_files_read {
+public class _readDataFiles {
     static ArrayList<Cinema> cinema_list_test = new ArrayList<>();
     static ArrayList<Movie> movie_list_test = new ArrayList<>();
     static ArrayList<ShowTime> showtime_list_test = new ArrayList<>();

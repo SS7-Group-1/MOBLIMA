@@ -1,10 +1,9 @@
 package MOBLIMA.Displays;
 
-import java.io.IOException;
 import java.util.Scanner;
 
-public class AllStaffDisplay {
-    public AllStaffDisplay(){
+public class StaffMenuDisplay {
+    public StaffMenuDisplay(){
 
     }
 

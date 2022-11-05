@@ -4,7 +4,7 @@ import MOBLIMA.*;
 
 import java.util.ArrayList;
 
-public class GenerateDataFiles {
+public class _generateDataFiles {
     public static void main(String args[]) {
         generateCinema();
     }

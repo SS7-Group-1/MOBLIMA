@@ -6,11 +6,10 @@ import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
 import MOBLIMA.ShowTime;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MainMenu {
+public class _oldMenu {
 
     public static void main(String args[]){
 
