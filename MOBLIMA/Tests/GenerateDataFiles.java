@@ -1,9 +1,6 @@
 package MOBLIMA.Tests;
 
-import MOBLIMA.Cinema;
-import MOBLIMA.Cineplex;
-import MOBLIMA.FileHelper;
-import MOBLIMA.Seat;
+import MOBLIMA.*;
 
 import java.util.ArrayList;
 
@@ -18,7 +15,7 @@ public class GenerateDataFiles {
         Seat[][] seats = new Seat[10][10];
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                seats[i][j] = new Seat(false);
+                seats[i][j] = new Seat(SeatType.STANDARD);
             }
         }
         cinema_list.add(new Cinema(Cineplex.JEWEL, false, "C01", seats));

@@ -126,7 +126,7 @@ public class BookingDisplay {
                         //compute price
                         computePrice();
                         //make new seat object.
-                        Seat seat = new Seat(false);
+                        Seat seat = new Seat(SeatType.STANDARD);
                         //if available, get customer info
                         System.out.println("Seat is available.");
                         Customer cust = getCustomerInfo(); //customer info to be saved into customer object.

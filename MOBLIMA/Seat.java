@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Seat implements Serializable {
     private boolean isOccupied;
-    private boolean isPremium;
+    private SeatType seatType;
 
     public Seat(){
     }
 
-    public Seat(boolean isPremium){
+    public Seat(SeatType seatType){
         this.isOccupied=false;
-        this.isPremium = isPremium;
+        this.seatType = seatType;
     }
 
     public boolean getOccupied(){
@@ -24,12 +24,8 @@ public class Seat implements Serializable {
         }
     }
 
-    public void setPremium(boolean premium) {
-        isPremium = premium;
-    }
-
-    public boolean isPremium(){
-        return isPremium;
+    public void setSeatType(SeatType seatType) {
+        this.seatType = seatType;
     }
 
     @Override
@@ -39,5 +35,9 @@ public class Seat implements Serializable {
         return "Seat{" +
                 ", isOccupied=" + occupy +
                 '}';
+    }
+
+    public SeatType getSeatType() {
+        return seatType;
     }
 }

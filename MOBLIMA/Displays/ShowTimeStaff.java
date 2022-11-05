@@ -16,20 +16,23 @@ public class ShowTimeStaff {
     private ArrayList<Cinema> cinema_list;
     Scanner sc = new Scanner(System.in);
 
-    public ShowTimeStaff() {
+    public ShowTimeStaff(ArrayList<Cinema> cinema_list, ArrayList<Movie> movie_list, ArrayList<ShowTime> showtime_list){
+        this.cinema_list=cinema_list;
+        this.movie_list=movie_list;
+        this.showtime_list=showtime_list;
     }
 
-    public void DisplayMenu() {
-        movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
-        cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinema.dat");
-        showtime_list = (ArrayList<ShowTime>) FileHelper.read("data/showtime.dat");
+    // ITS SHOWTIME!!!
+    // https://i.kym-cdn.com/entries/icons/original/000/025/605/showtime.jpg
 
+    public void DisplayMenu() {
         System.out.println("*".repeat(40));
         System.out.println("Showtime management staff menu");
         int choice = 0;
         while (choice != 69) {
             System.out.println("*".repeat(40));
-            //System.out.println("[1] View all showtime");
+            //System.out.println("[1] View showtime by movie");
+            //System.out.println("[1] View showtime by cineplex");
             System.out.println("[2] Manage movie showtime");
             //System.out.println("[3] Manage cinema showtime");
             System.out.println("[69] Exit");
