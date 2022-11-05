@@ -95,4 +95,7 @@ public class ShowTime implements Serializable {
 
     }
 
+    public String getDate() {
+        return date.toString();
+    }
 }

@@ -25,16 +25,16 @@ public class AllStaffDisplay {
             choice = sc.nextInt();
             switch(choice){
                 case 1:
-                    try{
-                        MovieListingStaff bilbo = new MovieListingStaff();
-                        bilbo.DisplayMenu();
-                    } catch(IOException e){
-                        e.printStackTrace();
-                    }
+                    //try{
+                        //MovieListingStaff bilbo = new MovieListingStaff();
+                        //bilbo.DisplayMenu();
+                    //} catch(IOException e){
+                    //    e.printStackTrace();
+                    //}
                     break;
                 case 2:
-                    ShowTimeStaff frodo = new ShowTimeStaff();
-                    frodo.DisplayMenu();
+                    //ShowTimeStaff frodo = new ShowTimeStaff();
+                    //frodo.DisplayMenu();
                     break;
                 case 3:
                     SystemSettingStaff sam = new SystemSettingStaff();
