@@ -20,7 +20,16 @@ public class MainMenu {
 
         System.out.println("Sup welcome to cinema TEMPERORY pagez");
 
+
         System.out.println("*".repeat(40));
+        System.out.println("Select user type");
+        System.out.println("[1] User");
+        System.out.println("[2] Staff");
+        
+        // TODO: IMPLEMENT STAFF / USER DIFFERENT MENUS
+
+        System.out.println("*".repeat(40));
+        System.out.println("Select option");
         System.out.println("[1] MovieListing");
         System.out.println("[2] ReviewRating");
         System.out.println("[3] Booking");
