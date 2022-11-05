@@ -6,6 +6,7 @@ import MOBLIMA.Movie;
 import java.util.*;
 import java.util.Map.Entry;
 
+
 public class SystemSettingStaff {
     ArrayList<Movie> movie_list = new ArrayList<>();
 
@@ -48,18 +49,55 @@ public class SystemSettingStaff {
 
 
             }
-
-
-
-
-
-
-
     }
     public void configureTicketPrice()
     {
-        // Settle later
-        System.out.println("Hi");
+        Scanner sc = new Scanner(System.in);
+        Boolean set = Boolean.TRUE;
+
+        while (set)
+        {
+            System.out.println("Dear User, Please Select Option that you wish to view");
+            System.out.println("1: View all Ticket Price");
+            System.out.println("2: Configure Ticket Price");
+            int choice = sc.nextInt();
+            switch(choice)
+            {
+                case 1:
+                    printTicket();
+                    set = Boolean.FALSE;
+                    break;
+
+
+            }
+        }
+    }
+
+    public void printTicket()
+    {
+        String type=""; String cinema ="";String age =""; String day="";int price=0;
+        try{
+            Scanner x = new Scanner("C://Java programming//MOBLIMA//MOBLIMA//Displays//TicketPrice.csv");
+            x.useDelimiter("[,\n]");
+
+            while(x.hasNext())
+            {
+                type= x.next();
+                cinema=x.next();
+                age= x.next();
+                day = x.next();
+                price = x.nextInt();
+
+                System.out.println("Type "+type +" Cinema " + cinema + " age "+age +"day "+day + " price "+price);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Wrong file");
+        }
+
+
+
     }
 
     public void printTop5Ranking(int choice) //NEED CHANGE TO PRIVATE LATER and sales for each movie //Ticket sales for all are zeroes quite sus

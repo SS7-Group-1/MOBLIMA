@@ -1,14 +1,14 @@
 package MOBLIMA;
 
 public enum Cineplex {
-    LIDO("LIDO"),
-    JEWEL("JEWEL"),
-    PAYA_LEBAR_QUARTER("PAYA LEBAR QUARTER"),
-    WATERWAY_POINT("WATERWAY POINT"),
-    NEX("NEX"),
-    SELETAR_MALL("SELETAR MALL"),
-    JCUBE("JCUBE"),
-    LOT_ONE("LOT ONE");
+    LIDO("Lido"),
+    JEWEL("Jewel"),
+    PAYA_LEBAR_QUARTER("Paya Lebar Quarter"),
+    WATERWAY_POINT("Waterway Point"),
+    NEX("nex"),
+    SELETAR_MALL("Seletar Mall"),
+    JCUBE("JCube"),
+    LOT_ONE("Lot One");
 
     private String name;
 

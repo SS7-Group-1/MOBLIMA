@@ -1,50 +1,47 @@
-package MOBLIMA.Tests;
+package MOBLIMA.Displays;
 
 import MOBLIMA.Cinema;
-import MOBLIMA.Displays.*;
 import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
 import MOBLIMA.ShowTime;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MainMenu {
+public class UserMenuDisplay {
+    public UserMenuDisplay(){
 
-    public static void main(String args[]){
+    }
 
+    public void displayMenu(){
+        Scanner sc = new Scanner(System.in);
         ArrayList<Cinema> cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinema.dat");
         ArrayList<Movie> movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
         ArrayList<ShowTime> showtime_list = (ArrayList<ShowTime>) FileHelper.read("data/showtime.dat");
 
-        System.out.println("Sup welcome to cinema TEMPERORY pagez");
 
+        int choice = 0;
 
-        System.out.println("*".repeat(40));
-        System.out.println("Select user type");
-        System.out.println("[1] User");
-        System.out.println("[2] Staff");
-        
-        // TODO: IMPLEMENT STAFF / USER DIFFERENT MENUS
+        while (choice != 5){
+            System.out.println("*".repeat(40));
+            System.out.println("Guest Display Menu");
+            System.out.println("*".repeat(40));
+            System.out.println("[1] Movies");
+            System.out.println("[2] Show Times");
+            System.out.println("[3] Reviews and Ratings");
+            System.out.println("[4] Booking");
+            System.out.println("[5] Exit");
 
-        System.out.println("*".repeat(40));
-        System.out.println("Select option");
-        System.out.println("[1] MovieListing");
-        System.out.println("[2] ReviewRating");
-        System.out.println("[3] Booking");
-        System.out.println("[4] Manage Cinema (Staff)");
-        System.out.println("[5] Manage Movie (Staff)");
-        System.out.println("[6] Manage Showtime (Staff)");
-        System.out.print("Enter selection: ");
-        Scanner sc = new Scanner(System.in);
-        while(true){
-            switch (sc.nextInt()){
+            choice = sc.nextInt();
+            switch(choice){
                 case 1:
                     MovieListingDisplay movieListing = new MovieListingDisplay(movie_list);
                     movieListing.DisplayMenu();
                     break;
                 case 2:
+                    System.out.println("WIP");
+                    break;
+                case 3:
                     System.out.println("*".repeat(40));
                     System.out.println("Select movie");
                     for (int i = 0; i < movie_list.size(); i++) {
@@ -66,24 +63,9 @@ public class MainMenu {
                         }
                     }
                     break;
-                case 3:
+                case 4:
                     BookingDisplay bookingDisplay = new BookingDisplay(showtime_list);
                     bookingDisplay.DisplayMenu();
-                    break;
-                case 4:
-                    CinemaStaffDisplay manageCinemaDisplay = new CinemaStaffDisplay(cinema_list);
-                    manageCinemaDisplay.DisplayMenu();
-                    break;
-                case 5:
-                    MovieListingStaff manageMovieDisplay = new MovieListingStaff(movie_list);
-                    //manageMovieDisplay.DisplayMenu();
-                    break;
-                case 6:
-                    ShowTimeStaff manageShowtimeDisplay = new ShowTimeStaff(cinema_list, movie_list, showtime_list);
-                    manageShowtimeDisplay.DisplayMenu();
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
                     break;
             }
         }

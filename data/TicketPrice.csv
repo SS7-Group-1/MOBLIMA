@@ -1,0 +1,36 @@
+2D,Default  ,Adult ,Weekday,8
+2D,Default  ,Adult ,Weekend,9
+2D,Default  ,Adult ,Public Holiday ,11
+2D,Default  ,Child,Weekday,6
+2D,Default  ,Child ,Weekend,7
+2D,Default  ,Child ,Public Holiday ,9
+2D,Default  ,Senior,Weekday,7
+2D,Default  ,Senior,Weekend,8
+2D,Default  ,Senior,Public Holiday ,10
+2D,Platinum ,Adult ,Weekday,10
+2D,Platinum ,Adult ,Weekend,11
+2D,Platinum ,Adult ,Public Holiday ,13
+2D,Platinum ,Child ,Weekday,8
+2D,Platinum ,Child ,Weekend,9
+2D,Platinum ,Child,Public Holiday ,11
+2D,Platinum ,Senior,Weekday,9
+2D,Platinum ,Senior,Weekend,10
+2D,Platinum ,Senior,Public Holiday ,12
+3D,Default  ,Adult ,Weekday,10
+3D,Default  ,Adult ,Weekend,11
+3D,Default  ,Adult ,Public Holiday ,13
+3D,Default  ,Child,Weekday,8
+3D,Default  ,Child ,Weekend,9
+3D,Default  ,Child ,Public Holiday ,11
+3D,Default  ,Senior,Weekday,9
+3D,Default  ,Senior,Weekend,10
+3D,Default  ,Senior,Public Holiday ,12
+3D,Platinum ,Adult ,Weekday,12
+3D,Platinum ,Adult ,Weekend,13
+3D,Platinum ,Adult ,Public Holiday ,15
+3D,Platinum ,Child ,Weekday,10
+3D,Platinum ,Child ,Weekend,11
+3D,Platinum ,Child,Public Holiday ,13
+3D,Platinum ,Senior,Weekday,11
+3D,Platinum ,Senior,Weekend,12
+3D,Platinum ,Senior,Public Holiday ,14
