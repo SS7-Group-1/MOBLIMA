@@ -10,7 +10,6 @@ public class LoginDisplay {
     };
 
     public void displayMenu(){
-        int valid = 0;
         int validStaff = 0;
 
         Scanner sc = new Scanner(System.in);
@@ -39,27 +38,26 @@ public class LoginDisplay {
                     System.out.print("Password: ");
                     String password = sc.next();
                     String userpass = user + ":" + password;
-                    System.out.println("*".repeat(40));
                     try {
+                        boolean valid = false;
                         Scanner reader = new Scanner(new File("data/cinema_staff_login.txt"));
                         while (reader.hasNext()) {
                             String line = reader.nextLine();
                             if (line.equals(userpass)) {
-                                System.out.println("Welcome " + user + "!");
-                                valid = 1;
+                                valid = true;
                                 break;
                             }
                         }
-                        if (valid == 0){
+                        if(valid){
+                            System.out.println("Welcome " + user + "!");
+                            StaffMenuDisplay.displayMenu();
+                        }
+                        else{
                             System.out.println("Invalid login credentials. Please try again");
                         }
                         reader.close();
                     } catch(IOException e){
                         e.printStackTrace();
-                    }
-                    if (valid == 1){
-                        StaffMenuDisplay.displayMenu();
-                        choice = 4;
                     }
                     break;
                 case 69:
