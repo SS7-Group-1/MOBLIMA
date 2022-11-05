@@ -16,29 +16,40 @@ public class SystemSettingStaff {
 
         while(set)
         {
-            System.out.println("Hello staff");
-            System.out.println("Please Choose the item that you wish to view/edit");
-            System.out.println("1. Configure ticket price");
-            System.out.println("2. Print top 5 Ranking movies");
-            System.out.println("3. To exit Display");
-            System.out.println("");
-            int choice =sc.nextInt();
-            switch(choice)
-            {
-                case 1:
-                    configureTicketPrice();
-                    break;
-                case 2:
-                    System.out.println("Please Choose 1 for ranking by Ratings");
-                    System.out.println("Please Choose 2 for ranking by Ticket Sales");
-                    int ranking = sc.nextInt();
-                    printTop5Ranking(ranking);
-                    break;
-                case 3:
-                    set = Boolean.FALSE;
-                    break;
+                System.out.println("Hello staff");
+                System.out.println("Please Choose the item that you wish to view/edit");
+                System.out.println("1. Configure ticket price");
+                System.out.println("2. Print top 5 Ranking movies");
+                System.out.println("3. To exit Display");
+                System.out.println("");
+                try {
+                    int choice = sc.nextInt();
+                    switch (choice) {
+                        case 1:
+                            configureTicketPrice();
+                            break;
+                        case 2:
+                            System.out.println("Please Choose 1 for ranking by Ratings");
+                            System.out.println("Please Choose 2 for ranking by Ticket Sales");
+                            int ranking = sc.nextInt();
+                            printTop5Ranking(ranking);
+                            break;
+                        case 3:
+                            set = Boolean.FALSE;
+                            break;
+                    }
+                }
+                catch (Exception e)
+                    {
+                        System.out.println("Please enter valid entry");
+                        set=Boolean.FALSE;
+
+                    }
+
+
             }
-        }
+
+
 
 
 
