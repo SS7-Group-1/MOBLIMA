@@ -8,7 +8,7 @@ public enum AgeRating {
     M18("M18"),
     R21("R21");
 
-    private String ageRating;
+    private final String ageRating;
 
     AgeRating(String age){
         this.ageRating=age;

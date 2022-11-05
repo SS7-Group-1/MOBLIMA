@@ -1,13 +1,13 @@
 package MOBLIMA;
 
 public enum MovieStatus {
-    COMING_SOON("Coming_soon"),
+    COMING_SOON("Coming Soon"),
     PREVIEW("Preview"),
     SHOWING("Showing"),
     
-    END_OF_SHOWING("End_Of_Showing");
+    END_OF_SHOWING("End of showing");
 
-    private String status;
+    private final String status;
 
     //constructor
     MovieStatus(String stat){

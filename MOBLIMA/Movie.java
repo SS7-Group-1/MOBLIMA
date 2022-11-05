@@ -14,22 +14,24 @@ public class Movie implements Serializable {
     private int sales;
     private Reviews review;
     private MovieType movieType;
+    private int duration;
 
-    public Movie(){
-        this.sales =0;
+    public Movie() {
+        this.sales = 0;
     }
 
-    public Movie(String title, MovieStatus stat, String synopsis, String director, ArrayList<String>cast, Ratings rating, AgeRating ageRating,Reviews review,MovieType movieType, int sales) {
-        this.title=title;
-        this.status=stat;
-        this.synopsis=synopsis;
-        this.director=director;
+    public Movie(String title, MovieStatus status, String synopsis, String director, ArrayList<String> cast, Ratings rating, AgeRating ageRating, Reviews review, MovieType movieType, int duration) {
+        this.title = title;
+        this.status = status;
+        this.synopsis = synopsis;
+        this.director = director;
         this.cast = cast;
-        this.rating=rating;
-        this.ageRating=ageRating;
-        this.sales=sales;
-        this.review=review;
-        this.movieType=movieType;
+        this.rating = rating;
+        this.ageRating = ageRating;
+        this.sales = 0;
+        this.review = review;
+        this.movieType = movieType;
+        this.duration = duration;
     }
 
     public String getTitle() {
@@ -40,12 +42,12 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public void addSales(){
-        this.sales= this.sales+1;
+    public int getSales() {
+        return this.sales;
     }
 
-    public int getSales(){
-        return this.sales;
+    public void addSales(int sales) {
+        this.sales += sales;
     }
 
     public Ratings getRating() {
@@ -56,12 +58,12 @@ public class Movie implements Serializable {
         this.rating = rating;
     }
 
-    public Reviews getReview(){
+    public Reviews getReview() {
         return review;
     }
 
-    public void setReview(Reviews review){
-        this.review=review;
+    public void setReview(Reviews review) {
+        this.review = review;
     }
 
     public MovieStatus getStatus() {
@@ -72,7 +74,7 @@ public class Movie implements Serializable {
         this.status = status;
     }
 
-    public String getDirector(){
+    public String getDirector() {
         return director;
     }
 
@@ -96,7 +98,7 @@ public class Movie implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public ArrayList<String> getcast(){
+    public ArrayList<String> getCast() {
         return cast;
     }
 
@@ -104,12 +106,20 @@ public class Movie implements Serializable {
         this.cast = cast;
     }
 
-    public String getAgeRating(){
+    public String getAgeRating() {
         return String.valueOf(ageRating);
     }
 
     public void setAgeRating(AgeRating ageRating) {
         this.ageRating = ageRating;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     @Override

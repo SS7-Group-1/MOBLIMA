@@ -16,18 +16,10 @@ public class MovieListingStaff {
     }
 
     public void DisplayMenu() throws IOException {
-        System.out.println("*".repeat(40));
-        System.out.println("       SCREEN     ");
-        System.out.println(" A  ▢ ▢ ▢ ▢ ▢ ▢ ▢  A");
-        System.out.println(" B  ▢ ▢ ▢ ▢ ▢ ▢ ▢  B   ▢ Available");
-        System.out.println(" C  ▢ ▢ ▤ ▤ ▤ ▢ ▢  C   ▤ Premium Seat");
-        System.out.println(" D  ▢ ▢ ▤ ▤ ▤ ▢ ▢  D   ■ Booked");
-        System.out.println(" E  ▢ ▢ ▢ ▢ ▢ ▢ ▢  E");
-        System.out.println("    1 2 3 4 5 6 7  ");
-
 
         System.out.println("*".repeat(40));
         System.out.println("Movie Listing Staff Menu");
+        // TODO: ADD MOVIE DURATION
         int choice = 0;
         while (choice != 4) {
             System.out.println("*".repeat(40));
@@ -118,7 +110,7 @@ public class MovieListingStaff {
                             add_another = false;
                         }
                     } while (add_another);
-                    rating.setRating(ratings_list);
+                    rating.setRatings(ratings_list);
                     movie.setRating(rating);
 
                     // Set movie age
@@ -170,7 +162,7 @@ public class MovieListingStaff {
                             add_another = false;
                         }
                     } while (add_another);
-                    review.setReview(movie_reviews);
+                    review.setReviews(movie_reviews);
                     movie.setReview(review);
 
                     // Set movie type

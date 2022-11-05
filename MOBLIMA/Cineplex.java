@@ -10,7 +10,7 @@ public enum Cineplex {
     JCUBE("JCube"),
     LOT_ONE("Lot One");
 
-    private String name;
+    private final String name;
 
     Cineplex(String name){
         this.name = name;

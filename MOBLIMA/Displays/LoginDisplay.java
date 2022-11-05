@@ -103,6 +103,7 @@ public class LoginDisplay {
             }
         }
         System.out.println("Thanks for using MOBLIMA");
+        System.exit(69);
     }
 
 }

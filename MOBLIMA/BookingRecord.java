@@ -1,23 +1,28 @@
 package MOBLIMA;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 public class BookingRecord {
-    private Customer customer;
     private String transactionID;
-    private Seat seat;
+    private LocalDateTime transactionDateTime;
+    private ShowTime showTime;
+    private ArrayList<Seat> seats;
 
-    public BookingRecord(Customer customer, String tid, Seat seat){
-        this.customer=customer;
-        this.transactionID=tid;
-        this.seat=seat;
-
+    public BookingRecord(String transactionID, ShowTime showTime, ArrayList<Seat> seats) {
+        this.transactionID = transactionID;
+        this.transactionDateTime = LocalDateTime.now();
+        this.showTime = showTime;
+        this.seats = seats;
     }
 
     @Override
     public String toString() {
         return "BookingRecord{" +
-                "customer=" + customer +
-                ", transactionID='" + transactionID + '\'' +
-                ", seat=" + seat +
+                "transactionID='" + transactionID + '\'' +
+                ", transactionDateTime=" + transactionDateTime +
+                ", showTime=" + showTime +
+                ", seats=" + seats +
                 '}';
     }
 }

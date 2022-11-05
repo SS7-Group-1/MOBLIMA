@@ -1,57 +1,46 @@
 package MOBLIMA;
 
 import java.io.Serializable;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Date;
 
 public class ShowTime implements Serializable {
 
-    private LocalTime time;
+    private LocalDateTime dateTime;
+    private Cinema cinema;
     private Movie movie;
     private Seat[][] seats;
-    private LocalDate date;
-    private Cinema cinema;
 
-    private int duration;
     public ShowTime(Movie movie){
         this.movie = movie;
+        this.dateTime = LocalDateTime.now();
     }
 
-    public ShowTime(LocalTime time, Movie movie, Seat[][] seats, LocalDate date, Cinema cinema, int duration){
-        this.time=time;
-        this.movie=movie;
-        this.seats=seats;
-        this.date=date;
-        this.cinema=cinema;
-        this.duration = duration;
-    }
-
-    @Override
-    public String toString() {
-        return "ShowTime{" +
-                "time='" + time + '\'' +
-                ", movie=" + movie +
-                ", seats=" + Arrays.toString(seats) +
-                ", day=" + date +
-                ", cinema=" + cinema +
-                '}';
-    }
-
-    public void setDay(LocalDate day) {
-        this.date = date;
+    public ShowTime(Cinema cinema, Movie movie, LocalDateTime dateTime) {
+        this.movie = movie;
+        this.cinema = cinema;
+        this.seats = cinema.getSeatLayout().clone();
+        this.dateTime = dateTime;
     }
 
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
 
+    public Seat[][] getSeats(){
+        return seats;
+    }
+
     public void setSeats(Seat[][] seats) {
         this.seats = seats;
+    }
+
+    public boolean checkIfOccupied(int row, int col) {
+        return seats[row][col].isOccupied();
     }
 
     public Movie getMovie() {
@@ -64,48 +53,46 @@ public class ShowTime implements Serializable {
 
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
+        this.seats = cinema.getSeatLayout().clone();
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public LocalTime getTime() {
-        return time;
+        return dateTime.toLocalTime();
     }
 
     public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public boolean getSpecificSeats(int row, int col) {
-        return seats[row][col].getOccupied();
-    }
-    public void getAllSeats(){
-        //for (int i=0;i<cinema.getSeats_row();i++){
-        //    for (int j=0;j< cinema.getSeats_col();j++) {
-        //        System.out.println(seats[i][j]);
-        //    }
-        //}
-
-
+        this.dateTime = LocalDateTime.of(dateTime.toLocalDate(), time);
     }
 
     public String getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy");
-        return formatter.format(date);
+        return dateTime.toLocalDate().format(formatter);
+    }
+
+    public void setDate(LocalDate date) {
+        this.dateTime = LocalDateTime.of(date, dateTime.toLocalTime());
     }
 
     public String getDay() {
-        String day = date.getDayOfWeek().toString();
+        String day = dateTime.getDayOfWeek().toString();
         return day.substring(0,1).toUpperCase() + day.substring(1).toLowerCase();
+    }
+
+    @Override
+    public String toString() {
+        return "ShowTime{" +
+                "dateTime=" + dateTime +
+                ", cinema=" + cinema +
+                ", movie=" + movie +
+                ", seats=" + Arrays.toString(seats) +
+                '}';
     }
 }

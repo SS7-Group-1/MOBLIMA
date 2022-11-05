@@ -4,7 +4,7 @@ public enum MovieType {
     threeD("3D"),
     twoD("2D");
 
-    private String type;
+    private final String type;
 
     MovieType(String type){
         this.type = type;

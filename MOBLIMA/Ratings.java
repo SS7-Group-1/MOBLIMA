@@ -4,50 +4,47 @@ import java.util.ArrayList;
 
 public class Ratings implements Serializable {
 
-    private ArrayList<Float> rating;
+    private ArrayList<Float> ratings;
 
     public Ratings(){ //constructor
-        rating = new ArrayList<Float>();
+        ratings = new ArrayList<>();
+    }
+    public Ratings(ArrayList<Float> ratings){ //constructor
+        this.ratings = ratings;
     }
 
     public void addRating(Float rat){
-        rating.add(rat);
+        ratings.add(rat);
         System.out.println("Rating successfully added");
     }
 
     public Float getAverageRating(){
         Float sum=0.0f;
 
-        for(int i=0;i<rating.size();i++){
-            sum+=rating.get(i);
+        for (Float rating : ratings) {
+            sum += rating;
         }
 
-        return sum/rating.size();
+        return sum/ ratings.size();
     }
     public void printRatings(){
-        for(int i=0;i<rating.size();i++){
-            System.out.println(rating.get(i));
+        for (Float aFloat : ratings) {
+            System.out.println(aFloat);
         }
     }
 
-    public void printTopFive(){
-        for(int i=0;i<5;i++){
-            System.out.println(rating.get(i));
-        }
+    public ArrayList<Float> getRatings() {
+        return ratings;
     }
 
-    public ArrayList<Float> toArray() {
-        return rating;
-    }
-
-    public void setRating(ArrayList<Float> rating) {
-        this.rating = rating;
+    public void setRatings(ArrayList<Float> ratings) {
+        this.ratings = ratings;
     }
 
     @Override
     public String toString() {
         return "Ratings{" +
-                "rating=" + rating +
+                "rating=" + ratings +
                 '}';
     }
 }

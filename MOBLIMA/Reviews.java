@@ -4,37 +4,39 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Reviews implements Serializable {
-    private ArrayList<String> review;
+    private ArrayList<String> reviews;
 
-    public Reviews(){ //constructor
-        review = new ArrayList<>();
-
+    public Reviews(){
+        reviews = new ArrayList<>();
     }
-    //add review will add into the arraylist/
+
+    public Reviews(ArrayList<String> reviews){
+        this.reviews = reviews;
+    }
+
     public void addReview(String rev){
-        review.add(rev);
+        reviews.add(rev);
         System.out.println("Review successfully added");
     }
 
-    //print reviews.
-    public void printReview(){
-        for(int i=0;i<review.size();i++){
-            System.out.println(review.get(i));
+    public void printReviews(){
+        for (String review : reviews) {
+            System.out.println(review);
         }
     }
 
-    public void setReview(ArrayList<String> review) {
-        this.review = review;
+    public void setReviews(ArrayList<String> reviews) {
+        this.reviews = reviews;
     }
 
-    public ArrayList<String> toArray(){
-        return review;
+    public ArrayList<String> getReviews(){
+        return reviews;
     }
 
     @Override
     public String toString() {
         return "Reviews{" +
-                "review=" + review +
+                "review=" + reviews +
                 '}';
     }
 }

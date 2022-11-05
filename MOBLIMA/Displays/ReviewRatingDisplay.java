@@ -28,7 +28,7 @@ public class ReviewRatingDisplay {
                 case 1:
                     System.out.println("*".repeat(40));
                     System.out.println("Reviews for " + movie.getTitle());
-                    movie.getReview().printReview();
+                    movie.getReview().printReviews();
                     break;
                 case 2:
                     System.out.println("*".repeat(40));

@@ -72,7 +72,7 @@ public class CinemaStaffDisplay {
                     sc.skip("\\R?");
                     String type = sc.nextLine();
                     boolean isPremium = type.equalsIgnoreCase("y");
-                    cinema.setPremium(isPremium);
+                    cinema.setPlatinum(isPremium);
 
                     // select cinema code
                     System.out.println("Enter cinema code: ");
@@ -187,7 +187,7 @@ public class CinemaStaffDisplay {
                     sc.skip("\\R?");
                     String type = sc.nextLine();
                     boolean isPremium = type.equalsIgnoreCase("y");
-                    cinema.setPremium(isPremium);
+                    cinema.setPlatinum(isPremium);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");

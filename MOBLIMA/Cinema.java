@@ -1,7 +1,6 @@
 package MOBLIMA;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public class Cinema implements Serializable {
     private boolean isPlatinum;
@@ -9,13 +8,13 @@ public class Cinema implements Serializable {
     private Cineplex cineplex;
     private Seat[][] seatLayout;
 
-    public Cinema() {
+    public Cinema(){
     }
 
-    public Cinema(Cineplex cineplex, boolean isplat, String code, Seat[][] seatLayout) {
+    public Cinema(Cineplex cineplex, boolean isPlatinum, String cinemaCode, Seat[][] seatLayout) {
         this.cineplex = cineplex;
-        this.isPlatinum = isplat;
-        this.cinemaCode = code;
+        this.isPlatinum = isPlatinum;
+        this.cinemaCode = cinemaCode;
         this.seatLayout = seatLayout;
     }
 
@@ -23,42 +22,42 @@ public class Cinema implements Serializable {
         return isPlatinum;
     }
 
+    public void setPlatinum(boolean isPremium) {
+        this.isPlatinum = isPremium;
+    }
+
     public String getCinemaCode() {
         return cinemaCode;
-    }
-
-    public Seat[][] getSeatLayout() {
-        return seatLayout;
-    }
-
-    public String getName() {
-        return cineplex.toString();
-    }
-
-    @Override
-    public String toString() {
-        return cineplex + " (" + cinemaCode + ")" + (isPlatinum ? " (Platinum)" : "");
-    }
-
-    public void setSeatingLayout(int rows, int cols) {
-        Seat[][] seats = new Seat[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                seats[i][j] = new Seat(SeatType.STANDARD);
-            }
-            this.seatLayout = seats;
-        }
     }
 
     public void setCinemaCode(String cinemaCode) {
         this.cinemaCode = cinemaCode;
     }
 
-    public void setPremium(boolean isPremium) {
-        this.isPlatinum = isPremium;
+    public Seat[][] getSeatLayout() {
+        return seatLayout;
+    }
+
+    public void setSeatingLayout(int rows, int cols) {
+        Seat[][] seats = new Seat[rows][cols];
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                seats[row][col] = new Seat(SeatType.STANDARD, row, col);
+            }
+            this.seatLayout = seats;
+        }
+    }
+
+    public String getCineplex() {
+        return cineplex.toString();
     }
 
     public void setCineplex(Cineplex cineplex) {
         this.cineplex = cineplex;
+    }
+
+    @Override
+    public String toString() {
+        return cineplex + " (" + cinemaCode + ")" + (isPlatinum ? " (Platinum)" : "");
     }
 }

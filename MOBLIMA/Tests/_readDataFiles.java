@@ -18,9 +18,10 @@ public class _readDataFiles {
         System.out.println("Choice: ");
         Scanner sc = new Scanner(System.in);
         while (choice != 0){
-            System.out.println("1. Read cinema.dat");
-            System.out.println("2. Read movie.dat");
-            System.out.println("3. Read showtime.dat");
+            System.out.println("[0] Exit");
+            System.out.println("[1] Read cinema.dat");
+            System.out.println("[2] Read movie.dat");
+            System.out.println("[3] Read showtime.dat");
             choice = sc.nextInt();
             switch (choice){
                 case 1:

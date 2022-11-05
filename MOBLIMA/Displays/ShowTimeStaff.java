@@ -147,10 +147,6 @@ public class ShowTimeStaff {
                             System.out.println("Invalid time. Please try again.");
                         }
                     }
-                    System.out.println("*".repeat(40));
-                    System.out.println("Enter movie duration (in minutes): ");
-                    int duration = sc.nextInt();
-                    showTime.setDuration(duration);
 
                     //print
                     System.out.println(showTime);
@@ -261,9 +257,7 @@ public class ShowTimeStaff {
                     break;
                 case 4:
                     System.out.println("*".repeat(40));
-                    System.out.println("Enter movie duration (in minutes): ");
-                    int duration = sc.nextInt();
-                    showTime.setDuration(duration);
+                    System.out.println("REMOVED");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");

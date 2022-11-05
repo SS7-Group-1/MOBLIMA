@@ -2,8 +2,6 @@ package MOBLIMA.Displays;
 
 import MOBLIMA.*;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +47,7 @@ public class BookingDisplay {
                     for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
                         System.out.println("■ " + entry.getKey());
                         Map<String, List<ShowTime>> cinema_group =
-                                entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getName()));
+                                entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
 
                         for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
                             System.out.println("  [" + entryz.getKey() + "]");
@@ -74,7 +72,7 @@ public class BookingDisplay {
                     System.out.println("Cinema outlet locations");
                     System.out.println("*".repeat(40));
                     Map<String, List<ShowTime>> cinema_group =
-                            showtime_List.stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getName()));
+                            showtime_List.stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
                     for (Map.Entry<String, List<ShowTime>> entry : cinema_group.entrySet()) {
                         System.out.println("[0] " + entry.getKey());
                     }
@@ -90,9 +88,9 @@ public class BookingDisplay {
     }
 
 
-    public Customer getCustomerInfo(){
+    public User getCustomerInfo(){
         boolean isSenior=false;
-        boolean isChild=false;
+        boolean isNigel=false;
         System.out.println("Please proceed to insert information");
         //get Email
         System.out.println("Email: ");
@@ -116,14 +114,9 @@ public class BookingDisplay {
             isSenior = true;
         }
         else if (age <16){
-            isChild=true;
+            isNigel=true;
         }
-        Customer cust = new Customer(name,phone,Email,isSenior,isChild);
-        return cust;
-    }
-
-    public void printSeatAvailability(ShowTime showtime){ //show seat availability.
-        showtime.getAllSeats();
-
+        //User cust = new User(name,phone,Email);
+        return null;
     }
 }
