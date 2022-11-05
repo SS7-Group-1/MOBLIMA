@@ -44,14 +44,10 @@ public class Cinema implements Serializable {
         Seat[][] seats = new Seat[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                seats[i][j] = new Seat(false);
+                seats[i][j] = new Seat(SeatType.STANDARD);
             }
             this.seatLayout = seats;
         }
-    }
-
-    public void setSeatPremium (int row, int col, boolean isPremium) {
-        seatLayout[row][col].setPremium(isPremium);
     }
 
     public void setCinemaCode(String cinemaCode) {

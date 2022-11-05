@@ -8,11 +8,12 @@ import java.util.Scanner;
 public class CinemaStaffDisplay {
 
     ArrayList<Cinema> cinema_list = new ArrayList<>();
+    public CinemaStaffDisplay(ArrayList<Cinema> cinema_list) {
+        this.cinema_list = cinema_list;
+    }
     Scanner sc = new Scanner(System.in);
 
     public void DisplayMenu(){
-        cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinema.dat");
-
         System.out.println("*".repeat(40));
         System.out.println("Cinema Management Menu");
 
@@ -224,12 +225,12 @@ public class CinemaStaffDisplay {
                     sc.skip("\\R?");
                     String seat = sc.nextLine();
 
-                    System.out.println("Select seat type: [N] Normal, [p] Premium");
+                    System.out.println("Select seat type: WORK IN PROGRESS");
                     sc.skip("\\R?");
                     String type = sc.nextLine();
                     boolean isPremium = type.equalsIgnoreCase("p");
 
-                    cinema.setSeatPremium(seat.charAt(0) - 65, Integer.parseInt(seat.substring(1)) - 1, isPremium);
+                    //cinema.setSeatPremium(seat.charAt(0) - 65, Integer.parseInt(seat.substring(1)) - 1, isPremium);
 
                     updateCinema(cinema);
                     printSeatingLayout(cinema);
@@ -254,11 +255,7 @@ public class CinemaStaffDisplay {
             System.out.print(" " + ((char)(i + 65)) + "  ");
             for (int j = 0; j < seatLayout[i].length; j++) {
                 String seatIcon;
-                if(seatLayout[i][j].isPremium()) {
-                    seatIcon = "▤";
-                } else {
-                    seatIcon = "▢";
-                }
+                seatIcon = seatLayout[i][j].getSeatType().getIcon();
                 System.out.print(seatIcon + " ");
             }
             if(i == 1){
