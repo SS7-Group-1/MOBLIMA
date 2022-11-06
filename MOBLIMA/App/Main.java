@@ -74,7 +74,7 @@ public class Main {
                     System.out.println("[5] Manage Cinemas");
                     System.out.println("[6] Manage Movies");
                     System.out.println("[7] Manage Showtimes");
-                    System.out.println("[N/A] Configure System Settings");
+                    System.out.println("[8] Configure System Settings");
                 }
             }
             System.out.println("[0] " + (Account.UserDetail.user == null ? "Return to main menu" : "Logout"));

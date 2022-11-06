@@ -21,48 +21,40 @@ public class SystemSetting {
 
         while(set)
         {
-                System.out.println("Hello staff");
-                System.out.println("Please Choose the item that you wish to view/edit");
+                System.out.println("│ System setting menu │");
                 System.out.println("[1] Configure ticket price");
-                System.out.println("[2] Print top 5 Ranking movies");
-                System.out.println("[3] Configure User View");
-                System.out.println("[4] To exit Display");
-                System.out.println("");
+                System.out.println("[2] Show top 5 movies by rating");
+                System.out.println("[3] Show top 5 movies by sales");
+                System.out.println("[4] Configure User View");
+                System.out.println("[ TODO ] Configure User role");
+                System.out.println("[0] Go back");
+                System.out.println("Select an option");
                 try {
                     int choice = sc.nextInt();
                     switch (choice) {
-                        case 1:
-                            configureTicketPrice();
-                            break;
-                        case 2:
-                            System.out.println("Please Choose 1 for ranking by Ratings");
-                            System.out.println("Please Choose 2 for ranking by Ticket Sales");
-                            int ranking = sc.nextInt();
-                            printTop5Ranking(ranking);
-                            break;
-                        case 3:
-                            //configure system view
-                            configureUserPermission();
-                            break;
-                        case 4:
-                            set = Boolean.FALSE;
-                            break;
+                        case 1 -> configureTicketPrice();
+                        case 2 -> {
+                            Movies movies = new Movies();
+                            movies.displayTop5rating();
+                        }
+                        case 3 ->{
+                            Movies movies = new Movies();
+                            movies.displayTop5sales();
+                        }
+                        case 4 -> configureUserPermission();
+                        case 0 -> set = Boolean.FALSE;
                     }
                 }
                 catch (Exception e)
                     {
-                        System.out.println("Please enter valid entry");
+                        System.out.println("Invalid option");
                         set=Boolean.FALSE;
-
                     }
-
-
             }
     }
 
     public void configureUserPermission(){
         Scanner sc = new Scanner(System.in);
-
         try{
             FileWriter fw = new FileWriter("data/UserPermission.txt");
             System.out.println("*".repeat(40));
@@ -89,16 +81,12 @@ public class SystemSetting {
         } catch(IOException e){
             e.printStackTrace();
         }
-
     }
-
 
     public void configureTicketPrice()
     {
         Scanner sc = new Scanner(System.in);
         Boolean set = Boolean.TRUE;
-        Boolean slut = Boolean.TRUE;
-
         while (set)
         {
             System.out.println("Dear User, Please Select Option that you wish to view");
@@ -114,11 +102,11 @@ public class SystemSetting {
                     break;
                 case 2:
                         System.out.println("Please Enter Modifier too be edited");
-                        System.out.println("1) Adult / Child / Senior");
-                        System.out.println("2) Weekday / Weekends / Public Holiday");
-                        System.out.println("3) 2D / 3D");
-                        System.out.println("4) Standard / Premium Seats");
-                        System.out.println("5) Standard/ Platinum Cinema");
+                        System.out.println("[1] Adult / Child / Senior");
+                        System.out.println("[2] Weekday / Weekends / Public Holiday");
+                        System.out.println("[3] 2D / 3D");
+                        System.out.println("[4] Standard / Premium Seats");
+                        System.out.println("[5] Standard/ Platinum Cinema");
                         int pick = sc.nextInt();
                         switch (pick) {
                             case 1:
@@ -233,7 +221,6 @@ public class SystemSetting {
 
     public int Configuration(String EModifier,  String ESymbol, String EINT)
     {
-
         File oldFile = new File("data/Modifier.txt");
         File newFile = new File("temp.txt");
         int count=0;
@@ -271,17 +258,11 @@ public class SystemSetting {
             {
                 System.out.println("Error");
             }
-
         return count;
-
-
-
-
-
     }
+
     public void printTicket()
     {
-
         try {
             File file = new File("data/Modifier.txt");
             Scanner x = new Scanner(file);
@@ -295,94 +276,13 @@ public class SystemSetting {
                 String symbol = res[1];
                 String INT = res[2];
 
-
                 System.out.println("Modifier type is "+ modifier + ", Arithmetic symbol is " + symbol + ", Amount to be modified is "+ INT);
             }
             x.close();
         }
-
         catch(Exception e)
         {
             e.printStackTrace();
         }
-
-
-
-
-
     }
-
-    public void printTop5Ranking(int choice)
-    {
-        movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
-        switch (choice)
-        {
-            case 1: //top 5 movies by rating
-                System.out.println("*".repeat(40));
-                System.out.println("Top 5 movies by rating");
-                HashMap<String,Float>Map = new HashMap<>();
-                LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<>();
-                ArrayList<Float> list = new ArrayList<>();
-                //add to map.
-                for (Movie movie : movie_list) {
-                    Map.put(movie.getTitle(), movie.getRating().getAverageRating());
-                }
-                for (Map.Entry<String, Float> entry : Map.entrySet()) {
-                    list.add(entry.getValue());
-                }
-                list.sort(Collections.reverseOrder());
-                for (Float num : list) {
-                    for (Entry<String, Float> entry : Map.entrySet()) {
-                        if (entry.getValue().equals(num)) {
-                            sortedMap.put(entry.getKey(), num);
-                        }
-                    }
-                }
-                //System.out.println(sortedMap);
-                int print_count =0;
-                for (SortedMap.Entry<String, Float> entry : sortedMap.entrySet()) {
-                    if (print_count!=5) {
-                        System.out.println(" " + ++print_count + ". " + entry.getKey() + " rating: " + entry.getValue());
-                    }else{
-                        break;
-                    }
-                }
-                break;
-            case 2: //Top 5 movies by ticket sales
-                System.out.println("*".repeat(40));
-                System.out.println("Top 5 movies by sales");
-                HashMap<String, Integer> map1 = new HashMap<>();
-                LinkedHashMap<String, Integer> sortedMap1 = new LinkedHashMap<>();
-                ArrayList<Integer> list1 = new ArrayList<>();
-
-                //add to map.
-                for (Movie movie : movie_list) {
-                    map1.put(movie.getTitle(), movie.getSales());
-                }
-                for (Map.Entry<String, Integer> entry : map1.entrySet()) {
-                    list1.add(entry.getValue());
-                }
-                list1.sort(Collections.reverseOrder());
-                for (int num : list1) {
-                    for (Entry<String, Integer> entry : map1.entrySet()) {
-                        if (entry.getValue().equals(num)) {
-                            sortedMap1.put(entry.getKey(), num);
-                        }
-                    }
-                }
-                int print_count1=0;
-                //System.out.println(sortedMap1);
-                for (SortedMap.Entry<String, Integer> entry : sortedMap1.entrySet()) {
-                    if (print_count1!=5) {
-                        System.out.println(" " + ++print_count1 + ". " + entry.getKey() + " Ticket sales: " + entry.getValue());
-                    }else{
-                        break;
-                    }
-                }
-                break;
-        }
-    }
-
-
-
 }
