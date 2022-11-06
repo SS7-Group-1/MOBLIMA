@@ -1,9 +1,9 @@
 package MOBLIMA;
 
 public enum SeatType {
-    STANDARD("Standard", "▢"),
-    PREMIUM("Premium", "★"),
-    HANDICAP("Handicap", "H");
+    STANDARD("StandardSeat", "▢"),
+    PREMIUM("PremiumSeat", "★"),
+    HANDICAP("HandicapSeat", "H");
 
     private final String type;
     private final String icon;

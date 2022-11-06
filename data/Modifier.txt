@@ -11,3 +11,4 @@ Weekend + 2
 2D + 0
 PremiumSeat + 2
 StandardSeat + 0
+HandicapSeat + 0
