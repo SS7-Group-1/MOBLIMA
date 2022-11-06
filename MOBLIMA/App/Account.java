@@ -78,7 +78,7 @@ public class Account {
 
         user_list.add(user);
         FileHelper.write(user_list, "data/users.dat");
-        System.out.print("Account created!");
+        System.out.println("Account created!");
 
         return user;
     }

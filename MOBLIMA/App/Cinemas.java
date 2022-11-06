@@ -14,7 +14,16 @@ public class Cinemas {
     }
 
     public Cinema selectCinema(){
-        return null;
+        // select cinema
+        System.out.println("Select a cinema");
+        int cinema_count = 0;
+        for (Cinema cinema: cinema_list){
+            System.out.println(cinema_count + ". " + cinema);
+            cinema_count++;
+        }
+        System.out.print("Enter cinema number: ");
+        int cinema_number = sc.nextInt();
+        return cinema_list.get(cinema_number);
     }
 
     public void displayCinemas(){

@@ -12,10 +12,12 @@ import java.util.stream.Collectors;
 
 public class ShowTimes {
     ArrayList<ShowTime> showtime_list;
+    ArrayList<BookingRecord> booking_list;
     Scanner sc = new Scanner(System.in);
 
     public ShowTimes(){
         this.showtime_list = (ArrayList<ShowTime>) FileHelper.read("data/showtimes.dat");
+        this.booking_list = (ArrayList<BookingRecord>) FileHelper.read("data/bookings.dat");
       }
 
     public void displayShowtimes(){
@@ -39,10 +41,14 @@ public class ShowTimes {
                 }
             }
         }
+        if(showtime_count == 0){
+            System.out.println("No showtimes found");
+            return;
+        }
         int choice = -1;
         while (choice != 0) {
             System.out.println("▭".repeat(40));
-            System.out.println("[1-" + showtime_count + "] View movie information or buy tickets");
+            System.out.println("[1-" + showtime_count + "] Buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
             choice = sc.nextInt();
@@ -120,11 +126,32 @@ public class ShowTimes {
         System.out.println("Confirm booking? (y/N): ");
         sc.skip("\\R?");
         if (sc.nextLine().equalsIgnoreCase("y")) {
+
+            while(Account.UserDetail.user == null){
+                System.out.println("Please login or signup to continue");
+                System.out.println("▭".repeat(40));
+                System.out.println("[1] Login");
+                System.out.println("[2] Register");
+                switch (sc.nextInt()) {
+                    case 1 -> { // LOGIN
+                        Account account = new Account();
+                        User user = account.login();
+                        Account.UserDetail.user = user;
+                    }
+                    case 2 -> { // REGISTER
+                        Account account = new Account();
+                        User user = account.register();
+                        Account.UserDetail.user = user;
+                    }
+                }
+            }
+
+            new_booking.setUser(Account.UserDetail.user);
+
             Payment payment = new Payment();
             if(payment.pay(new_booking.getTotalPrice())){
-                System.out.println("Payment successful");
-                System.out.println("Your transaction ID is " + "123456789");
-                System.out.println("Your booking is confirmed");
+                System.out.println("Transaction ID " + "123456789");
+                System.out.println("Your booking is confirmed!");
 
                 //deselect all seats
                 for(Ticket ticket : new_booking.getTickets()){
@@ -146,18 +173,89 @@ public class ShowTimes {
     }
 
     public void displayShowtimesByMovie(Movie movie){
-        System.out.println(movie);
-        for (ShowTime showtime: showtime_list){
-            if (showtime.getMovie().getTitle().equals(movie.getTitle())){
-                System.out.println(showtime);
+        System.out.println("*".repeat(40));
+        System.out.println("Showtimes for " + movie.getTitle());
+        System.out.println("*".repeat(40));
+        Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
+
+        int showtime_count = 0;
+        Map<Integer, ShowTime> showtimeMap = new HashMap<>();
+        for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
+            if(entry.getKey().equals(movie.getTitle())){
+                System.out.println("■ " + entry.getKey());
+                Map<String, List<ShowTime>> cinema_group =
+                        entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
+
+                for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
+                    System.out.println("  ▬ " + entryz.getKey() + " ▬");
+                    for (ShowTime showtimez : entryz.getValue()) {
+                        System.out.println("    [" + ++showtime_count + "] " + showtimez.getDay() + ", " + showtimez.getDate() + ", " + showtimez.getTime() + (showtimez.getCinema().isPlatinum() ? " (Platinum Cinema)" : ""));
+                        showtimeMap.put(showtime_count, showtimez);
+                    }
+                }
+            }
+        }
+        if(showtime_count == 0){
+            System.out.println("No showtimes found");
+            return;
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + showtime_count + "] Buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= showtime_count) {
+                ShowTime showTime = showtimeMap.get(choice);
+                bookShowtime(showTime);
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
             }
         }
     }
 
     public void displayShowtimesByCinema(Cinema cinema){
-        for (ShowTime showtime: showtime_list){
-            if (showtime.getCinema().equals(cinema)){
-                System.out.println(showtime);
+        System.out.println("*".repeat(40));
+        System.out.println("Showtimes at " + cinema.getCineplex());
+        System.out.println("*".repeat(40));
+        Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
+
+        int showtime_count = 0;
+        Map<Integer, ShowTime> showtimeMap = new HashMap<>();
+        for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
+            System.out.println("■ " + entry.getKey());
+            Map<String, List<ShowTime>> cinema_group =
+                    entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
+
+            for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
+                if(entryz.getKey().equals(cinema.getCineplex())){
+                    System.out.println("  ▬ " + entryz.getKey() + " ▬");
+                    for (ShowTime showtimez : entryz.getValue()) {
+                        System.out.println("    [" + ++showtime_count + "] " + showtimez.getDay() + ", " + showtimez.getDate() + ", " + showtimez.getTime() + (showtimez.getCinema().isPlatinum() ? " (Platinum Cinema)" : ""));
+                        showtimeMap.put(showtime_count, showtimez);
+                    }
+                }
+            }
+        }
+        if(showtime_count == 0){
+            System.out.println("No showtimes found");
+            return;
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + showtime_count + "] Buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= showtime_count) {
+                ShowTime showTime = showtimeMap.get(choice);
+                bookShowtime(showTime);
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
             }
         }
     }

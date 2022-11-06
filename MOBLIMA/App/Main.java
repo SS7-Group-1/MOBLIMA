@@ -122,7 +122,7 @@ public class Main {
                         System.out.println("│ Showtimes │");
                         System.out.println("[1] View all showtimes");
                         System.out.println("[2] Search for showtimes by movie");
-                        System.out.println("[3] Search for showtimes by cinema");
+                        //System.out.println("[3] Search for showtimes by cinema");
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
@@ -138,12 +138,12 @@ public class Main {
                                 ShowTimes showtimes = new ShowTimes();
                                 showtimes.displayShowtimesByMovie(movie);
                             }
-                            case 3 -> { // SEARCH FOR SHOWTIMES BY CINEMA
-                                Cinemas cinemas = new Cinemas();
-                                Cinema cinema = cinemas.selectCinema();
-                                ShowTimes showtimes = new ShowTimes();
-                                showtimes.displayShowtimesByCinema(cinema);
-                            }
+//                            case 3 -> { // SEARCH FOR SHOWTIMES BY CINEMA
+//                                Cinemas cinemas = new Cinemas();
+//                                Cinema cinema = cinemas.selectCinema();
+//                                ShowTimes showtimes = new ShowTimes();
+//                                showtimes.displayShowtimesByCinema(cinema);
+//                            }
                             default -> System.out.println("Invalid option. Please try again.");
                         }
                     }
