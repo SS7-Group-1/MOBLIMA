@@ -9,10 +9,10 @@ public class Movie implements Serializable {
     private String synopsis;
     private String director;
     private ArrayList<String> cast;
-    private Ratings rating;
+    private Rating rating;
     private AgeRating ageRating;
     private int sales;
-    private Reviews review;
+    private Review review;
     private MovieType movieType;
     private int duration;
 
@@ -20,7 +20,7 @@ public class Movie implements Serializable {
         this.sales = 0;
     }
 
-    public Movie(String title, MovieStatus status, String synopsis, String director, ArrayList<String> cast, Ratings rating, AgeRating ageRating, Reviews review, MovieType movieType, int duration) {
+    public Movie(String title, MovieStatus status, String synopsis, String director, ArrayList<String> cast, Rating rating, AgeRating ageRating, Review review, MovieType movieType, int duration) {
         this.title = title;
         this.status = status;
         this.synopsis = synopsis;
@@ -50,19 +50,19 @@ public class Movie implements Serializable {
         this.sales += sales;
     }
 
-    public Ratings getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(Ratings rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
-    public Reviews getReview() {
+    public Review getReview() {
         return review;
     }
 
-    public void setReview(Reviews review) {
+    public void setReview(Review review) {
         this.review = review;
     }
 
@@ -100,6 +100,12 @@ public class Movie implements Serializable {
 
     public ArrayList<String> getCast() {
         return cast;
+    }
+
+    public void printCasts(){
+        for (String cast : cast) {
+            System.out.println(" - " + cast);
+        }
     }
 
     public void setCast(ArrayList<String> cast) {

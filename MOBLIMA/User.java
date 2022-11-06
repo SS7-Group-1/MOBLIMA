@@ -1,26 +1,27 @@
 package MOBLIMA;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class User {
-    private String name;
-    private String phone;
+public class User implements Serializable {
     private String email;
+    private String phone;
+    private String password;
     private ArrayList<BookingRecord> bookingRecords;
     private LocalDate dateOfBirth;
-
     private boolean isAdmin;
 
     public User(){
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public User(String email, String phone, String password, LocalDate dateOfBirth, boolean isAdmin) {
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.isAdmin = isAdmin;
+        this.bookingRecords = new ArrayList<>();
     }
 
     public String getPhone() {
@@ -37,6 +38,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
@@ -74,7 +83,6 @@ public class User {
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", isSenior=" + isSenior() +
