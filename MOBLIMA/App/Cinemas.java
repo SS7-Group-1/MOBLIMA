@@ -101,7 +101,7 @@ public class Cinemas {
     public void updateCinemaSeating(Cinema cinema) {
         boolean edit = true;
         while (edit) {
-            printSeatingLayout(cinema.getSeatLayout());
+            printSeatingLayout(cinema.getSeatLayout(), false);
             System.out.println("*".repeat(40));
             System.out.println("[1] Update cinema size");
             System.out.println("[2] Update seat type");
@@ -117,7 +117,7 @@ public class Cinemas {
                     cinema.setSeatingLayout(rows, cols);
                     updateCinema(cinema);
                     System.out.println("Seat layout updated");
-                    printSeatingLayout(cinema.getSeatLayout());
+                    printSeatingLayout(cinema.getSeatLayout(), false);
                     edit = false;
                 }
                 case 2 -> {
@@ -132,7 +132,7 @@ public class Cinemas {
                     //cinema.setSeatPremium(seat.charAt(0) - 65, Integer.parseInt(seat.substring(1)) - 1, isPremium);
 
                     FileHelper.write(cinema_list, "data/cinema.dat");
-                    printSeatingLayout(cinema.getSeatLayout());
+                    printSeatingLayout(cinema.getSeatLayout(), false);
                     System.out.println("Update another seat? (y/N): ");
                     sc.skip("\\R?");
                     if (!sc.nextLine().equalsIgnoreCase("y")) {
@@ -144,7 +144,7 @@ public class Cinemas {
         }
     }
 
-    public void printSeatingLayout(Seat[][] seatLayout){
+    public void printSeatingLayout(Seat[][] seatLayout, boolean showSelection){
         System.out.println("▭".repeat(40));
         System.out.println("Seating layout");
         System.out.println(" ".repeat((seatLayout.length / 2) + 5) + "SCREEN");
@@ -161,11 +161,14 @@ public class Cinemas {
                 }
                     System.out.print(seatIcon + " ");
             }
-            if(i == 1){
+            if(i == 0){
                 System.out.print("   ▢ Normal Seat");
             }
-            else if(i == 2){
+            else if(i == 1){
                 System.out.print("   ▤ Premium Seat");
+            }
+            else if(i == 2 && showSelection){
+                System.out.print("   ▣ Selected Seat");
             }
             System.out.println();
         }
