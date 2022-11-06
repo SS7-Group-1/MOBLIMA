@@ -1,6 +1,8 @@
 package MOBLIMA;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
     private String seatNumber;
     private SeatType seatType;
     private TicketType ticketType;

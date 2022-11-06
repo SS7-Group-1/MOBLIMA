@@ -1,6 +1,8 @@
 package MOBLIMA;
 
-public enum TicketType {
+import java.io.Serializable;
+
+public enum TicketType implements Serializable {
     STANDARD("Adult"),
     CHILD("Child"),
     SENIOR("Senior");

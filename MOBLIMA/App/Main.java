@@ -68,7 +68,7 @@ public class Main {
             System.out.println("[3] Reviews and Ratings");
 
             if(Account.UserDetail.user != null){
-                System.out.println("[N/A] Booking");
+                System.out.println("[4] Booking History");
 
                 if(Account.UserDetail.user.isAdmin()){
                     System.out.println("[5] Manage Cinemas");
@@ -187,28 +187,8 @@ public class Main {
                     }
                 }
                 case 4 -> { // BOOKING
-                    int subChoice = -1;
-                    while(subChoice != 0){
-                        System.out.println("▭".repeat(40));
-                        System.out.println("│ Manage Bookings │");
-                        System.out.println("[1] Make new booking");
-                        System.out.println("[2] View past bookings");
-                        System.out.println("[0] Go back");
-                        System.out.print("Enter option: ");
-                        subChoice = sc.nextInt();
-                        switch (subChoice){
-                            case 0 -> {}
-                            case 1 -> { // VIEW ALL CINEMAS
-                                Cinemas cinemas = new Cinemas();
-                                cinemas.displayCinemas();
-                            }
-                            case 2 -> { // ADD NEW CINEMA
-                                Cinemas cinemas = new Cinemas();
-                                cinemas.addCinema();
-                            }
-                            default -> System.out.println("Invalid option. Please try again.");
-                        }
-                    }
+                    Bookings bookings = new Bookings();
+                    bookings.viewRecords();
                 }
                 case 5 -> { // MANAGE CINEMAS
                     int subChoice = -1;
@@ -311,8 +291,8 @@ public class Main {
                     }
                 }
                 case 8 -> { // CONFIGURE SYSTEM SETTINGS
-                    // TODO: IMPLEMENT SYSTEM SETTINGS CONFIGURATION
-                    System.out.println("Havent implement yet");
+                    SystemSetting test = new SystemSetting();
+                    test.DisplayMenu();
                 }
                 default -> System.out.println("Invalid option");
             }

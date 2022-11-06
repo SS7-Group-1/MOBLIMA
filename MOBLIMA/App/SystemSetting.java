@@ -1,4 +1,4 @@
-package MOBLIMA.OLD_DISPLAYS;
+package MOBLIMA.App;
 
 import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 
-public class SystemSettingStaff {
+public class SystemSetting {
     ArrayList<Movie> movie_list = new ArrayList<>();
 
     public void DisplayMenu()

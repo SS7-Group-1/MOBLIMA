@@ -2,8 +2,10 @@ package MOBLIMA.App;
 
 import MOBLIMA.*;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -67,7 +69,7 @@ public class ShowTimes {
         Cinemas cinemas = new Cinemas();
         Pricing pricing = new Pricing();
         BookingRecord new_booking = new BookingRecord();
-
+        new_booking.setShowTime(showTime);
         sc.skip("\\R?");
         boolean selectSeat = true;
         while(selectSeat){
@@ -145,11 +147,14 @@ public class ShowTimes {
                     }
                 }
             }
-
             new_booking.setUser(Account.UserDetail.user);
 
             Payment payment = new Payment();
             if(payment.pay(new_booking.getTotalPrice())){
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+                LocalDateTime now = LocalDateTime.now();
+                String transactionID = showTime.getCinema().getCinemaCode() + now.format(formatter);
+                new_booking.setTransactionID(transactionID);
                 System.out.println("Transaction ID " + "123456789");
                 System.out.println("Your booking is confirmed!");
 
@@ -161,6 +166,8 @@ public class ShowTimes {
                 for(Ticket ticket : new_booking.getTickets()){
                     showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setOccupied();
                 }
+                booking_list.add(new_booking);
+                FileHelper.write(booking_list, "data/bookings.dat");
                 writeToShowtimeFile();
             }
             else{

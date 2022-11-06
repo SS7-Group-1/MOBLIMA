@@ -1,9 +1,12 @@
 package MOBLIMA;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class BookingRecord {
+public class BookingRecord implements Serializable {
     private String transactionID;
     private LocalDateTime transactionDateTime;
     private ShowTime showTime;
@@ -84,9 +87,20 @@ public class BookingRecord {
     public String printSeats(){
         String seats = "";
         for (Ticket ticket: tickets){
-            seats += ticket.getSeatNumber() + " ";
+            seats += "\n  " + ticket.getSeatNumber() + " (" + ticket.getSeatType() + ") ";
         }
         return seats;
+    }
+
+    public void printBookingRecord() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy, HH:mm");
+        System.out.println("Transaction ID: " + transactionID);
+        System.out.println("Transaction Date: " + transactionDateTime.format(formatter));
+        System.out.println("Movie: " + showTime.getMovie().getTitle());
+        System.out.println("Cinema: " + showTime.getCinema().getCinemaCode() + " " + (showTime.getCinema().isPlatinum() ? "(Platinum)" : ""));
+        System.out.println("Show Time: " + showTime.getDay() + ", " + showTime.getDate() + ", " + showTime.getTime());
+        System.out.println("Seats: " + printSeats());
+        System.out.println("Total Price: " + totalPrice);
     }
 
     @Override
