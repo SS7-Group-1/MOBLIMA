@@ -23,9 +23,10 @@ public class SystemSettingStaff {
         {
                 System.out.println("Hello staff");
                 System.out.println("Please Choose the item that you wish to view/edit");
-                System.out.println("1. Configure ticket price");
-                System.out.println("2. Print top 5 Ranking movies");
-                System.out.println("3. To exit Display");
+                System.out.println("[1] Configure ticket price");
+                System.out.println("[2] Print top 5 Ranking movies");
+                System.out.println("[3] Configure User View");
+                System.out.println("[4] To exit Display");
                 System.out.println("");
                 try {
                     int choice = sc.nextInt();
@@ -40,6 +41,10 @@ public class SystemSettingStaff {
                             printTop5Ranking(ranking);
                             break;
                         case 3:
+                            //configure system view
+                            configureUserPermission();
+                            break;
+                        case 4:
                             set = Boolean.FALSE;
                             break;
                     }
@@ -54,6 +59,40 @@ public class SystemSettingStaff {
 
             }
     }
+
+    public void configureUserPermission(){
+        Scanner sc = new Scanner(System.in);
+
+        try{
+            FileWriter fw = new FileWriter("data/UserPermission.txt");
+            System.out.println("*".repeat(40));
+            System.out.println("[1] Allow user to view top 5 movies by ratings only");
+            System.out.println("[2] Allow user to view top 5 movies by sales only");
+            System.out.println("[3] Allow both");
+
+            int choice = sc.nextInt();
+            switch(choice){
+                case 1:
+                    fw.write('1');
+                    System.out.println("User can only view top 5 movies by ratings");
+                    break;
+                case 2:
+                    fw.write('2');
+                    System.out.println("Usre can only view top 5 movies by sales");
+                    break;
+                case 3:
+                    fw.write('0');
+                    System.out.println("User can view top 5 movies by ratings or sales");
+                    break;
+            }
+            fw.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
     public void configureTicketPrice()
     {
         Scanner sc = new Scanner(System.in);
