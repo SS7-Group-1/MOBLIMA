@@ -1,7 +1,8 @@
-package MOBLIMA.Tests;
+package MOBLIMA.OLD_DISPLAYS;
 
 import MOBLIMA.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class _populateDataFiles {
             populateMovies();
             System.out.println("Populating showtimes...");
             populateShowTimes();
+            System.out.println("Populating users...");
+            populateUsers();
             System.out.println("Done!");
         } else {
             System.out.println("Aborted.");
@@ -90,7 +93,7 @@ public class _populateDataFiles {
             }
         }
         cinema_list.add(new Cinema(Cineplex.JEWEL, true, "JEWEL_LUMIERE_1", seats));
-        FileHelper.write(cinema_list, "data/cinema.dat");
+        FileHelper.write(cinema_list, "data/cinemas.dat");
 
         showTimeCinema1 = cinema_list.get(0);
         showTimeCinema2 = cinema_list.get(3);
@@ -104,9 +107,9 @@ public class _populateDataFiles {
         Movie movie;
         ArrayList<String> cast;
         ArrayList<String> reviews;
-        Reviews review;
+        Review review;
         ArrayList<Float> ratings;
-        Ratings rating;
+        Rating rating;
 
         // MOVIE 1/10 : Kung Fu Nigel
         movie = new Movie();
@@ -130,8 +133,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.PG);
         movie.setMovieType(MovieType.threeD);
         movie.setDuration(120);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         showTimeMovie1 = movie;
         movie_list.add(movie);
 
@@ -157,8 +161,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.R21);
         movie.setMovieType(MovieType.twoD);
         movie.setDuration(105);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         showTimeMovie2 = movie;
         movie_list.add(movie);
 
@@ -186,8 +191,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.R21);
         movie.setMovieType(MovieType.twoD);
         movie.setDuration(95);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         showTimeMovie3 = movie;
         movie_list.add(movie);
 
@@ -213,8 +219,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.NC16);
         movie.setMovieType(MovieType.threeD);
         movie.setDuration(100);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         showTimeMovie4 = movie;
         movie_list.add(movie);
 
@@ -240,8 +247,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.PG13);
         movie.setMovieType(MovieType.threeD);
         movie.setDuration(90);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         showTimeMovie5 = movie;
         movie_list.add(movie);
 
@@ -269,8 +277,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.R21);
         movie.setMovieType(MovieType.threeD);
         movie.setDuration(80);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         movie_list.add(movie);
 
         // MOVIE 7/10 : My Hero Nigel
@@ -296,8 +305,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.PG);
         movie.setMovieType(MovieType.threeD);
         movie.setDuration(150);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         movie_list.add(movie);
 
         // MOVIE 8/10 : Attack on Nigel
@@ -322,8 +332,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.PG13);
         movie.setMovieType(MovieType.twoD);
         movie.setDuration(120);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         movie_list.add(movie);
 
         // MOVIE 9/10 : The Fault in Our Nigel
@@ -349,8 +360,9 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.NC16);
         movie.setMovieType(MovieType.twoD);
         movie.setDuration(90);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         movie_list.add(movie);
 
         // MOVIE 10/10 : Tentacle Game
@@ -375,11 +387,12 @@ public class _populateDataFiles {
         movie.setAgeRating(AgeRating.PG13);
         movie.setMovieType(MovieType.threeD);
         movie.setDuration(110);
-        movie.setReview(new Reviews(reviews));
-        movie.setRating(new Ratings(ratings));
+        movie.setCast(cast);
+        movie.setReview(new Review(reviews));
+        movie.setRating(new Rating(ratings));
         movie_list.add(movie);
 
-        FileHelper.write(movie_list, "data/movie.dat");
+        FileHelper.write(movie_list, "data/movies.dat");
     }
 
     public static void populateShowTimes(){
@@ -406,7 +419,16 @@ public class _populateDataFiles {
         showTime_list.add(new ShowTime(showTimeCinema2, showTimeMovie5, LocalDateTime.parse("13:10 13/11/2022", formatter)));
         showTime_list.add(new ShowTime(showTimeCinema5, showTimeMovie5, LocalDateTime.parse("21:40 14/11/2022", formatter)));
 
-        FileHelper.write(showTime_list, "data/showtime.dat");
+        FileHelper.write(showTime_list, "data/showtimes.dat");
+    }
 
+    public static void populateUsers(){
+        ArrayList<User> user_list = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+        user_list.add(new User("user@moblima.com", "87456874", "password", LocalDate.parse("18/09/1990", formatter), false));
+        user_list.add(new User("admin@moblima.com", "95447824", "password", LocalDate.parse("18/09/1990", formatter), true));
+
+        FileHelper.write(user_list, "data/users.dat");
     }
 }

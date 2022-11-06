@@ -3,14 +3,14 @@ package MOBLIMA;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Reviews implements Serializable {
+public class Review implements Serializable {
     private ArrayList<String> reviews;
 
-    public Reviews(){
+    public Review(){
         reviews = new ArrayList<>();
     }
 
-    public Reviews(ArrayList<String> reviews){
+    public Review(ArrayList<String> reviews){
         this.reviews = reviews;
     }
 
@@ -21,7 +21,7 @@ public class Reviews implements Serializable {
 
     public void printReviews(){
         for (String review : reviews) {
-            System.out.println(review);
+            System.out.println(" - " + review);
         }
     }
 

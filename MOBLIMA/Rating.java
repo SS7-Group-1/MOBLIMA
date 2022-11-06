@@ -2,14 +2,14 @@ package MOBLIMA;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ratings implements Serializable {
+public class Rating implements Serializable {
 
     private ArrayList<Float> ratings;
 
-    public Ratings(){ //constructor
+    public Rating(){ //constructor
         ratings = new ArrayList<>();
     }
-    public Ratings(ArrayList<Float> ratings){ //constructor
+    public Rating(ArrayList<Float> ratings){ //constructor
         this.ratings = ratings;
     }
 
