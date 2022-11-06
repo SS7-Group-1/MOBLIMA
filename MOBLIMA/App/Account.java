@@ -1,4 +1,4 @@
-package MOBLIMA.Tests;
+package MOBLIMA.App;
 
 import MOBLIMA.FileHelper;
 import MOBLIMA.User;

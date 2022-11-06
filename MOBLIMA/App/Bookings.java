@@ -1,10 +1,7 @@
-package MOBLIMA.Tests;
+package MOBLIMA.App;
 
 import MOBLIMA.ShowTime;
 import MOBLIMA.User;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Bookings {
     User user;

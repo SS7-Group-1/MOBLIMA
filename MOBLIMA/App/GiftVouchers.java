@@ -1,8 +1,7 @@
-package MOBLIMA.Tests;
+package MOBLIMA.App;
 
 import MOBLIMA.FileHelper;
 import MOBLIMA.GiftVoucher;
-import MOBLIMA.Movie;
 
 import java.util.ArrayList;
 

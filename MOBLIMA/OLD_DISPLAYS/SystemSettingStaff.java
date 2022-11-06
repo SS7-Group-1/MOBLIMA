@@ -1,4 +1,4 @@
-package MOBLIMA.Displays;
+package MOBLIMA.OLD_DISPLAYS;
 
 import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
@@ -9,8 +9,6 @@ import java.io.*;
 import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
-import java.io.FileNotFoundException;
-
 
 
 public class SystemSettingStaff {
