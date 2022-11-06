@@ -2,8 +2,6 @@ package MOBLIMA.App;
 
 import MOBLIMA.*;
 
-import java.io.File;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -78,11 +76,9 @@ public class ShowTimes {
             String seat = sc.nextLine();
             if(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].isOccupied()){
                 System.out.println("Seat is occupied. Please select another seat");
-                continue;
             }
             else if(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].isSelected()){
                 System.out.println("You have already selected this seat");
-                continue;
             }
 
             else{
@@ -137,13 +133,11 @@ public class ShowTimes {
                 switch (sc.nextInt()) {
                     case 1 -> { // LOGIN
                         Account account = new Account();
-                        User user = account.login();
-                        Account.UserDetail.user = user;
+                        Account.UserDetail.user = account.login();
                     }
                     case 2 -> { // REGISTER
                         Account account = new Account();
-                        User user = account.register();
-                        Account.UserDetail.user = user;
+                        Account.UserDetail.user = account.register();
                     }
                 }
             }
@@ -362,19 +356,19 @@ public class ShowTimes {
             System.out.println("[3] Time ");
             System.out.println("[4] Duration ");
             System.out.print("Enter option: ");
-            switch (sc.nextInt()){
-                case 1:
+            switch (sc.nextInt()) {
+                case 1 -> {
                     Cinemas cinemas = new Cinemas();
                     Cinema cinema = cinemas.selectCinema();
                     showTime.setCinema(cinema);
                     showTime.setSeats(cinema.getSeatLayout().clone());
                     System.out.println("Cinema updated successfully.");
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("*".repeat(40));
                     System.out.println("Enter movie date (DD/MM/YYYY): ");
                     sc.skip("\\R?");
-                    while(true){
+                    while (true) {
                         try {
                             String date = sc.nextLine();
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
@@ -385,12 +379,12 @@ public class ShowTimes {
                             System.out.println("Invalid date. Please try again.");
                         }
                     }
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("*".repeat(40));
                     System.out.println("Enter movie start time (HH:mm): ");
                     sc.skip("\\R?");
-                    while(true){
+                    while (true) {
                         try {
                             String time = sc.nextLine();
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -401,14 +395,15 @@ public class ShowTimes {
                             System.out.println("Invalid time. Please try again.");
                         }
                     }
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("*".repeat(40));
                     System.out.println("REMOVED");
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Invalid option. Please try again.");
                     continue;
+                }
             }
             writeToShowtimeFile();
             System.out.println("Showtime updated successfully");
