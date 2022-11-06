@@ -42,6 +42,7 @@ public class _readDataFiles {
                     for (ShowTime showtime: showtime_list_test){
                         System.out.println(showtime);
                     }
+                    break;
                 case 4:
                     user_list_test = (ArrayList<User>) FileHelper.read("data/users.dat");
                     for (User user: user_list_test){

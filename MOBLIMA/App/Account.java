@@ -11,6 +11,10 @@ import java.util.Scanner;
 public class Account {
     ArrayList<User> user_list;
 
+    public class UserDetail {
+        public static User user;
+    }
+
     public Account(){
         this.user_list = (ArrayList<User>) FileHelper.read("data/users.dat");
     }

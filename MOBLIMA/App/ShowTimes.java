@@ -1,16 +1,13 @@
 package MOBLIMA.App;
 
-import MOBLIMA.Cinema;
-import MOBLIMA.FileHelper;
-import MOBLIMA.Movie;
-import MOBLIMA.ShowTime;
+import MOBLIMA.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ShowTimes {
     ArrayList<ShowTime> showtime_list;
@@ -21,14 +18,47 @@ public class ShowTimes {
       }
 
     public void displayShowtimes(){
-        for (ShowTime showtime: showtime_list){
-            System.out.println(showtime);
+        System.out.println("*".repeat(40));
+        System.out.println("All showtimes");
+        System.out.println("*".repeat(40));
+        Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
+
+        int showtime_count = 0;
+        Map<Integer, ShowTime> showtimeMap = new HashMap<>();
+        for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
+            System.out.println("■ " + entry.getKey());
+            Map<String, List<ShowTime>> cinema_group =
+                    entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
+
+            for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
+                System.out.println("  ▬ " + entryz.getKey() + " ▬");
+                for (ShowTime showtimez : entryz.getValue()) {
+                    System.out.println("    [" + ++showtime_count + "] " + showtimez.getDay() + ", " + showtimez.getDate() + ", " + showtimez.getTime() + (showtimez.getCinema().isPlatinum() ? " (Platinum Cinema)" : ""));
+                    showtimeMap.put(showtime_count, showtimez);
+                }
+            }
+        }int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + showtime_count + "] View movie information or buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= showtime_count) {
+                Bookings bookings = new Bookings();
+                ShowTime showTime = showtimeMap.get(choice);
+                bookings.newBooking(showTime);
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
+            }
         }
     }
 
     public void displayShowtimesByMovie(Movie movie){
+        System.out.println(movie);
         for (ShowTime showtime: showtime_list){
-            if (showtime.getMovie().equals(movie)){
+            if (showtime.getMovie().getTitle().equals(movie.getTitle())){
                 System.out.println(showtime);
             }
         }
@@ -44,6 +74,11 @@ public class ShowTimes {
 
     public ShowTime selectShowTime(){
         return null;
+    }
+
+    public void removeSeat(ShowTime showTime, int row, int col){
+        Seat[][] seats = showTime.getSeats();
+        seats[row][col].setOccupied();
     }
 
     public void addShowtime(Movie movie){

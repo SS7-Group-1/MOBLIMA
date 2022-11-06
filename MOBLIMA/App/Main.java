@@ -28,19 +28,23 @@ public class Main {
                 case 1 -> { // LOGIN
                     Account account = new Account();
                     User user = account.login();
+
                     if(user != null){
-                        displayMenu(user);
+                        Account.UserDetail.user = user;
+                        displayMenu();
                     }
                 }
                 case 2 -> { // REGISTER
                     Account account = new Account();
                     User user = account.register();
                     if(user != null){
-                        displayMenu(user);
+                        Account.UserDetail.user = user;
+                        displayMenu();
                     }
                 }
                 case 3 -> { // GUEST
-                    displayMenu(null);
+                    Account.UserDetail.user = null;
+                    displayMenu();
                 }
                 case 4 -> {
                     System.out.println("Exiting application");
@@ -52,7 +56,7 @@ public class Main {
         }
     }
 
-    public static void displayMenu(User user) {
+    public static void displayMenu() {
         Scanner sc = new Scanner(System.in);
 
         int choice = -1;
@@ -63,17 +67,17 @@ public class Main {
             System.out.println("[2] Showtimes");
             System.out.println("[3] Reviews and Ratings");
 
-            if(user != null){
-                System.out.println("[4] Booking");
+            if(Account.UserDetail.user != null){
+                System.out.println("[N/A] Booking");
 
-                if(user.isAdmin()){
+                if(Account.UserDetail.user.isAdmin()){
                     System.out.println("[5] Manage Cinemas");
                     System.out.println("[6] Manage Movies");
                     System.out.println("[7] Manage Showtimes");
-                    System.out.println("[8] Configure System Settings");
+                    System.out.println("[N/A] Configure System Settings");
                 }
             }
-            System.out.println("[0] " + (user == null ? "Return to main menu" : "Logout"));
+            System.out.println("[0] " + (Account.UserDetail.user == null ? "Return to main menu" : "Logout"));
 
             choice = sc.nextInt();
             switch (choice) {

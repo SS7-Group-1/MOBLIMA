@@ -4,130 +4,211 @@ import MOBLIMA.*;
 
 import java.util.*;
 
-public class Movies
-{
+public class Movies {
     ArrayList<Movie> movie_list;
     Scanner sc = new Scanner(System.in);
 
-    public Movies()
-    {
+    public Movies() {
         this.movie_list = (ArrayList<Movie>) FileHelper.read("data/movies.dat");
     }
 
-    public void displayMovies()
-    {
+    public void displayMovies() {
         System.out.println("▭".repeat(40));
         System.out.println("| List of all movies |");
-        Map<String, List<Movie>> moviesByStatus = new HashMap<>();
-        for (Movie movie : movie_list) {
-            String status = movie.getStatus().toString();
-            if (!moviesByStatus.containsKey(status) && movie.getStatus() != MovieStatus.END_OF_SHOWING) {
+        IdentityHashMap<String, ArrayList<Integer>> moviesByStatus = new IdentityHashMap<>();
+        for (int i = 0; i < movie_list.size(); i++) {
+            String status = movie_list.get(i).getStatus().toString();
+            if (!moviesByStatus.containsKey(status) && movie_list.get(i).getStatus() != MovieStatus.END_OF_SHOWING) {
                 moviesByStatus.put(status, new ArrayList<>());
             }
-            moviesByStatus.get(status).add(movie);
+            moviesByStatus.get(status).add(i);
         }
-        for (Map.Entry<String, List<Movie>> entry : moviesByStatus.entrySet()) {
-            System.out.println("[" + entry.getKey() + "]");
-            for (Movie movie : entry.getValue()) {
-                System.out.println(" - " + movie.getTitle());
+        int movie_count = 0;
+        IdentityHashMap<Integer, Integer> movieMap = new IdentityHashMap<>();
+        for (Map.Entry<String, ArrayList<Integer>> entry : moviesByStatus.entrySet()) {
+            System.out.println("(" + entry.getKey() + ")");
+            for (Integer i : entry.getValue()) {
+                System.out.println(" [" + ++movie_count + "] " + movie_list.get(i).getTitle());
+                movieMap.put(movie_count, i);
+            }
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + movie_count + "] View movie information or buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= movie_count) {
+                int position = movieMap.get(choice);
+                displayMovieInformation(movie_list.get(position));
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
             }
         }
     }
 
-    public void displayTop5rating()
-    {
+    public void displayMovieInformation(Movie movie) {
+        System.out.println("▭".repeat(40));
+        System.out.println("Title: " + movie.getTitle());
+        System.out.println("Synopsis: " + movie.getSynopsis());
+        System.out.println("Director: " + movie.getDirector());
+        System.out.println("Cast(s): ");
+        movie.printCasts();
+        System.out.println("Status: " + movie.getStatus());
+        System.out.println("Average Rating: " + String.format("%.2f", movie.getRating().getAverageRating()));
+        System.out.println("Review(s): ");
+        movie.getReview().printReviews();
+        System.out.println("Total Sales: " + movie.getSales());
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1] Buy tickets for this movie");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 0 -> {
+                }
+                case 1 -> {
+                    ShowTimes showTimes = new ShowTimes();
+                    showTimes.displayShowtimesByMovie(movie);
+                    return;
+                }
+                default -> System.out.println("Invalid option");
+            }
+        }
+    }
+
+    public void displayTop5rating() {
         System.out.println("▭".repeat(40));
         System.out.println("| Top 5 movies by rating |");
-        HashMap<String,Float> Map = new HashMap<>();
-        LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<>();
+        HashMap<Movie, Float> Map = new HashMap<>();
+        LinkedHashMap<Movie, Float> sortedMap = new LinkedHashMap<>();
         ArrayList<Float> list = new ArrayList<>();
         //add to map.
         for (Movie movie : movie_list) {
-            Map.put(movie.getTitle(), movie.getRating().getAverageRating());
+            Map.put(movie, movie.getRating().getAverageRating());
         }
-        for (java.util.Map.Entry<String, Float> entry : Map.entrySet()) {
+        for (java.util.Map.Entry<Movie, Float> entry : Map.entrySet()) {
             list.add(entry.getValue());
         }
         list.sort(Collections.reverseOrder());
         for (Float num : list) {
-            for (java.util.Map.Entry<String, Float> entry : Map.entrySet()) {
+            for (java.util.Map.Entry<Movie, Float> entry : Map.entrySet()) {
                 if (entry.getValue().equals(num)) {
                     sortedMap.put(entry.getKey(), num);
                 }
             }
         }
-        int print_count =0;
-        for (SortedMap.Entry<String, Float> entry : sortedMap.entrySet()) {
-            if (print_count!=5) {
-                System.out.println(" " + ++print_count + ". " + entry.getKey() + " (" + String.format("%.2f", entry.getValue()) + ")");
-            }else{
+        int print_count = 0;
+        Map<String, Movie> movieMap = new HashMap<>();
+        for (SortedMap.Entry<Movie, Float> entry : sortedMap.entrySet()) {
+            if (print_count != 5) {
+                System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + String.format("%.2f", entry.getValue()) + ")");
+                movieMap.put(String.valueOf(print_count), entry.getKey());
+            } else {
                 break;
+            }
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + print_count + "] View movie information or buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= print_count) {
+                Movie movie = movieMap.get(String.valueOf(choice));
+                displayMovieInformation(movie);
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
             }
         }
     }
 
-    public void displayTop5sales()
-    {
+    public void displayTop5sales() {
         System.out.println("▭".repeat(40));
         System.out.println("Top 5 movies by sales");
-        HashMap<String, Integer> map1 = new HashMap<>();
-        LinkedHashMap<String, Integer> sortedMap1 = new LinkedHashMap<>();
+        HashMap<Movie, Integer> map1 = new HashMap<>();
+        LinkedHashMap<Movie, Integer> sortedMap1 = new LinkedHashMap<>();
         ArrayList<Integer> list1 = new ArrayList<>();
 
         //add to map.
         for (Movie movie : movie_list) {
-            map1.put(movie.getTitle(), movie.getSales());
+            map1.put(movie, movie.getSales());
         }
-        for (Map.Entry<String, Integer> entry : map1.entrySet()) {
+        for (Map.Entry<Movie, Integer> entry : map1.entrySet()) {
             list1.add(entry.getValue());
         }
         list1.sort(Collections.reverseOrder());
         for (int num : list1) {
-            for (Map.Entry<String, Integer> entry : map1.entrySet()) {
+            for (Map.Entry<Movie, Integer> entry : map1.entrySet()) {
                 if (entry.getValue().equals(num)) {
                     sortedMap1.put(entry.getKey(), num);
                 }
             }
         }
-        int print_count=0;
-        for (SortedMap.Entry<String, Integer> entry : sortedMap1.entrySet()) {
-            if (print_count!=5) {
-                System.out.println(" " + ++print_count + ". " + entry.getKey() + " (" + entry.getValue() + " sales)");
-            }else{
+        int print_count = 0;
+        Map<String, Movie> movieMap = new HashMap<>();
+        for (SortedMap.Entry<Movie, Integer> entry : sortedMap1.entrySet()) {
+            if (print_count != 5) {
+                System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + entry.getValue() + " sales)");
+                movieMap.put(String.valueOf(print_count), entry.getKey());
+            } else {
                 break;
+            }
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + print_count + "] View movie information or buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= print_count) {
+                Movie movie = movieMap.get(String.valueOf(choice));
+                displayMovieInformation(movie);
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
             }
         }
     }
 
-    public Movie selectMovie(){
-        return null;
+    public Movie selectMovie() {
+        for (int i = 0; i < movie_list.size(); i++) {
+            System.out.println(" [" + (i + 1) + "] " + movie_list.get(i).getTitle());
+        }
+        System.out.print("Enter selection: ");
+        int add_choice;
+        while (true) {
+            add_choice = sc.nextInt();
+            if (add_choice < 0 || add_choice > movie_list.size() + 1) {
+                System.out.println("Invalid option. Please try again.");
+            } else {
+                return movie_list.get(add_choice - 1);
+            }
+        }
     }
 
-    public void searchForMovie(){
+    public void searchForMovie() {
         System.out.println("▭".repeat(40));
         System.out.println("| Search for movie |");
         System.out.print("Enter movie title: ");
         String title = sc.nextLine();
         for (Movie movie : movie_list) {
             if (movie.getTitle().equals(title)) {
-                System.out.println("Movie found!");
-                System.out.println("Title: " + movie.getTitle());
-                System.out.println("Synopsis: " + movie.getSynopsis());
-                System.out.println("Director: " + movie.getDirector());
-                System.out.println("Cast(s): ");
-                movie.printCasts();
-                System.out.println("Status: " + movie.getStatus());
-                System.out.println("Average Rating: " + String.format("%.2f", movie.getRating().getAverageRating()));
-                System.out.println("Review(s): ");
-                movie.getReview().printReviews();
-                System.out.println("Total Sales: " + movie.getSales());
+                displayMovieInformation(movie);
                 return;
             }
         }
         System.out.println("Movie not found!");
     }
 
-    public void addMovie(){
+    public void addMovie() {
         int add_choice = 0;
         Movie movie = new Movie();
 
@@ -284,7 +365,7 @@ public class Movies
         //addMovie(movie);
     }
 
-    public void updateMovie(Movie movie){
+    public void updateMovie(Movie movie) {
         boolean edit = true;
         while (edit) {
             System.out.println("*".repeat(40));
@@ -296,10 +377,10 @@ public class Movies
             System.out.println("[4] Director ");
             System.out.println("[5] Type");
             System.out.print("Enter option: ");
-            switch (sc.nextInt()){
+            switch (sc.nextInt()) {
                 case 1:
                     System.out.println("*".repeat(40));
-                    System.out.println("Enter new title: " );
+                    System.out.println("Enter new title: ");
                     sc.skip("\\R?");
                     movie.setTitle(sc.nextLine());
                     break;
@@ -372,7 +453,7 @@ public class Movies
         }
     }
 
-    public void removeMovie(Movie movie){
+    public void removeMovie(Movie movie) {
         movie_list.remove(movie);
         FileHelper.write(movie_list, "movies.dat");
         System.out.println("Movie successfully removed");

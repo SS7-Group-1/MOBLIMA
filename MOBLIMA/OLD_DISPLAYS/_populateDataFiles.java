@@ -2,6 +2,7 @@ package MOBLIMA.OLD_DISPLAYS;
 
 import MOBLIMA.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +24,8 @@ public class _populateDataFiles {
             populateShowTimes();
             System.out.println("Populating users...");
             populateUsers();
+            ArrayList<BookingRecord> booking_list = new ArrayList<>();
+            FileHelper.write(booking_list, "data/bookings.dat");
             System.out.println("Done!");
         } else {
             System.out.println("Aborted.");

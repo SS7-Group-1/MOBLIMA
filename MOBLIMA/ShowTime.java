@@ -1,12 +1,15 @@
 package MOBLIMA;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
 
 public class ShowTime implements Serializable {
 
@@ -14,10 +17,12 @@ public class ShowTime implements Serializable {
     private Cinema cinema;
     private Movie movie;
     private Seat[][] seats;
+    private String showTimeId;
 
     public ShowTime(Movie movie){
         this.movie = movie;
         this.dateTime = LocalDateTime.now();
+        setShowTimeId();
     }
 
     public ShowTime(Cinema cinema, Movie movie, LocalDateTime dateTime) {
@@ -25,6 +30,15 @@ public class ShowTime implements Serializable {
         this.cinema = cinema;
         this.seats = cinema.getSeatLayout().clone();
         this.dateTime = dateTime;
+        setShowTimeId();
+    }
+
+    public String getShowTimeId() {
+        return showTimeId;
+    }
+
+    private void setShowTimeId() {
+        this.showTimeId = String.valueOf(java.util.UUID.randomUUID());
     }
 
     public void setMovie(Movie movie) {
@@ -88,11 +102,6 @@ public class ShowTime implements Serializable {
 
     @Override
     public String toString() {
-        return "ShowTime{" +
-                "dateTime=" + dateTime +
-                ", cinema=" + cinema +
-                ", movie=" + movie +
-                ", seats=" + Arrays.toString(seats) +
-                '}';
+        return movie.getTitle() + " " + cinema.toString() + " " + getDay() + ", " + getDate() + " - " + getTime() + " (" + showTimeId + ")";
     }
 }
