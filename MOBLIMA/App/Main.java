@@ -304,7 +304,7 @@ public class Main {
                             case 3 -> { // REMOVE SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
                                 ShowTime showTime = showTimes.selectShowTime();
-                                showTimes.removeShowtime(showTime);
+                                showTimes.removeFromShowtimeFile(showTime);
                             }
                             default -> System.out.println("Invalid option. Please try again.");
                         }

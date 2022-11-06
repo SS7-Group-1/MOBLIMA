@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Seat implements Serializable {
     private boolean isOccupied;
+    private boolean isSelected;
     private SeatType seatType;
     private int col;
     private int row;
@@ -12,6 +13,7 @@ public class Seat implements Serializable {
     }
 
     public Seat(SeatType seatType, int row, int col){
+        this.isSelected=false;
         this.isOccupied=false;
         this.seatType = seatType;
         this.row = row;
@@ -25,6 +27,22 @@ public class Seat implements Serializable {
     public void setOccupied(){
         if (!isOccupied){
             isOccupied=true;
+        }
+    }
+
+    public boolean isSelected(){
+        return isSelected;
+    }
+
+    public void setSelected(){
+        if (!isSelected){
+            isSelected=true;
+        }
+    }
+
+    public void setDeselected(){
+        if (isSelected){
+            isSelected=false;
         }
     }
 

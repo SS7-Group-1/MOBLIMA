@@ -24,6 +24,7 @@ public class Cinemas {
     }
 
     public void addCinema(){
+
     }
 
     public void updateCinema(Cinema cinema){
@@ -135,15 +136,21 @@ public class Cinemas {
     }
 
     public void printSeatingLayout(Seat[][] seatLayout){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Seating layout");
         System.out.println(" ".repeat((seatLayout.length / 2) + 5) + "SCREEN");
         for (int i = 0; i < seatLayout.length; i++) {
             System.out.print(" " + ((char)(i + 65)) + "  ");
             for (int j = 0; j < seatLayout[i].length; j++) {
-                String seatIcon;
-                seatIcon = seatLayout[i][j].getSeatType().getIcon();
-                System.out.print(seatIcon + " ");
+                    String seatIcon;
+                    seatIcon = seatLayout[i][j].getSeatType().getIcon();
+                if(seatLayout[i][j].isOccupied()){
+                    seatIcon = "x";
+                }
+                else if(seatLayout[i][j].isSelected()) {
+                    seatIcon = "▣";
+                }
+                    System.out.print(seatIcon + " ");
             }
             if(i == 1){
                 System.out.print("   ▢ Normal Seat");
@@ -158,6 +165,7 @@ public class Cinemas {
             System.out.print(++i + " ");
         }
         System.out.println();
+        System.out.println("▭".repeat(40));
     }
 
 }

@@ -15,17 +15,6 @@ public class Bookings {
         this.booking_record_list = (ArrayList<BookingRecord>) FileHelper.read("data/bookings.dat");
     }
 
-    public void newBooking(ShowTime showTime){
-        System.out.println("New Booking for " + showTime.getMovie().getTitle());
-        // select movie
-        // select showtime
-
-        Pricing pricing = new Pricing();
-        float price = pricing.computePricing(TicketType.STANDARD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), SeatType.STANDARD);
-
-        System.out.println("Price: $" + price);
-    }
-
     public void viewBooking(){
         // view user booking records
         System.out.println("Your booking records");

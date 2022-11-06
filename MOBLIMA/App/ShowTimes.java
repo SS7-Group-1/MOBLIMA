@@ -2,6 +2,7 @@ package MOBLIMA.App;
 
 import MOBLIMA.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +38,8 @@ public class ShowTimes {
                     showtimeMap.put(showtime_count, showtimez);
                 }
             }
-        }int choice = -1;
+        }
+        int choice = -1;
         while (choice != 0) {
             System.out.println("▭".repeat(40));
             System.out.println("[1-" + showtime_count + "] View movie information or buy tickets");
@@ -45,13 +47,101 @@ public class ShowTimes {
             System.out.print("Enter option: ");
             choice = sc.nextInt();
             if (choice > 0 && choice <= showtime_count) {
-                Bookings bookings = new Bookings();
                 ShowTime showTime = showtimeMap.get(choice);
-                bookings.newBooking(showTime);
+                bookShowtime(showTime);
                 return;
             } else if (choice != 0) {
                 System.out.println("Invalid option");
             }
+        }
+    }
+
+    public void bookShowtime(ShowTime showTime){
+        System.out.println("New Booking for " + showTime.getMovie().getTitle());
+        Cinemas cinemas = new Cinemas();
+        Pricing pricing = new Pricing();
+        BookingRecord new_booking = new BookingRecord();
+
+        sc.skip("\\R?");
+        boolean selectSeat = true;
+        while(selectSeat){
+            cinemas.printSeatingLayout(showTime.getSeats());
+            System.out.print("Select seat to book: ");
+            String seat = sc.nextLine();
+            if(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].isOccupied()){
+                System.out.println("Seat is occupied. Please select another seat");
+                continue;
+            }
+            else if(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].isSelected()){
+                System.out.println("You have already selected this seat");
+                continue;
+            }
+
+            else{
+                Ticket ticket = new Ticket();
+                ticket.setSeatType(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].getSeatType());
+                ticket.setSeatNumber(seat);
+                System.out.println("Ticket type: ");
+                System.out.println("[1] Adult ► $" + pricing.computePricing(TicketType.STANDARD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()));
+                System.out.println("[2] Child ► $" + pricing.computePricing(TicketType.CHILD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()));
+                System.out.println("[3] Senior ► $" + pricing.computePricing(TicketType.SENIOR, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()));
+                int ticketType = sc.nextInt();
+                if(ticketType == 1){
+                    ticket.setTicketType(TicketType.STANDARD);
+                }
+                else if(ticketType == 2){
+                    ticket.setTicketType(TicketType.CHILD);
+                }
+                else if(ticketType == 3){
+                    ticket.setTicketType(TicketType.SENIOR);
+                }
+                System.out.println("Seat " + seat + " added");
+                showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setSelected();
+
+
+                new_booking.addTicket(ticket);
+                float price = pricing.computePricing(ticket.getTicketType(), showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType());
+                new_booking.addPrice(price);
+
+                System.out.println("▭".repeat(40));
+                System.out.println("Selected seats: " + new_booking.printSeats());
+                System.out.println("Total price: $" + new_booking.getTotalPrice());
+                System.out.println("Book another seat? (y/N): ");
+                sc.skip("\\R?");
+                if (sc.nextLine().equalsIgnoreCase("n")) {
+                    selectSeat = false;
+                }
+            }
+        }
+
+        System.out.println("▭".repeat(40));
+        System.out.println("Selected seats: " + new_booking.printSeats());
+        System.out.println("Total price: $" + new_booking.getTotalPrice());
+        System.out.println("Confirm booking? (y/N): ");
+        sc.skip("\\R?");
+        if (sc.nextLine().equalsIgnoreCase("y")) {
+            Payment payment = new Payment();
+            if(payment.pay(new_booking.getTotalPrice())){
+                System.out.println("Payment successful");
+                System.out.println("Your transaction ID is " + "123456789");
+                System.out.println("Your booking is confirmed");
+
+                //deselect all seats
+                for(Ticket ticket : new_booking.getTickets()){
+                    showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setDeselected();
+                }
+                // add to booking record
+                for(Ticket ticket : new_booking.getTickets()){
+                    showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setOccupied();
+                }
+                writeToShowtimeFile();
+            }
+            else{
+                System.out.println("Payment unsuccessful");
+            }
+        }
+        else{
+            System.out.println("Booking cancelled");
         }
     }
 
@@ -73,12 +163,40 @@ public class ShowTimes {
     }
 
     public ShowTime selectShowTime(){
-        return null;
-    }
+        System.out.println("*".repeat(40));
+        System.out.println("All showtimes");
+        System.out.println("*".repeat(40));
+        Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
-    public void removeSeat(ShowTime showTime, int row, int col){
-        Seat[][] seats = showTime.getSeats();
-        seats[row][col].setOccupied();
+        int showtime_count = 0;
+        Map<Integer, ShowTime> showtimeMap = new HashMap<>();
+        for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
+            System.out.println("■ " + entry.getKey());
+            Map<String, List<ShowTime>> cinema_group =
+                    entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
+
+            for (Map.Entry<String, List<ShowTime>> entryz : cinema_group.entrySet()) {
+                System.out.println("  ▬ " + entryz.getKey() + " ▬");
+                for (ShowTime showtimez : entryz.getValue()) {
+                    System.out.println("    [" + ++showtime_count + "] " + showtimez.getDay() + ", " + showtimez.getDate() + ", " + showtimez.getTime() + (showtimez.getCinema().isPlatinum() ? " (Platinum Cinema)" : ""));
+                    showtimeMap.put(showtime_count, showtimez);
+                }
+            }
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("▭".repeat(40));
+            System.out.println("[1-" + showtime_count + "] View movie information or buy tickets");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= showtime_count) {
+                return showtimeMap.get(choice);
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
+            }
+        }
+        return null;
     }
 
     public void addShowtime(Movie movie){
@@ -122,7 +240,7 @@ public class ShowTimes {
         }
 
         //print
-        System.out.println(showTime);
+        addToShowtimeFile(showTime);
         System.out.println("Showtime added successfully.");
     }
 
@@ -185,7 +303,7 @@ public class ShowTimes {
                     System.out.println("Invalid option. Please try again.");
                     continue;
             }
-            FileHelper.write(showtime_list, "data/showtime.dat");
+            writeToShowtimeFile();
             System.out.println("Showtime updated successfully");
             System.out.println("Update another field? (y/N): ");
             sc.skip("\\R?");
@@ -195,8 +313,17 @@ public class ShowTimes {
         }
     }
 
-    public void removeShowtime(ShowTime showTime){
+    public void addToShowtimeFile(ShowTime showTime){
+        showtime_list.add(showTime);
+        FileHelper.write(showtime_list, "data/showtimes.dat");
+    }
+
+    public void writeToShowtimeFile(){
+        FileHelper.write(showtime_list, "data/showtimes.dat");
+    }
+
+    public void removeFromShowtimeFile(ShowTime showTime){
         showtime_list.remove(showTime);
-        System.out.println("Showtime removed successfully.");
+        FileHelper.write(showtime_list, "data/showtimes.dat");
     }
 }
