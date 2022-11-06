@@ -1,34 +1,185 @@
 package MOBLIMA.App;
 
+import MOBLIMA.FileHelper;
+import MOBLIMA.Movie;
 import MOBLIMA.User;
+import MOBLIMA.Voucher;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Payment {
     Scanner sc = new Scanner(System.in);
-    public boolean pay(float amount){
+    ArrayList<Voucher> voucher_list;
+    public Payment(){
+        this.voucher_list = (ArrayList<Voucher>) FileHelper.read("data/vouchers.dat");
+    }
+
+    public float pay(float amount){
         System.out.println("▭".repeat(40));
         System.out.println("Payment for $" + amount);
 
         System.out.println("Redeem voucher code? (y/N): ");
         sc.skip("\\R?");
         if (sc.nextLine().equalsIgnoreCase("y")) {
-            System.out.print("Enter voucher code: ");
-            String voucherCode = sc.nextLine();
+            boolean found = false;
+            while(!found){
+                System.out.print("Enter voucher code: ");
+                String voucherCode = sc.nextLine();
+                for (Voucher voucher : voucher_list) {
+                    if (voucher.getVoucherCode().equals(voucherCode)) {
+                        if(voucher.isValid()){
+                            found = true;
+                            System.out.println("Voucher code successfully redeemed");
+                            System.out.println("Previous amount: $" + amount);
+                            amount -= voucher.getAmount();
+                            System.out.println("Voucher amount: -$" + voucher.getAmount());
+                            if(amount < 0){
+                                amount = 0;
+                            }
+                            System.out.println("New total amount: $" + amount);
+                            voucher.setMaxUses(voucher.getMaxUses() - 1);
+                            FileHelper.write(voucher_list, "data/vouchers.dat");
+                        }
+                    }
+                }
+                if(!found){
+                    System.out.println("Voucher code not found. Try again? (Y/n)");
+                    sc.skip("\\R?");
+                    if (sc.nextLine().equalsIgnoreCase("n")) {
+                        found = true;
+                    }
+                }
+            }
+        }
+        if(amount > 0){
+            System.out.println("Card number:");
+            sc.skip("\\R?");
+            String credit_card = sc.nextLine();
+
+            System.out.println("CVV");
+            sc.skip("\\R?");
+            String pin = sc.nextLine();
+
+            System.out.println("Expiry date:");
+            sc.skip("\\R?");
+            String expiry_date = sc.nextLine();
+            System.out.println("Payment successful.");
+        }
+        else{
+            System.out.println("No payment required.");
+        }
+        return amount;
+    }
+
+    public void printAllVoucherCodes(){
+        System.out.println("▭".repeat(40));
+        System.out.println("Voucher codes");
+        for (Voucher voucher: voucher_list){
+            System.out.println(voucher.getVoucherCode() + ": $" + voucher.getAmount() + " (" + (voucher.unlimitedUses() ? "Unlimited uses" : voucher.getMaxUses() + " uses left") + ")");
+        }
+    }
+
+    public void addVoucherCode(){
+        Voucher voucher = new Voucher();
+        System.out.println("▭".repeat(40));
+        System.out.println("Add voucher code");
+        System.out.print("Enter voucher code: ");
+        String code = sc.nextLine();
+        for (Voucher nigel : voucher_list) {
+            if (nigel.getVoucherCode().equals(code)) {
+                System.out.println("Voucher code already exists");
+                return;
+            }
+        }
+        voucher.setVoucherCode(sc.nextLine());
+        System.out.println("Enter voucher amount: ");
+        sc.skip("\\R?");
+        voucher.setAmount(sc.nextFloat());
+        System.out.println("Unlimited redemptions? (y/N): ");
+        sc.skip("\\R?");
+        if (sc.nextLine().equalsIgnoreCase("y")) {
+            voucher.setMaxUses(-1);
+        }
+        else{
+            System.out.println("Enter max redemptions: ");
+            voucher.setMaxUses(sc.nextInt());
+            sc.skip("\\R?");
         }
 
-        System.out.println("Card number:");
-        sc.skip("\\R?");
-        String credit_card = sc.nextLine();
+        System.out.println("Voucher code added.");
+        voucher_list.add(voucher);
+        FileHelper.write(voucher_list, "data/vouchers.dat");
+    }
 
-        System.out.println("CVV");
-        sc.skip("\\R?");
-        String pin = sc.nextLine();
+    public void updateVoucherCode(){
+        System.out.println("*".repeat(40));
+        System.out.println("Select voucher to update");
+        Voucher voucher = selectVoucher();
+        System.out.println("*".repeat(40));
+        System.out.println("Updating " + voucher.getVoucherCode());
+        System.out.println("Select field to edit");
+        System.out.println("[1] Voucher code ");
+        System.out.println("[2] Redemptions ");
+        System.out.println("[3] Amounts ");
+        System.out.print("Enter option: ");
+        switch (sc.nextInt()) {
+            case 1:
+                System.out.print("Enter new voucher code: ");
+                String code = sc.nextLine();
+                for (Voucher nigel : voucher_list) {
+                    if (nigel.getVoucherCode().equals(code)) {
+                        System.out.println("Voucher code already exists");
+                        return;
+                    }
+                }
+                voucher.setVoucherCode(sc.nextLine());
+                break;
+            case 2:
+                System.out.print("Enter new max redemptions: ");
+                System.out.println("Unlimited redemptions? (y/N): ");
+                sc.skip("\\R?");
+                if (sc.nextLine().equalsIgnoreCase("y")) {
+                    voucher.setMaxUses(-1);
+                }
+                else{
+                    System.out.println("Enter max redemptions: ");
+                    voucher.setMaxUses(sc.nextInt());
+                    sc.skip("\\R?");
+                }
+                break;
+            case 3:
+                System.out.print("Enter new amount: ");
+                voucher.setAmount(sc.nextFloat());
+                break;
+            default:
+                System.out.println("Invalid option. Please try again.");
+        }
+        System.out.println("Voucher code updated.");
+        FileHelper.write(voucher_list, "data/vouchers.dat");
+    }
 
-        System.out.println("Expiry date:");
-        sc.skip("\\R?");
-        String expiry_date = sc.nextLine();
-        System.out.println("Payment successful.");
-        return true;
+    public void removeVoucherCode(){
+        System.out.println("Select voucher to update");
+        Voucher voucher = selectVoucher();
+        voucher_list.remove(voucher);
+        FileHelper.write(voucher_list, "data/vouchers.dat");
+        System.out.print("Voucher removed");
+    }
+
+    public Voucher selectVoucher(){
+        for (int i = 0; i < voucher_list.size(); i++) {
+            System.out.println(" [" + (i + 1) + "] " + voucher_list.get(i).getVoucherCode());
+        }
+        System.out.print("Enter selection: ");
+        int add_choice;
+        while (true) {
+            add_choice = sc.nextInt();
+            if (add_choice < 0 || add_choice > voucher_list.size() + 1) {
+                System.out.println("Invalid option. Please try again.");
+            } else {
+                return voucher_list.get(add_choice - 1);
+            }
+        }
     }
 }

@@ -26,6 +26,8 @@ public class _populateDataFiles {
             System.out.println("Resetting booking file...");
             ArrayList<BookingRecord> booking_list = new ArrayList<>();
             FileHelper.write(booking_list, "data/bookings.dat");
+            System.out.println("Populating vouchers...");
+            populateVouchers();
             System.out.println("Done!");
         } else {
             System.out.println("Aborted.");
@@ -432,5 +434,13 @@ public class _populateDataFiles {
         user_list.add(new User("admin@moblima.com", "95447824", "password", LocalDate.parse("18/09/1990", formatter), true));
 
         FileHelper.write(user_list, "data/users.dat");
+    }
+
+    public static void populateVouchers(){
+        ArrayList<Voucher> voucher_list = new ArrayList<>();
+        voucher_list.add(new Voucher("UNLIMITED2OFF", 2f, -1));
+        voucher_list.add(new Voucher("ONETIME10OFF", 10f, 1));
+        voucher_list.add(new Voucher("LIMITED5OFF", 5f, 10));
+        FileHelper.write(voucher_list, "data/vouchers.dat");
     }
 }

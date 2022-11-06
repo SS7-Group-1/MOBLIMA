@@ -100,7 +100,7 @@ public class BookingRecord implements Serializable {
         System.out.println("Cinema: " + showTime.getCinema().getCinemaCode() + " " + (showTime.getCinema().isPlatinum() ? "(Platinum)" : ""));
         System.out.println("Show Time: " + showTime.getDay() + ", " + showTime.getDate() + ", " + showTime.getTime());
         System.out.println("Seats: " + printSeats());
-        System.out.println("Total Price: " + totalPrice);
+        System.out.println("Total Price: $" + totalPrice);
     }
 
     @Override

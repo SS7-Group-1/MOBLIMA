@@ -2,6 +2,7 @@ package MOBLIMA.App;
 
 import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
+import MOBLIMA.User;
 //import MOBLIMA.Tests.generateDataFiles;
 
 import java.io.*;
@@ -21,12 +22,14 @@ public class SystemSetting {
 
         while(set)
         {
+             System.out.println("▭".repeat(40));
                 System.out.println("│ System setting menu │");
                 System.out.println("[1] Configure ticket price");
                 System.out.println("[2] Show top 5 movies by rating");
                 System.out.println("[3] Show top 5 movies by sales");
-                System.out.println("[4] Configure User View");
-                System.out.println("[ TODO ] Configure User role");
+                System.out.println("[4] Configure User Top 5 permission");
+                System.out.println("[5] Configure User Role");
+                System.out.println("[6] Manage vouchers");
                 System.out.println("[0] Go back");
                 System.out.println("Select an option");
                 try {
@@ -42,6 +45,43 @@ public class SystemSetting {
                             movies.displayTop5sales();
                         }
                         case 4 -> configureUserPermission();
+                        case 5->{
+                            Account account = new Account();
+                            User user = account.selectAccount();
+                            if(user != null){
+                                account.setUserRole(user);
+                            }
+                        }
+                        case 6->{
+                            int choice2 = -1;
+                            while(choice2 != 0){
+                                System.out.println("▭".repeat(40));
+                                System.out.println("[1] View all vouchers");
+                                System.out.println("[2] Add voucher");
+                                System.out.println("[3] Update voucher");
+                                System.out.println("[4] Remove voucher");
+                                System.out.println("[0] Go back");
+                                System.out.println("Select an option");
+                                choice2 = sc.nextInt();
+                                Payment payment = new Payment();
+                                switch (choice2) {
+                                    case 1 -> {
+                                        payment.printAllVoucherCodes();
+                                    }
+                                    case 2 -> {
+                                        payment.addVoucherCode();
+                                    }
+                                    case 3 -> {
+                                        payment.updateVoucherCode();
+                                    }
+                                    case 4 -> {
+                                        payment.removeVoucherCode();
+                                    }
+                                    case 0 -> set = Boolean.FALSE;
+                                    default -> System.out.println("Invalid option");
+                                }
+                            }
+                        }
                         case 0 -> set = Boolean.FALSE;
                     }
                 }

@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class Account {
     ArrayList<User> user_list;
+    Scanner sc = new Scanner(System.in);
 
     public class UserDetail {
         public static User user;
@@ -83,8 +84,28 @@ public class Account {
         return user;
     }
 
-    public void updateAccount(){
-
+    public User selectAccount(){
+        System.out.println("▭".repeat(40));
+        System.out.println("User List");
+        for (int i = 0; i < user_list.size(); i++) {
+            System.out.println(" [" + (i + 1) + "] " + user_list.get(i).getEmail() + (user_list.get(i).isAdmin() ? " (Admin)":""));
+        }
+        System.out.print("Enter selection: ");
+        int add_choice;
+        while (true) {
+            add_choice = sc.nextInt();
+            if (add_choice < 0 || add_choice > user_list.size() + 1) {
+                System.out.println("Invalid option. Please try again.");
+            } else {
+                return user_list.get(add_choice - 1);
+            }
+        }
     }
 
+    public void setUserRole(User user){
+        System.out.print("Set " + user.getEmail() + " as an admin? (y/N)");
+        sc.skip("\\R?");
+        user.setAdmin(sc.nextLine().equalsIgnoreCase("y"));
+        FileHelper.write(user_list, "data/users.dat");
+    }
 }

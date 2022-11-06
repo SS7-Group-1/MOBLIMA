@@ -150,7 +150,9 @@ public class ShowTimes {
             new_booking.setUser(Account.UserDetail.user);
 
             Payment payment = new Payment();
-            if(payment.pay(new_booking.getTotalPrice())){
+            float final_price = payment.pay(new_booking.getTotalPrice());
+            if(final_price >= 0){
+                new_booking.setTotalPrice(final_price);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
                 LocalDateTime now = LocalDateTime.now();
                 String transactionID = showTime.getCinema().getCinemaCode() + now.format(formatter);
