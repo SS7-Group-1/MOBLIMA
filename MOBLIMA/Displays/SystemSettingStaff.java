@@ -205,7 +205,7 @@ public class SystemSettingStaff {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             Scanner x = new Scanner(oldFile);
-            x.useDelimiter("[,\n]");
+            x.useDelimiter("[,\s\n]");
 
             while (x.hasNext()) {
                 /*String data = x.nextLine();
@@ -216,11 +216,11 @@ public class SystemSettingStaff {
 
 
                 if (modifier.equals(EModifier)) {
-                    pw.println(EModifier + "," + ESymbol + "," + EINT);
+                    pw.println(EModifier + " " + ESymbol + " " + EINT);
                     count = 1;
 
                 } else {
-                    pw.print(modifier + "," + symbol + "," + INT);
+                    pw.println(modifier + " " + symbol + " " + INT);
                 }
             }
                 x.close();
@@ -249,11 +249,11 @@ public class SystemSettingStaff {
         try {
             File file = new File("data/Modifier.txt");
             Scanner x = new Scanner(file);
-            x.useDelimiter("[,\n]");
+            x.useDelimiter("[\s\n]");
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
-                String[] res = data.split(",");
+                String[] res = data.split(" ");
 
                 String modifier =res[0];
                 String symbol = res[1];
