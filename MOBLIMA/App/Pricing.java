@@ -69,7 +69,7 @@ public class Pricing {
         }
 
 
-        return 0f;
+        return base;
     }
 
     public String Day(LocalDate date)
