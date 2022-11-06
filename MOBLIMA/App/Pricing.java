@@ -36,7 +36,7 @@ public class Pricing {
 
                 else if(modifier.equals(movieType.toString())||modifier.equals(seatType.getType())||modifier.equals(ticketType.toString())||modifier.equals(Day(date))) //calculating 2D or 3D movie
                 {
-                    if(symbol == "+")
+                    if(symbol.equals("+"))
                     {
                         base += pricing;
                     }
@@ -48,7 +48,7 @@ public class Pricing {
 
                     else if ((isPlatinum&&modifier.equals("PlatinumCinema"))||(!isPlatinum&&modifier.equals("StandardCinema")))
                     {
-                        if(symbol == "+")
+                        if(symbol.equals("+"))
                         {
                             base += pricing;
                         }
@@ -75,7 +75,7 @@ public class Pricing {
     public String Day(LocalDate date)
     {
         int Day = date.getDayOfWeek().getValue(); //check value of day
-        if (Day <5)
+        if (Day <6)
         {
             return "Weekday";
         }

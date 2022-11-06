@@ -1,7 +1,7 @@
 package MOBLIMA;
 
 public enum TicketType {
-    STANDARD("Standard"),
+    STANDARD("Adult"),
     CHILD("Child"),
     SENIOR("Senior");
 
