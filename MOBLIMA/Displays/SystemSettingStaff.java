@@ -205,7 +205,7 @@ public class SystemSettingStaff {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             Scanner x = new Scanner(oldFile);
-            x.useDelimiter("[,\s\n]");
+            //x.useDelimiter("[,\s\n]");
 
             while (x.hasNext()) {
                 /*String data = x.nextLine();
@@ -213,7 +213,6 @@ public class SystemSettingStaff {
                 String modifier = x.next();
                 String symbol = x.next();
                 String INT = x.next();
-
 
                 if (modifier.equals(EModifier)) {
                     pw.println(EModifier + " " + ESymbol + " " + EINT);
