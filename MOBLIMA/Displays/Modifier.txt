@@ -1,0 +1,13 @@
+Base,+,10
+Child,-,1
+Adult,+,0
+Senior ,-,2
+StandardCinema,+,0
+PlatinumCinema,+,2
+PublicHoliday,+,3
+Weekday,+,0
+Weekend,+,2
+3D,+,3
+2D,+,0
+PremiumSeat,+,2
+StandardSeat,+,0

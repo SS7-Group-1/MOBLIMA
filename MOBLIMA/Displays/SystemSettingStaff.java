@@ -2,9 +2,15 @@ package MOBLIMA.Displays;
 
 import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
+//import MOBLIMA.Tests.generateDataFiles;
 
+import java.io.*;
+
+import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
+import java.io.FileNotFoundException;
+
 
 
 public class SystemSettingStaff {
@@ -54,53 +60,223 @@ public class SystemSettingStaff {
     {
         Scanner sc = new Scanner(System.in);
         Boolean set = Boolean.TRUE;
+        Boolean slut = Boolean.TRUE;
 
         while (set)
         {
             System.out.println("Dear User, Please Select Option that you wish to view");
-            System.out.println("1: View all Ticket Price");
+            System.out.println("1: View all Configuration");
             System.out.println("2: Configure Ticket Price");
+            System.out.println("3: To terminate programme");
             int choice = sc.nextInt();
+            String EModifier=""; String EINT="";String ESymbol="";
             switch(choice)
             {
                 case 1:
                     printTicket();
-                    set = Boolean.FALSE;
+                    break;
+                case 2:
+                        System.out.println("Please Enter Modifier too be edited");
+                        System.out.println("1) Adult / Child / Senior");
+                        System.out.println("2) Weekday / Weekends / Public Holiday");
+                        System.out.println("3) 2D / 3D");
+                        System.out.println("4) Standard / Premium Seats");
+                        System.out.println("5) Standard/ Platinum Cinema");
+                        int pick = sc.nextInt();
+                        switch (pick) {
+                            case 1:
+                                System.out.println("Please select 1 for Adult");
+                                System.out.println("Please select 2 for Child");
+                                System.out.println("Please select 3 for Senior");
+                                int adult = sc.nextInt();
+                                switch (adult) {
+                                    case 1:
+                                        EModifier = "Adult";
+                                        break;
+                                    case 2:
+                                        EModifier = "Child";
+                                        break;
+                                    case 3:
+                                        EModifier = "Senior";
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                System.out.println("Please select 1 for Weekday");
+                                System.out.println("Please select 2 for Weekends");
+                                System.out.println("Please select 3 for Public Holiday");
+                                int day = sc.nextInt();
+                                switch (day) {
+                                    case 1:
+                                        EModifier = "Weekday";
+                                        break;
+                                    case 2:
+                                        EModifier = "Weekend";
+                                        break;
+                                    case 3:
+                                        EModifier = "PublicHoliday";
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                System.out.println("Please select 1 for 2D");
+                                System.out.println("Please select 2 for 3D");
+                                int D = sc.nextInt();
+                                switch (D) {
+                                    case 1:
+                                        EModifier = "2D";
+                                        break;
+                                    case 2:
+                                        EModifier = "3D";
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                System.out.println("Please select 1 for Standard Seats");
+                                System.out.println("Please select 2 for Premium Seats");
+                                int seat = sc.nextInt();
+                                switch (seat) {
+                                    case 1:
+                                        EModifier = "StandardSeat";
+                                        break;
+                                    case 2:
+                                        EModifier = "PremiumSeat";
+                                        break;
+                                }
+                                break;
+                            case 5:
+                                System.out.println("Please select 1 for Standard Cinema");
+                                System.out.println("Please select 2 for Platinum Cinema");
+                                int cin = sc.nextInt();
+                                switch (cin) {
+                                    case 1:
+                                        EModifier = "StandardCinema";
+                                        break;
+                                    case 2:
+                                        EModifier = "PlatinumCinema";
+                                        break;
+                                }
+                                break;
+                        }
+
+                    System.out.println("Select Operations to be done on modifier");
+                    System.out.println("1) Addition");
+                    System.out.println("2) Subtraction");
+                    int arith = sc.nextInt();
+                    switch(arith)
+                    {
+                        case 1:
+                            ESymbol="+";
+                            break;
+                        case  2:
+                            ESymbol="-";
+                            break;
+                    }
+
+                    System.out.println("Enter Number to be modified");
+                    EINT = sc.next();
+
+                    if(Configuration(EModifier,ESymbol,EINT) ==1)
+                    {
+                        System.out.println("Modification Succesful");
+                    }
+                    else
+                    {
+                        System.out.println("Error");
+                    }
                     break;
 
-
+                case 3:
+                    set= Boolean.FALSE;
+                    System.out.println("Terminating Programme");
+                    break;
             }
         }
     }
 
-    public void printTicket()
+    public int Configuration(String EModifier,  String ESymbol, String EINT)
     {
-        String type=""; String cinema ="";String age =""; String day="";int price=0;
-        try{
-            Scanner x = new Scanner("C://Java programming//MOBLIMA//MOBLIMA//Displays//TicketPrice.csv");
+
+        File oldFile = new File("data/Modifier.txt");
+        File newFile = new File("temp.txt");
+        int count=0;
+        try {
+            FileWriter fw = new FileWriter("temp.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            Scanner x = new Scanner(oldFile);
             x.useDelimiter("[,\n]");
 
-            while(x.hasNext())
-            {
-                type= x.next();
-                cinema=x.next();
-                age= x.next();
-                day = x.next();
-                price = x.nextInt();
+            while (x.hasNext()) {
+                /*String data = x.nextLine();
+                String[] res = data.split(",");*/
+                String modifier = x.next();
+                String symbol = x.next();
+                String INT = x.next();
 
-                System.out.println("Type "+type +" Cinema " + cinema + " age "+age +"day "+day + " price "+price);
+
+                if (modifier.equals(EModifier)) {
+                    pw.println(EModifier + "," + ESymbol + "," + EINT);
+                    count = 1;
+
+                } else {
+                    pw.print(modifier + "," + symbol + "," + INT);
+                }
             }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File("data/Modifier.txt");
+                newFile.renameTo(dump);
+
         }
+            catch(Exception e)
+            {
+                System.out.println("Error");
+            }
+
+        return count;
+
+
+
+
+
+    }
+    public void printTicket()
+    {
+
+        try {
+            File file = new File("data/Modifier.txt");
+            Scanner x = new Scanner(file);
+            x.useDelimiter("[,\n]");
+
+            while (x.hasNextLine()) {
+                String data = x.nextLine();
+                String[] res = data.split(",");
+
+                String modifier =res[0];
+                String symbol = res[1];
+                String INT = res[2];
+
+
+                System.out.println("Modifier type is "+ modifier + ", Arithmetic symbol is " + symbol + ", Amount to be modified is "+ INT);
+            }
+            x.close();
+        }
+
         catch(Exception e)
         {
-            System.out.println("Wrong file");
+            e.printStackTrace();
         }
+
+
 
 
 
     }
 
-    public void printTop5Ranking(int choice) //NEED CHANGE TO PRIVATE LATER and sales for each movie //Ticket sales for all are zeroes quite sus
+    public void printTop5Ranking(int choice)
     {
         movie_list = (ArrayList<Movie>) FileHelper.read("data/movie.dat");
         switch (choice)
@@ -170,5 +346,7 @@ public class SystemSettingStaff {
                 break;
         }
     }
+
+
 
 }
