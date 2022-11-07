@@ -3,6 +3,9 @@ package MOBLIMA.App;
 import MOBLIMA.*;
 import java.util.*;
 
+/**
+ *
+ */
 public class Movies {
     ArrayList<Movie> movie_list;
     Scanner sc = new Scanner(System.in);

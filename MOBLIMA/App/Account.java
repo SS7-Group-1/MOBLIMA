@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 /**
  * Class that is responsible for the account of all users
- * @author
- * @version 1.0
+ * @author Lim Jia Wei
+ * @version 1.5
  * @since 2022-11-07
  *
  */
@@ -20,7 +20,7 @@ public class Account {
     Scanner sc = new Scanner(System.in);
 
     /**
-     * Usage of user class
+     * User class as an attribute in Account class
      */
     public class UserDetail {
         public static User user;
@@ -29,12 +29,16 @@ public class Account {
     /**
      * Default Constructor
      * Creates a new account
-     * Initialise an array list of users by reading from users.dat
+     * Initialise an array list of User objects by reading from users.dat
      */
     public Account(){
         this.user_list = (ArrayList<User>) FileHelper.read("data/users.dat");
     }
 
+    /**
+     * Function that ask user to log in using their email and password
+     * @return User object if login successful and NULL if login fails
+     */
     public User login(){
         Scanner sc = new Scanner(System.in);
         boolean login = true;
@@ -59,6 +63,17 @@ public class Account {
         return null;
     }
 
+    /**
+     * Function that allows user to register their credentials for MOBLIMA account , writes back created user into users.dat
+     * Credentials include :
+     * String type Email
+     * String type Password
+     * String type  Phone number
+     * String type Date of Birth
+     *
+     *
+     * @return User object  if successful and NULL if unsuccessful
+     */
     public User register(){
         Scanner sc = new Scanner(System.in);
         User user = new User();
@@ -99,6 +114,11 @@ public class Account {
         return user;
     }
 
+    /**
+     * Function that selects a user from the list and returns that user object
+     * @return the selected user object from the list
+     */
+
     public User selectAccount(){
         System.out.println("▭".repeat(40));
         System.out.println("User List");
@@ -116,6 +136,11 @@ public class Account {
             }
         }
     }
+
+    /**
+     * Functions that set whether a user is an admin
+     * @param user - user object that will be used to set to admin
+     */
 
     public void setUserRole(User user){
         System.out.print("Set " + user.getEmail() + " as an admin? (y/N)");

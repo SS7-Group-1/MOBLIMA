@@ -5,13 +5,28 @@ import MOBLIMA.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles all the cinemas
+ * @since 2022-11-07
+ * @author Lim Jia Wei
+ * @version 1.5
+ */
 public class Cinemas {
     ArrayList<Cinema> cinema_list;
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Default Constructor
+     * Initialises an array list of Cinema Objects by reading from cinema.dat
+     */
     public Cinemas(){
         this.cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinemas.dat");
     }
+
+    /**
+     * Function that allows user to select Cinema
+     * @return Cinema object that was selected
+     */
 
     public Cinema selectCinema(){
         // select cinema
@@ -26,11 +41,20 @@ public class Cinemas {
         return cinema_list.get(cinema_number);
     }
 
+    /**
+     * Function that displays all available Cinema
+     */
     public void displayCinemas(){
         for (Cinema cinema: cinema_list){
             System.out.println(cinema);
         }
     }
+
+    /**
+     * Function that adds a Cinema into its respective Cineplex
+     * Added Cinema Consist of Cinema type (Platinum/ Non-platinum) , Choice of cineplex , Cinema Code , Seat arrangement
+     * Added Cinema will be written back into cinemas.dat
+     */
 
     public void addCinema(){
         Cinema cinema = new Cinema();
@@ -83,6 +107,12 @@ public class Cinemas {
         System.out.println("Cinema added successfully");
     }
 
+    /**
+     * Function that allows the update of Cinemas
+     * Allows update of Cinemas' Cineplex , Cinema Code and Premium Seats
+     * Updated Cinema will be written back into cinema.dat
+     * @param cinema - cinema object to be updated
+     */
     public void updateCinema(Cinema cinema){
         boolean edit = true;
         System.out.println("▭".repeat(40));
@@ -140,10 +170,21 @@ public class Cinemas {
         }
     }
 
+    /**
+     * Allows the removal of Cinema
+     * writes back updated cinema list without removed cinema into cinema.dat
+     * @param cinema - cinema object to be removed
+     */
+
     public void removeCinema(Cinema cinema){
         cinema_list.remove(cinema);
         FileHelper.write(cinema_list, "data/cinema.dat");
     }
+
+    /**
+     * Function that updates the seating arrangement of Cinemas
+     * @param cinema - cinema object to have its seating arrangement to be updated
+     */
 
     public void updateCinemaSeating(Cinema cinema) {
         boolean edit = true;
@@ -191,6 +232,11 @@ public class Cinemas {
         }
     }
 
+    /**
+     * Allows the Printing of Seating Layout for users to see
+     * @param seatLayout - Array of Seat type to be used to print seating layout
+     * @param showSelection - Parameter that shows the selected seats by the user
+     */
     public void printSeatingLayout(Seat[][] seatLayout, boolean showSelection){
         System.out.println("▭".repeat(40));
         System.out.println("Seating layout");

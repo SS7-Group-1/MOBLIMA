@@ -11,6 +11,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class that runs the main programme
+ * @since 2022-11-07
+ * @author Lim Jia Wei
+ * @version 1.7
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -60,6 +66,9 @@ public class Main {
         }
     }
 
+    /**
+     * Function that show the Main Display Menu for users to interact with
+     */
     public static void displayMenu() {
         Scanner sc = new Scanner(System.in);
 
