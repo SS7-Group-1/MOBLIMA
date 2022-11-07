@@ -539,5 +539,36 @@ public class SystemSetting {
             System.out.println("Error");
         }
         return count;
+
+
+    }
+
+    public Boolean isPublicHoliday(String date)
+    {
+        try {
+            File file = new File("data/date.txt");
+            Scanner x = new Scanner(file);
+            x.useDelimiter("[\s\n]");
+
+            while (x.hasNextLine()) {
+                String data = x.nextLine();
+                String[] res = data.split(" ");
+
+                String Holiday =res[0];
+                String check = res[1];
+
+                if(check.equals(date))
+                {
+                    return Boolean.TRUE;
+                }
+
+            }
+            x.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Boolean.FALSE;
     }
 }
