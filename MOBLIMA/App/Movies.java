@@ -454,11 +454,11 @@ public class Movies {
             System.out.println("▭".repeat(40));
             System.out.println("Updating " + movie.getTitle());
             System.out.println("Select field to edit");
-            System.out.println("[1] Title ");
-            System.out.println("[2] Status ");
-            System.out.println("[3] Synopsis ");
-            System.out.println("[4] Director ");
-            System.out.println("[5] Type");
+            System.out.println("[1] Title: " + movie.getTitle());
+            System.out.println("[2] Status: " + movie.getStatus());
+            System.out.println("[3] Synopsis: " + movie.getSynopsis());
+            System.out.println("[4] Director: " + movie.getDirector());
+            System.out.println("[5] Type: " + movie.getMovieType());
             System.out.print("Enter option: ");
             switch (sc.nextInt()) {
                 case 1 -> {
@@ -528,7 +528,12 @@ public class Movies {
                     continue;
                 }
             }
-            FileHelper.write(movie_list, "data/movie.dat");
+            for(int i = 0; i < movie_list.size(); i++) {
+                if(movie_list.get(i).getTitle().equals(movie.getTitle())) {
+                    movie_list.set(i, movie);
+                }
+            }
+            FileHelper.write(movie_list, "data/movies.dat");
             System.out.println("Movie updated successfully");
             System.out.println("Update another field? (y/N): ");
             sc.skip("\\R?");
@@ -539,7 +544,7 @@ public class Movies {
     }
 
     /**
-     * Function that Removes a movie and updates movie.dat file
+     * Function that Removes a movie and updates movies.dat file
      * @param movie - movie object to be removed
      */
     public void removeMovie(Movie movie) {
@@ -555,13 +560,18 @@ public class Movies {
                 }
                 case 1 -> {
                     movie_list.remove(movie);
-                    FileHelper.write(movie_list, "movies.dat");
+                    FileHelper.write(movie_list, "data/movies.dat");
                     System.out.println("Movie successfully removed");
                     return;
                 }
                 case 2 -> {
                     movie.setStatus(MovieStatus.END_OF_SHOWING);
-                    FileHelper.write(movie_list, "data/movie.dat");
+                    for(int i = 0; i < movie_list.size(); i++) {
+                        if(movie_list.get(i).getTitle().equals(movie.getTitle())) {
+                            movie_list.set(i, movie);
+                        }
+                    }
+                    FileHelper.write(movie_list, "data/movies.dat");
                     System.out.println("Movie status updated successfully");
                     return;
                 }

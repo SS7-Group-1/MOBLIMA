@@ -116,4 +116,9 @@ public class Cinema implements Serializable {
     public void setCineplex(Cineplex cineplex) {
         this.cineplex = cineplex;
     }
+
+    @Override
+    public String toString() {
+        return cineplex + " - " + cinemaCode + " " + (isPlatinum ? "(Platinum)" : "");
+    }
 }

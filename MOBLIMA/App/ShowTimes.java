@@ -393,10 +393,10 @@ public class ShowTimes {
             System.out.println("▭".repeat(40));
             System.out.println("Updating " + showTime);
             System.out.println("Select field to edit");
-            System.out.println("[1] Cinema ");
-            System.out.println("[2] Date ");
-            System.out.println("[3] Time ");
-            System.out.println("[4] Duration ");
+            System.out.println("[1] Cinema: " + showTime.getCinema().getCineplex());
+            System.out.println("[2] Date: " + showTime.getDate());
+            System.out.println("[3] Time: " + showTime.getTime());
+            System.out.println("[4] Duration: " + showTime.getMovie().getDuration() + " minutes");
             System.out.print("Enter option: ");
             switch (sc.nextInt()) {
                 case 1 -> {
