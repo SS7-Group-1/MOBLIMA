@@ -54,7 +54,9 @@ public class Payment {
                                 amount = 0;
                             }
                             System.out.println("New total amount: $" + amount);
-                            voucher.setMaxUses(voucher.getMaxUses() - 1);
+                            if(voucher.getMaxUses() > 0){
+                                voucher.setMaxUses(voucher.getMaxUses() - 1);
+                            }
                             FileHelper.write(voucher_list, "data/vouchers.dat");
                         }
                     }
