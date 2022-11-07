@@ -100,13 +100,6 @@ public class Account {
         String name = sc.next();
         user.setPhone(name);
 
-        System.out.print("Date of Birth (DD/MM/YYYY): ");
-        sc.skip("\\R?");
-        String dob = sc.next();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(dob, formatter);
-        user.setDateOfBirth(localDate);
-
         user_list.add(user);
         FileHelper.write(user_list, "data/users.dat");
         System.out.println("Account created!");
