@@ -2,15 +2,43 @@ package MOBLIMA;
 
 import java.io.Serializable;
 
+/**
+ * Cinema class
+ * @author SS7 Group 1
+ * @version 1.0
+ * @since 2022-11-07
+ */
 public class Cinema implements Serializable {
+    /**
+     * Whether Cinema is Platinum suite or not.
+     */
     private boolean isPlatinum;
+    /**
+     * Unique Cinema code in format XXX.
+     */
     private String cinemaCode;
+    /**
+     * Cineplex that Cinema belongs to.
+     */
     private Cineplex cineplex;
+    /**
+     * Seat layout within the cinema.
+     */
     private Seat[][] seatLayout;
 
+    /**
+     * Default Constructor.
+     */
     public Cinema(){
     }
 
+    /**
+     *Creates a Cinema class with attributes initialised.
+     * @param cineplex Cineplex that this Cinema belongs to.
+     * @param isPlatinum Whether Cinema is a platinum suite or not.
+     * @param cinemaCode Unique Cinema code.
+     * @param seatLayout Cinema seat layout.
+     */
     public Cinema(Cineplex cineplex, boolean isPlatinum, String cinemaCode, Seat[][] seatLayout) {
         this.cineplex = cineplex;
         this.isPlatinum = isPlatinum;
@@ -18,26 +46,51 @@ public class Cinema implements Serializable {
         this.seatLayout = seatLayout;
     }
 
+    /**
+     * Accessor for IsPlatinum.
+     * @return Boolean: Whether Cinema is platinum suite.
+     */
     public boolean isPlatinum() {
         return isPlatinum;
     }
 
+    /**
+     * Mutator for IsPlatinum.
+     * @param isPremium Boolean to change to.
+     */
     public void setPlatinum(boolean isPremium) {
         this.isPlatinum = isPremium;
     }
 
+    /**
+     * Accessor for Cinema code.
+     * @return String: Cinema code in string format.
+     */
     public String getCinemaCode() {
         return cinemaCode;
     }
 
+    /**
+     * Mutator for Cinema code.
+     * @param cinemaCode Cinema code to change to.
+     */
     public void setCinemaCode(String cinemaCode) {
         this.cinemaCode = cinemaCode;
     }
 
+    /**
+     * Accessor for seat layout.
+     * @return Seat[][]: Cinema seat layout.
+     */
     public Seat[][] getSeatLayout() {
         return seatLayout;
     }
 
+    /**
+     * Mutator for seat layout.
+     * @param rows Number of rows in new seat layout.
+     * @param cols Number of columns in new seat layout.
+     */
     public void setSeatingLayout(int rows, int cols) {
         Seat[][] seats = new Seat[rows][cols];
         for (int row = 0; row < rows; row++) {
@@ -48,16 +101,19 @@ public class Cinema implements Serializable {
         }
     }
 
+    /**
+     * Accessor for Cineplex.
+     * @return String: Cineplex in String format.
+     */
     public String getCineplex() {
         return cineplex.toString();
     }
 
+    /**
+     * Mutator for Cineplex.
+     * @param cineplex Cineplex to change to.
+     */
     public void setCineplex(Cineplex cineplex) {
         this.cineplex = cineplex;
-    }
-
-    @Override
-    public String toString() {
-        return cineplex + " (" + cinemaCode + ")" + (isPlatinum ? " (Platinum)" : "");
     }
 }
