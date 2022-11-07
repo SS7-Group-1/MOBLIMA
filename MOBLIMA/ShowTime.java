@@ -199,12 +199,4 @@ public class ShowTime implements Serializable {
         return day.substring(0,1).toUpperCase() + day.substring(1).toLowerCase();
     }
 
-    /**
-     *
-     * @return a string containing details of the movie, consisting of movie title, cinema that it is being screened at, its showtime as well as its showTimeId
-     */
-    @Override
-    public String toString() {
-        return movie.getTitle() + " " + cinema.toString() + " " + getDay() + ", " + getDate() + " - " + getTime() + " (" + showTimeId + ")";
-    }
 }

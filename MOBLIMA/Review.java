@@ -64,17 +64,6 @@ public class Review implements Serializable {
     public ArrayList<String> getReviews(){
         return reviews;
     }
-
-    /**
-     *
-     * @return a string containing details of the reviews, consisting of all reviews for the movie
-     */
-    @Override
-    public String toString() {
-        return "Reviews{" +
-                "review=" + reviews +
-                '}';
-    }
 }
 
 

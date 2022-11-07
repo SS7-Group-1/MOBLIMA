@@ -172,17 +172,4 @@ public class User implements Serializable {
         isAdmin = admin;
     }
 
-    /**
-     *
-     * @return a string containing the details of the customer, which consist of phone number, email, whether the user is a senior and whether the user is a child
-     */
-    @Override
-    public String toString() {
-        return "Customer{" +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", isSenior=" + isSenior() +
-                ", isChild=" + isChild() +
-                '}';
-    }
 }
