@@ -46,7 +46,8 @@ public enum MovieStatus {
      * Accessor for movie status.
      * @return Movie's status.
      */
-    public String getStatus() {
+    @Override
+    public String toString() {
         return status;
     }
 }

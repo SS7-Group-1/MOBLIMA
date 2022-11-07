@@ -30,7 +30,7 @@ public class Movies {
         System.out.println("| List of all movies |");
         IdentityHashMap<String, ArrayList<Integer>> moviesByStatus = new IdentityHashMap<>();
         for (int i = 0; i < movie_list.size(); i++) {
-            String status = movie_list.get(i).getStatus().getStatus();
+            String status = movie_list.get(i).getStatus().toString();
             if (!moviesByStatus.containsKey(status) && movie_list.get(i).getStatus() != MovieStatus.END_OF_SHOWING) {
                 moviesByStatus.put(status, new ArrayList<>());
             }
@@ -74,7 +74,7 @@ public class Movies {
         System.out.println("Director: " + movie.getDirector());
         System.out.println("Cast(s): ");
         movie.printCasts();
-        System.out.println("Status: " + movie.getStatus().getStatus());
+        System.out.println("Status: " + movie.getStatus().toString());
         if (movie.getRating().getRatings().size() < 2) {
             System.out.println("Average Rating: N/A");
         } else {
@@ -120,6 +120,9 @@ public class Movies {
         ArrayList<Float> list = new ArrayList<>();
         //add to map.
         for (Movie movie : movie_list) {
+            if(movie.getRating().getRatings().size() < 2){
+                continue;
+            }
             Map.put(movie, movie.getRating().getAverageRating());
         }
         for (java.util.Map.Entry<Movie, Float> entry : Map.entrySet()) {
@@ -136,7 +139,7 @@ public class Movies {
         int print_count = 0;
         Map<String, Movie> movieMap = new HashMap<>();
         for (SortedMap.Entry<Movie, Float> entry : sortedMap.entrySet()) {
-            if (print_count != 5 && entry.getKey().getStatus() != MovieStatus.END_OF_SHOWING && entry.getKey().getRating().getRatings().size() > 1) {
+            if (print_count != 5 && entry.getKey().getStatus() != MovieStatus.END_OF_SHOWING) {
                 System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + String.format("%.2f", entry.getValue()) + ")");
                 movieMap.put(String.valueOf(print_count), entry.getKey());
             } else {
@@ -565,5 +568,70 @@ public class Movies {
                 default -> System.out.println("Invalid option. Please try again.");
             }
         }
+    }
+
+    /**
+     * Function that adds a rating for a movie
+     * @param movie - movie object for its rating to be added
+     */
+    public void addRating(Movie movie){
+        System.out.println("▭".repeat(40));
+        System.out.println("Add rating for " + movie.getTitle());
+        System.out.print("Enter rating: ");
+        while(true){
+            float rating = sc.nextFloat();
+            if(rating >= 1 && rating <= 5){
+                for(int i = 0; i < movie_list.size(); i++){
+                    if(movie_list.get(i).getTitle().equals(movie.getTitle())){
+                        movie_list.get(i).getRating().addRating(rating);
+                        movie_list.get(10).getRating().printRatings();
+                        FileHelper.write(movie_list, "data/movies.dat");
+                        System.out.println("Rating successfully added");
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("Rating must be between 1-5. Please try again.");
+            }
+        }
+    }
+
+    /**
+     * Function that adds a review for a movie
+     * @param movie - movie object to be added a review
+     */
+    public void addReview(Movie movie){
+        System.out.println("▭".repeat(40));
+        System.out.println("Add review for " + movie.getTitle());
+        System.out.print("Enter review: ");
+        sc.skip("\\R?");
+        String review = sc.nextLine();
+
+        for(int i = 0; i < movie_list.size(); i++){
+            if(movie_list.get(i).getTitle().equals(movie.getTitle())){
+                movie_list.get(i).getReview().addReview(review);
+                movie_list.get(i).getReview().printReviews();
+                FileHelper.write(movie_list, "data/movies.dat");
+                System.out.println("Review successfully added");
+                return;
+            }
+        }
+    }
+
+    public void viewReviews(Movie movie){
+        System.out.println("▭".repeat(40));
+        System.out.println("Reviews for " + movie.getTitle());
+        movie.getReview().printReviews();
+        System.out.println("▭".repeat(40));
+    }
+    /**
+     * Function that views the rating of a movie
+     * @param movie - movie object for its rating to be viewed
+     */
+    public void viewRatings(Movie movie){
+        System.out.println("▭".repeat(40));
+        System.out.println("Ratings for " + movie.getTitle());
+        movie.getRating().printRatings();
+        System.out.println("▭".repeat(40));
     }
 }

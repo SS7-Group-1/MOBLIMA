@@ -13,9 +13,10 @@ import java.util.Scanner;
 
 /**
  * Class that runs the main programme
- * @since 2022-11-07
+ *
  * @author Lim Jia Wei
  * @version 1.7
+ * @since 2022-11-07
  */
 public class Main {
 
@@ -26,7 +27,7 @@ public class Main {
         System.out.println("Welcome to Platinum Village");
         System.out.println("the leading movie theatre in Singapore");
 
-        while(true){
+        while (true) {
             System.out.println("▭".repeat(40));
             System.out.println("[1] Login");
             System.out.println("[2] Register");
@@ -39,7 +40,7 @@ public class Main {
                     Account account = new Account();
                     User user = account.login();
 
-                    if(user != null){
+                    if (user != null) {
                         Account.UserDetail.user = user;
                         displayMenu();
                     }
@@ -47,7 +48,7 @@ public class Main {
                 case 2 -> { // REGISTER
                     Account account = new Account();
                     User user = account.register();
-                    if(user != null){
+                    if (user != null) {
                         Account.UserDetail.user = user;
                         displayMenu();
                     }
@@ -73,17 +74,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int choice = -1;
-        while(choice != 0){
+        while (choice != 0) {
             System.out.println("▭".repeat(40));
             System.out.println("│ Main Menu │");
             System.out.println("[1] Movies");
             System.out.println("[2] Showtimes");
             System.out.println("[3] Reviews and Ratings");
 
-            if(Account.UserDetail.user != null){
+            if (Account.UserDetail.user != null) {
                 System.out.println("[4] Booking History");
 
-                if(Account.UserDetail.user.isAdmin()){
+                if (Account.UserDetail.user.isAdmin()) {
                     System.out.println("[5] Manage Cinemas");
                     System.out.println("[6] Manage Movies");
                     System.out.println("[7] Manage Showtimes");
@@ -96,7 +97,7 @@ public class Main {
             switch (choice) {
                 case 1 -> { // MOVIES LIST
                     int subChoice = -1;
-                    while(subChoice != 0){
+                    while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
                         System.out.println("│ Movies │");
                         System.out.println("[1] View all movies");
@@ -126,8 +127,9 @@ public class Main {
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
-                        switch (subChoice){
-                            case 0 -> {}
+                        switch (subChoice) {
+                            case 0 -> {
+                            }
                             case 1 -> { // VIEW ALL MOVIES
                                 Movies movies = new Movies();
                                 movies.displayMovies();
@@ -137,7 +139,7 @@ public class Main {
                                 movies.searchForMovie();
                             }
                             case 3 -> { // SHOW TOP 5 MOVIES BY RATING
-                                if(topRatingsAllowed){
+                                if (topRatingsAllowed) {
                                     Movies movies = new Movies();
                                     movies.displayTop5rating();
                                 } else {
@@ -145,7 +147,7 @@ public class Main {
                                 }
                             }
                             case 4 -> { // SHOW TOP 5 MOVIES BY SALES
-                                if(topSalesAllowed){
+                                if (topSalesAllowed) {
                                     Movies movies = new Movies();
                                     movies.displayTop5sales();
                                 } else {
@@ -158,7 +160,7 @@ public class Main {
                 }
                 case 2 -> { // VIEW SHOWTIMES
                     int subChoice = -1;
-                    while(subChoice != 0){
+                    while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
                         System.out.println("│ Showtimes │");
                         System.out.println("[1] View all showtimes");
@@ -167,8 +169,9 @@ public class Main {
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
-                        switch (subChoice){
-                            case 0 -> {}
+                        switch (subChoice) {
+                            case 0 -> {
+                            }
                             case 1 -> { // VIEW ALL SHOWTIMES
                                 ShowTimes showtimes = new ShowTimes();
                                 showtimes.displayShowtimes();
@@ -190,11 +193,11 @@ public class Main {
                     }
                 }
                 case 3 -> { // REVIEW AND RATING
-                    Movies movies = new Movies();
-                    Movie movie = movies.selectMovie(false);
-                    if(movie != null){
-                        int subChoice = -1;
-                        while(subChoice != 0){
+                    int subChoice = -1;
+                    while (subChoice != 0) {
+                        Movies movies = new Movies();
+                        Movie movie = movies.selectMovie(false);
+                        if (movie != null) {
                             System.out.println("▭".repeat(40));
                             System.out.println("│ Reviews & Ratings │");
                             System.out.println("[1] View reviews");
@@ -204,23 +207,20 @@ public class Main {
                             System.out.println("[0] Go back");
                             System.out.print("Enter option: ");
                             subChoice = sc.nextInt();
-                            switch (subChoice){
-                                case 0 -> {}
+                            switch (subChoice) {
+                                case 0 -> {
+                                }
                                 case 1 -> { // VIEW REVIEWS
-                                    ReviewRatings reviewRatings = new ReviewRatings();
-                                    reviewRatings.viewReviews(movie);
+                                    movies.viewReviews(movie);
                                 }
                                 case 2 -> { // ADD NEW REVIEW
-                                    ReviewRatings reviewRatings = new ReviewRatings();
-                                    reviewRatings.addReview(movie);
+                                    movies.addReview(movie);
                                 }
                                 case 3 -> { // VIEW RATINGS
-                                    ReviewRatings reviewRatings = new ReviewRatings();
-                                    reviewRatings.viewRatings(movie);
+                                    movies.viewRatings(movie);
                                 }
                                 case 4 -> { // ADD NEW RATING
-                                    ReviewRatings reviewRatings = new ReviewRatings();
-                                    reviewRatings.addRating(movie);
+                                    movies.addRating(movie);
                                 }
                                 default -> System.out.println("Invalid option. Please try again.");
                             }
@@ -233,7 +233,7 @@ public class Main {
                 }
                 case 5 -> { // MANAGE CINEMAS
                     int subChoice = -1;
-                    while(subChoice != 0){
+                    while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
                         System.out.println("│ Manage Cinemas │");
                         System.out.println("[1] View all cinemas");
@@ -243,8 +243,9 @@ public class Main {
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
-                        switch (subChoice){
-                            case 0 -> {}
+                        switch (subChoice) {
+                            case 0 -> {
+                            }
                             case 1 -> { // VIEW ALL CINEMAS
                                 Cinemas cinemas = new Cinemas();
                                 cinemas.displayCinemas();
@@ -283,7 +284,7 @@ public class Main {
                 }
                 case 6 -> { // MANAGE MOVIES
                     int subChoice = -1;
-                    while(subChoice != 0){
+                    while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
                         System.out.println("│ Manage Movies │");
                         System.out.println("[1] Add new movie");
@@ -292,8 +293,9 @@ public class Main {
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
-                        switch (subChoice){
-                            case 0 -> {}
+                        switch (subChoice) {
+                            case 0 -> {
+                            }
                             case 1 -> { // ADD NEW MOVIE
                                 Movies movies = new Movies();
                                 movies.addMovie();
@@ -314,7 +316,7 @@ public class Main {
                 }
                 case 7 -> { // MANAGE SHOWTIMES
                     int subChoice = -1;
-                    while(subChoice != 0){
+                    while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
                         System.out.println("│ Manage Showtimes │");
                         System.out.println("[1] Add new showtime");
@@ -323,8 +325,9 @@ public class Main {
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
-                        switch (subChoice){
-                            case 0 -> {}
+                        switch (subChoice) {
+                            case 0 -> {
+                            }
                             case 1 -> { // ADD NEW SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
                                 Movies movies = new Movies();
