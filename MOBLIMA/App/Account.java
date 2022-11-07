@@ -8,14 +8,29 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that is responsible for the account of all users
+ * @author
+ * @version 1.0
+ * @since 2022-11-07
+ *
+ */
 public class Account {
     ArrayList<User> user_list;
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Usage of user class
+     */
     public class UserDetail {
         public static User user;
     }
 
+    /**
+     * Default Constructor
+     * Creates a new account
+     * Initialise an array list of users by reading from users.dat
+     */
     public Account(){
         this.user_list = (ArrayList<User>) FileHelper.read("data/users.dat");
     }
