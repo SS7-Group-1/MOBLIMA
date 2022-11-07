@@ -8,13 +8,29 @@ import MOBLIMA.Voucher;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles all the payment of a movie
+ * @since 2022-11-07
+ * @author Lim Jia Wei
+ * @version 1.4
+ */
 public class Payment {
     Scanner sc = new Scanner(System.in);
     ArrayList<Voucher> voucher_list;
+
+    /**
+     * Default Constructor
+     * Initialises an array of list of Voucher type by reading from voucher.dat
+     */
     public Payment(){
         this.voucher_list = (ArrayList<Voucher>) FileHelper.read("data/vouchers.dat");
     }
 
+    /**
+     * function that request information from users for payment
+     * @param amount - amount of money to be paid after discounts
+     * @return total amount of money to be paid by user
+     */
     public float pay(float amount){
         System.out.println("▭".repeat(40));
         System.out.println("Payment for $" + amount);
@@ -74,6 +90,9 @@ public class Payment {
         return amount;
     }
 
+    /**
+     * Function that prints all voucher codes and their corresponding information
+     */
     public void printAllVoucherCodes(){
         System.out.println("▭".repeat(40));
         System.out.println("Voucher codes");
@@ -82,6 +101,10 @@ public class Payment {
         }
     }
 
+    /**
+     * Functions that adds a new voucher code and their corresponding information
+     * Updates voucher.dat after adding a new voucher code
+     */
     public void addVoucherCode(){
         Voucher voucher = new Voucher();
         System.out.println("▭".repeat(40));
@@ -114,6 +137,10 @@ public class Payment {
         FileHelper.write(voucher_list, "data/vouchers.dat");
     }
 
+    /**
+     * Function that allows the update of voucher code and their corresponding information
+     * updates voucher.dat after updating voucher information
+     */
     public void updateVoucherCode(){
         System.out.println("▭".repeat(40));
         System.out.println("Select voucher to update");
@@ -161,6 +188,11 @@ public class Payment {
         FileHelper.write(voucher_list, "data/vouchers.dat");
     }
 
+    /**
+     * Function that removes a Voucher
+     * updates voucher.dat after removing voucher
+     */
+
     public void removeVoucherCode(){
         System.out.println("Select voucher to update");
         Voucher voucher = selectVoucher();
@@ -169,6 +201,10 @@ public class Payment {
         System.out.print("Voucher removed");
     }
 
+    /**
+     * Allows user to select a specific voucher
+     * @return selected voucher
+     */
     public Voucher selectVoucher(){
         for (int i = 0; i < voucher_list.size(); i++) {
             System.out.println(" [" + (i + 1) + "] " + voucher_list.get(i).getVoucherCode());

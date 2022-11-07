@@ -8,10 +8,16 @@ import java.io.*;
 import java.io.File;
 import java.util.*;
 
+/**
+ * Class where the staff controls the administrative side of the cinema
+ */
 
 public class SystemSetting {
     ArrayList<Movie> movie_list = new ArrayList<>();
 
+    /**
+     * Function that act as a display Menu for staff to do the necessary adjustment
+     */
     public void DisplayMenu()
     {
         Boolean set = Boolean.TRUE;
@@ -90,6 +96,9 @@ public class SystemSetting {
             }
     }
 
+    /**
+     * Function that controls the user accessibility to top 5 movies by ratings and sales
+     */
     public void configureUserPermission(){
         Scanner sc = new Scanner(System.in);
         try{
@@ -127,6 +136,9 @@ public class SystemSetting {
         }
     }
 
+    /**
+     * Function that controls the ticket price
+     */
     public void configureTicketPrice()
     {
         Scanner sc = new Scanner(System.in);
@@ -142,7 +154,7 @@ public class SystemSetting {
             switch(choice)
             {
                 case 1:
-                    printTicket();
+                    printTicketModifier();
                     break;
                 case 2:
                         System.out.println("Please Enter Modifier too be edited");
@@ -263,6 +275,13 @@ public class SystemSetting {
         }
     }
 
+    /**
+     * Function that configures the modifiers for ticket price in Modifier.txt
+     * @param EModifier - Modifier to be edited
+     * @param ESymbol - Symbol to be editied (either + or -)
+     * @param EINT - New edited number
+     * @return 1 if configuration successful , 0 if configuration fail
+     */
     public int Configuration(String EModifier,  String ESymbol, String EINT)
     {
         File oldFile = new File("data/Modifier.txt");
@@ -305,7 +324,10 @@ public class SystemSetting {
         return count;
     }
 
-    public void printTicket()
+    /**
+     * Function that prints all the modifiers for tickets
+     */
+    public void printTicketModifier()
     {
         try {
             File file = new File("data/Modifier.txt");

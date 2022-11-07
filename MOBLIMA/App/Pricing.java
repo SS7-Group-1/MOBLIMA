@@ -8,7 +8,22 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * CLass that calculates ticket pricing
+ * @since 2022-11-07
+ * @author Nigel Chok
+ * @version 1.4
+ */
 public class Pricing {
+    /**
+     * Function that tabulates the ticket pricing
+     * @param ticketType
+     * @param isPlatinum - Boolean that determines whether a cinema is Platinum or not
+     * @param date -  date of watching movie
+     * @param movieType
+     * @param seatType
+     * @return ticket pricing
+     */
     public float computePricing(TicketType ticketType, boolean isPlatinum, LocalDate date, MovieType movieType, SeatType seatType){
 
         // Read base price
@@ -31,10 +46,10 @@ public class Pricing {
 
                 if(modifier.equals("Base"))
                 {
-                    base=pricing; //Base Price of object
+                    base=pricing; //Getting the base Price of object
                 }
 
-                else if(modifier.equals(movieType.toString())||modifier.equals(seatType.getType())||modifier.equals(ticketType.toString())||modifier.equals(Day(date))) //calculating 2D or 3D movie
+                else if(modifier.equals(movieType.toString())||modifier.equals(seatType.getType())||modifier.equals(ticketType.toString())||modifier.equals(Day(date)))  //Calculating Price from Movietype, Seat type, Ticket type and Day of the week
                 {
                     if(symbol.equals("+"))
                     {
@@ -46,7 +61,7 @@ public class Pricing {
                     }
                 }
 
-                    else if ((isPlatinum&&modifier.equals("PlatinumCinema"))||(!isPlatinum&&modifier.equals("StandardCinema")))
+                    else if ((isPlatinum&&modifier.equals("PlatinumCinema"))||(!isPlatinum&&modifier.equals("StandardCinema"))) //Calculating Price from type of cinema
                     {
                         if(symbol.equals("+"))
                         {
@@ -71,6 +86,13 @@ public class Pricing {
 
         return base;
     }
+
+    /**
+     * Function that returns the Day of the week (Weekday , Weekend) from date object
+      * @param date - Date of the week
+     * @return (Weekday / Weekends) based on the date of the week
+     */
+
 
     public String Day(LocalDate date)
     {

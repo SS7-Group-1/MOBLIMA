@@ -4,15 +4,26 @@ import MOBLIMA.*;
 import java.util.*;
 
 /**
- *
+ *Class that handles all movies and their respective information
+ * @since 2022-11-07
+ * @author Lim Jia Wei
+ * @version 1.3
  */
 public class Movies {
     ArrayList<Movie> movie_list;
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Default Constructor
+     * initialises an array list of movie type by reading from movies.dat
+     */
     public Movies() {
         this.movie_list = (ArrayList<Movie>) FileHelper.read("data/movies.dat");
     }
+
+    /**
+     *Function that displays currently available movies and allows users to purchase tickets
+     */
 
     public void displayMovies() {
         System.out.println("▭".repeat(40));
@@ -51,6 +62,11 @@ public class Movies {
         }
     }
 
+    /**
+     * Function that displays specific movie information and allows user to purchase tickets
+     * @param movie - parameter that will be passed in to retrieve movie information
+     */
+
     public void displayMovieInformation(Movie movie) {
         System.out.println("▭".repeat(40));
         System.out.println("Title: " + movie.getTitle());
@@ -83,6 +99,9 @@ public class Movies {
         }
     }
 
+    /**
+     * Functions that display movies sorted by their ratings (Top 5 Rating)
+     */
     public void displayTop5rating() {
         System.out.println("▭".repeat(40));
         System.out.println("| Top 5 movies by rating |");
@@ -131,6 +150,9 @@ public class Movies {
         }
     }
 
+    /**
+     * Function that display movies sorted by their sales (Top 5 Sales)
+     */
     public void displayTop5sales() {
         System.out.println("▭".repeat(40));
         System.out.println("Top 5 movies by sales");
@@ -180,6 +202,11 @@ public class Movies {
         }
     }
 
+    /**
+     * Function that Allows user to select movie
+     * @param showEndOfShowing - parameter that determines whether movie is showing
+     * @return selected movie
+     */
     public Movie selectMovie(boolean showEndOfShowing) {
         for (int i = 0; i < movie_list.size(); i++) {
             if(movie_list.get(i).getStatus() == MovieStatus.END_OF_SHOWING && !showEndOfShowing) {
@@ -199,6 +226,11 @@ public class Movies {
         }
     }
 
+    /**
+     * Function that increases the sales of the movie
+     * @param movie - movie which sales will be increased
+     * @param sales - number of sales to be increased
+     */
     public void incrementScales(Movie movie, int sales) {
         //get movie index by title
         int index = -1;
@@ -217,6 +249,9 @@ public class Movies {
         FileHelper.write(movie_list, "data/movies.dat");
     }
 
+    /**
+     * Function that searches for a movie using its title and display its information
+     */
     public void searchForMovie() {
         System.out.println("▭".repeat(40));
         System.out.println("| Search for movie |");
@@ -231,6 +266,9 @@ public class Movies {
         System.out.println("Movie not found!");
     }
 
+    /**
+     * Function that adds a movie and its corresponding information
+     */
     public void addMovie() {
         int add_choice = 0;
         Movie movie = new Movie();
@@ -388,6 +426,10 @@ public class Movies {
         //addMovie(movie);
     }
 
+    /**
+     * Function that updates the specific information of a movie
+     * @param movie - movie object for its information to be updated
+     */
     public void updateMovie(Movie movie) {
         boolean edit = true;
         while (edit) {
@@ -478,6 +520,10 @@ public class Movies {
         }
     }
 
+    /**
+     * Function that Removes a movie and updates movie.dat file
+     * @param movie - movie object to be removed
+     */
     public void removeMovie(Movie movie) {
         System.out.println("▭".repeat(40));
         System.out.println("[1] Delete movie permanently");

@@ -10,16 +10,29 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Class that handles all the Show Times
+ * @since 2022-11-08
+ * @author Lim Jia Wei
+ */
 public class ShowTimes {
     ArrayList<ShowTime> showtime_list;
     ArrayList<BookingRecord> booking_list;
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Default Constructor
+     * Initialises an array list of Show Time objects by reading from showtimes.dat
+     * Initialises an array list of Booking Record objects by reading from bookings.dat
+     */
     public ShowTimes(){
         this.showtime_list = (ArrayList<ShowTime>) FileHelper.read("data/showtimes.dat");
         this.booking_list = (ArrayList<BookingRecord>) FileHelper.read("data/bookings.dat");
       }
 
+    /**
+     * Function that Display all showtimes and allowing the purchasing of tickets
+     */
     public void displayShowtimes(){
         System.out.println("▭".repeat(40));
         System.out.println("All showtimes");
@@ -62,6 +75,10 @@ public class ShowTimes {
         }
     }
 
+    /**
+     * Function that allows the booking of a showtime , selection of ticket type and seat type and payment of ticket price
+     * @param showTime - Show time that will be previewed
+     */
     public void bookShowtime(ShowTime showTime){
         System.out.println("New Booking for " + showTime.getMovie().getTitle());
         Cinemas cinemas = new Cinemas();
@@ -179,6 +196,10 @@ public class ShowTimes {
         }
     }
 
+    /**
+     * Function that display all the showtime of a specific movie
+     * @param movie - Movie object to view all its correspoding showtime
+     */
     public void displayShowtimesByMovie(Movie movie){
         System.out.println("▭".repeat(40));
         System.out.println("Showtimes for " + movie.getTitle());
@@ -223,6 +244,10 @@ public class ShowTimes {
         }
     }
 
+    /**
+     * Class that displays all the Showtimes by Cinema
+     * @param cinema - Cinema object to display all its correspoding showtimes
+     */
     public void displayShowtimesByCinema(Cinema cinema){
         System.out.println("▭".repeat(40));
         System.out.println("Showtimes at " + cinema.getCineplex());
@@ -267,6 +292,10 @@ public class ShowTimes {
         }
     }
 
+    /**
+     * Function that allows user to select ShowTime
+     * @return selected showtime
+     */
     public ShowTime selectShowTime(){
         System.out.println("▭".repeat(40));
         System.out.println("All showtimes");
@@ -304,6 +333,10 @@ public class ShowTimes {
         return null;
     }
 
+    /**
+     * Function that adds a showtime to a movie
+     * @param movie - Movie object to add a showtime to
+     */
     public void addShowtime(Movie movie){
         System.out.println("▭".repeat(40));
         System.out.println("Adding new showtime for " + movie.getTitle());
@@ -348,6 +381,11 @@ public class ShowTimes {
         addToShowtimeFile(showTime);
         System.out.println("Showtime added successfully.");
     }
+
+    /**
+     * Function that updates a showtime and its corresponding information
+     * @param showTime - showtime object to be updated
+     */
 
     public void updateShowtime(ShowTime showTime){
         boolean edit = true;
@@ -419,15 +457,26 @@ public class ShowTimes {
         }
     }
 
+    /**
+     * Function that adds a new showTime into showtime_list
+     * @param showTime - showTime object to be added into showtimes.dat
+     */
     public void addToShowtimeFile(ShowTime showTime){
         showtime_list.add(showTime);
         FileHelper.write(showtime_list, "data/showtimes.dat");
     }
 
+    /**
+     * Function that writes showtime_list into showtimes.dat
+     */
     public void writeToShowtimeFile(){
         FileHelper.write(showtime_list, "data/showtimes.dat");
     }
 
+    /**
+     * Function that removes a showtime from showtimes.dat
+     * @param showTime
+     */
     public void removeFromShowtimeFile(ShowTime showTime){
         showtime_list.remove(showTime);
         FileHelper.write(showtime_list, "data/showtimes.dat");
