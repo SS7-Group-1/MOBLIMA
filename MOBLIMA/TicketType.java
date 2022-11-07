@@ -38,12 +38,4 @@ public enum TicketType implements Serializable {
         this.type = type;
     }
 
-    /**
-     *
-     * @return type: type of ticket (i.e adult/child/senior)
-     */
-    @Override
-    public String toString(){
-        return type;
-    }
 }

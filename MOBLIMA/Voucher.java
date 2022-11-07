@@ -135,15 +135,5 @@ public class Voucher implements Serializable {
         return this.maxUses == -1;
     }
 
-    /**
-     *
-     * @return a string containing the details of the gift voucher, which consist of the voucherID and the amount of the voucher
-     */
-    @Override
-    public String toString() {
-        return "GiftVoucher{" +
-                "voucherID='" + voucherCode + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
+
 }

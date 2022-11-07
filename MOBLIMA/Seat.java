@@ -130,17 +130,4 @@ public class Seat implements Serializable {
     public SeatType getSeatType() {
         return seatType;
     }
-
-    /**
-     *
-     * @return a string containing details of the seat, consisting of whether the seat is occupied or unoccupied
-     */
-    @Override
-    public String toString() {
-        int occupy = isOccupied ? 1 : 0;
-
-        return "Seat{" +
-                ", isOccupied=" + occupy +
-                '}';
-    }
 }
