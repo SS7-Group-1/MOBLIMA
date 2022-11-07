@@ -27,12 +27,13 @@ public class SystemSetting {
         {
              System.out.println("▭".repeat(40));
                 System.out.println("│ System setting menu │");
-                System.out.println("[1] Configure ticket price");
+                System.out.println("[1] Manage ticket price");
                 System.out.println("[2] Show top 5 movies by rating");
                 System.out.println("[3] Show top 5 movies by sales");
                 System.out.println("[4] Configure User Top 5 permission");
                 System.out.println("[5] Configure User Role");
                 System.out.println("[6] Manage vouchers");
+                System.out.println("[7] Manage Public Holidays");
                 System.out.println("[0] Go back");
                 System.out.println("Select an option");
                 try {
@@ -83,6 +84,36 @@ public class SystemSetting {
                                     case 0 -> set = Boolean.FALSE;
                                     default -> System.out.println("Invalid option");
                                 }
+                            }
+                        }
+                        case 7->{
+                            int choice3 = 1;
+                            while(choice3!=0) {
+                                System.out.println("▭".repeat(40));
+                                System.out.println("[1] View all Public Holiday");
+                                System.out.println("[2] Add Public Holiday");
+                                System.out.println("[3] Update Public Holiday");
+                                System.out.println("[4] Remove Public Holiday");
+                                System.out.println("[0] Go back");
+                                System.out.println("Select an option");
+                                choice3 = sc.nextInt();
+                                switch (choice3) {
+                                    case 1 -> {
+                                        ViewHoliday();
+                                    }
+                                    case 2 -> {
+                                        AddHoliday();
+                                    }
+                                    case 3 -> {
+                                        UpdateHoliday();
+                                    }
+                                    case 4 -> {
+                                        DeleteHoliday();
+                                    }
+                                    case 0 -> set = Boolean.FALSE;
+                                    default -> System.out.println("Invalid option");
+                                }
+
                             }
                         }
                         case 0 -> set = Boolean.FALSE;
@@ -146,7 +177,7 @@ public class SystemSetting {
         while (set)
         {
             System.out.println("Dear User, Please Select Option that you wish to view");
-            System.out.println("1: View all Configuration");
+            System.out.println("1: View all TicketConfiguration");
             System.out.println("2: Configure Ticket Price");
             System.out.println("3: To terminate programme");
             int choice = sc.nextInt();
@@ -257,7 +288,7 @@ public class SystemSetting {
                     System.out.println("Enter Number to be modified");
                     EINT = sc.next();
 
-                    if(Configuration(EModifier,ESymbol,EINT) ==1)
+                    if(TicketConfiguration(EModifier,ESymbol,EINT) ==1)
                     {
                         System.out.println("Modification Succesful");
                     }
@@ -282,7 +313,7 @@ public class SystemSetting {
      * @param EINT - New edited number
      * @return 1 if configuration successful , 0 if configuration fail
      */
-    public int Configuration(String EModifier,  String ESymbol, String EINT)
+    public int TicketConfiguration(String EModifier, String ESymbol, String EINT)
     {
         File oldFile = new File("data/Modifier.txt");
         File newFile = new File("temp.txt");
@@ -350,5 +381,163 @@ public class SystemSetting {
         {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Funtion that allows the addition of public holiday into holiday text file
+     * @return 1 if successful , 0 if fail
+     */
+    public int AddHoliday()
+    {
+        int count =1;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Name of Holiday");
+        String holiday = sc.nextLine();
+        System.out.println("Enter Date to be set as a holiday in the format of YYYY-MM-DD");
+        String date = sc.nextLine();
+
+        try {
+            FileWriter fw = new FileWriter("data/date.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            pw.println(holiday+" "+date);
+            pw.flush();
+            pw.close();
+
+        }
+        catch(Exception e)
+        {
+            count =0;
+            System.out.println("Error");
+        }
+        return count;
+    }
+
+    /**
+     * Function that allows all the public holiday to be viewed
+     */
+    public void ViewHoliday()
+    {
+        try {
+            File file = new File("data/date.txt");
+            Scanner x = new Scanner(file);
+            x.useDelimiter("[\s\n]");
+
+            while (x.hasNextLine()) {
+                String data = x.nextLine();
+                String[] res = data.split(" ");
+
+                String Holiday =res[0];
+                String date = res[1];
+
+                System.out.println("Holiday is "+ Holiday + ", date is " + date);
+            }
+            x.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Function that allows holidays to be updated
+     * @return 1 if successful, 0 if unsuccessful
+     */
+    public int UpdateHoliday()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Holiday to update");
+        String EHoliday = sc.nextLine();
+        System.out.println("Enter Date to update");
+        String EDate = sc.nextLine();
+
+        File oldFile = new File("data/date.txt");
+        File newFile = new File("temp.txt");
+        int count=0;
+        try {
+            FileWriter fw = new FileWriter("temp.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            Scanner x = new Scanner(oldFile);
+            //x.useDelimiter("[,\s\n]");
+
+            while (x.hasNext()) {
+                /*String data = x.nextLine();
+                String[] res = data.split(",");*/
+                String Holiday = x.next();
+                String Date = x.next();
+
+                if (Holiday.equals(EHoliday)) {
+                    pw.println(EHoliday + " " + EDate);
+                    count = 1;
+
+                } else {
+                    pw.println(Holiday + " " + Date);
+                }
+            }
+            x.close();
+            pw.flush();
+            pw.close();
+            oldFile.delete();
+            File dump = new File("data/date.txt");
+            newFile.renameTo(dump);
+
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error");
+        }
+        return count;
+    }
+
+    /**
+     * Function that deletes holiday
+     * @return 1 if true ,  0 if false
+     */
+    public int DeleteHoliday()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Holiday to Delete");
+        String DHoliday = sc.nextLine();
+
+        File oldFile = new File("data/date.txt");
+        File newFile = new File("temp.txt");
+        int count=0;
+        try {
+            FileWriter fw = new FileWriter("temp.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            Scanner x = new Scanner(oldFile);
+            //x.useDelimiter("[,\s\n]");
+
+            while (x.hasNext()) {
+                /*String data = x.nextLine();
+                String[] res = data.split(",");*/
+                String Holiday = x.next();
+                String Date = x.next();
+
+                if (Holiday.equals(DHoliday)) {
+                    count =1;
+                    continue;
+
+                } else {
+                    pw.println(Holiday + " " + Date);
+                }
+            }
+            x.close();
+            pw.flush();
+            pw.close();
+            oldFile.delete();
+            File dump = new File("data/date.txt");
+            newFile.renameTo(dump);
+
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error");
+        }
+        return count;
     }
 }
