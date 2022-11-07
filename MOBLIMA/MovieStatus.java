@@ -42,4 +42,11 @@ public enum MovieStatus {
         this.icon = icon;
     }
 
+    /**
+     * Accessor for movie status.
+     * @return Movie's status.
+     */
+    public String getStatus() {
+        return status;
+    }
 }

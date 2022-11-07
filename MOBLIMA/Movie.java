@@ -60,6 +60,8 @@ public class Movie implements Serializable {
      */
     public Movie() {
         this.sales = 0;
+        this.rating = new Rating();
+        this.review = new Review();
     }
 
     /**
