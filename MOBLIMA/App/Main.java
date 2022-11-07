@@ -83,12 +83,13 @@ public class Main {
 
             if (Account.UserDetail.user != null) {
                 System.out.println("[4] Booking History");
+                System.out.println("[5] Update account details");
 
                 if (Account.UserDetail.user.isAdmin()) {
-                    System.out.println("[5] Manage Cinemas");
-                    System.out.println("[6] Manage Movies");
-                    System.out.println("[7] Manage Showtimes");
-                    System.out.println("[8] Configure System Settings");
+                    System.out.println("[6] Manage Cinemas");
+                    System.out.println("[7] Manage Movies");
+                    System.out.println("[8] Manage Showtimes");
+                    System.out.println("[9] Configure System Settings");
                 }
             }
             System.out.println("[0] " + (Account.UserDetail.user == null ? "Return to main menu" : "Logout"));
@@ -231,7 +232,11 @@ public class Main {
                     Bookings bookings = new Bookings();
                     bookings.viewRecords();
                 }
-                case 5 -> { // MANAGE CINEMAS
+                case 5->{
+                    Account account = new Account();
+                    account.updateAccount();
+                }
+                case 6 -> { // MANAGE CINEMAS
                     int subChoice = -1;
                     while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
@@ -282,7 +287,7 @@ public class Main {
                         }
                     }
                 }
-                case 6 -> { // MANAGE MOVIES
+                case 7 -> { // MANAGE MOVIES
                     int subChoice = -1;
                     while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
@@ -314,7 +319,7 @@ public class Main {
                         }
                     }
                 }
-                case 7 -> { // MANAGE SHOWTIMES
+                case 8 -> { // MANAGE SHOWTIMES
                     int subChoice = -1;
                     while (subChoice != 0) {
                         System.out.println("▭".repeat(40));
@@ -348,7 +353,7 @@ public class Main {
                         }
                     }
                 }
-                case 8 -> { // CONFIGURE SYSTEM SETTINGS
+                case 9 -> { // CONFIGURE SYSTEM SETTINGS
                     SystemSetting test = new SystemSetting();
                     test.DisplayMenu();
                 }
