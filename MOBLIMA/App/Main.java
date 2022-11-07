@@ -5,6 +5,10 @@ import MOBLIMA.Movie;
 import MOBLIMA.ShowTime;
 import MOBLIMA.User;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -88,8 +92,28 @@ public class Main {
                         System.out.println("│ Movies │");
                         System.out.println("[1] View all movies");
                         System.out.println("[2] Search for movie");
-                        System.out.println("[3] Show top 5 movies by rating");
-                        System.out.println("[4] Show top 5 movies by sales");
+                        BufferedReader br = null;
+                        try {
+                            br = new BufferedReader(new FileReader("data/UserPermission.txt"));
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                        boolean topRatingsAllowed = false;
+                        boolean topSalesAllowed = false;
+                        String permission;
+                        try {
+                            permission = br.readLine();
+                            if (permission.equals("1") || permission.equals("0")) {
+                                System.out.println("[3] Show top 5 movies by rating");
+                                topRatingsAllowed = true;
+                            }
+                            if (permission.equals("2") || permission.equals("0")) {
+                                System.out.println("[4] Show top 5 movies by sales");
+                                topSalesAllowed = true;
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         System.out.println("[0] Go back");
                         System.out.print("Enter option: ");
                         subChoice = sc.nextInt();
@@ -104,12 +128,20 @@ public class Main {
                                 movies.searchForMovie();
                             }
                             case 3 -> { // SHOW TOP 5 MOVIES BY RATING
-                                Movies movies = new Movies();
-                                movies.displayTop5rating();
+                                if(topRatingsAllowed){
+                                    Movies movies = new Movies();
+                                    movies.displayTop5rating();
+                                } else {
+                                    System.out.println("You do not have permission to view this");
+                                }
                             }
                             case 4 -> { // SHOW TOP 5 MOVIES BY SALES
-                                Movies movies = new Movies();
-                                movies.displayTop5sales();
+                                if(topSalesAllowed){
+                                    Movies movies = new Movies();
+                                    movies.displayTop5sales();
+                                } else {
+                                    System.out.println("You do not have permission to view this");
+                                }
                             }
                             default -> System.out.println("Invalid option. Please try again.");
                         }
@@ -134,7 +166,7 @@ public class Main {
                             }
                             case 2 -> { // SEARCH FOR SHOWTIMES BY MOVIE
                                 Movies movies = new Movies();
-                                Movie movie = movies.selectMovie();
+                                Movie movie = movies.selectMovie(false);
                                 ShowTimes showtimes = new ShowTimes();
                                 showtimes.displayShowtimesByMovie(movie);
                             }
@@ -150,7 +182,7 @@ public class Main {
                 }
                 case 3 -> { // REVIEW AND RATING
                     Movies movies = new Movies();
-                    Movie movie = movies.selectMovie();
+                    Movie movie = movies.selectMovie(false);
                     if(movie != null){
                         int subChoice = -1;
                         while(subChoice != 0){
@@ -214,8 +246,22 @@ public class Main {
                             }
                             case 3 -> { // UPDATE CINEMA DETAILS
                                 Cinemas cinemas = new Cinemas();
-                                Cinema cinema = cinemas.selectCinema();
-                                cinemas.updateCinema(cinema);
+                                System.out.println("*".repeat(40));
+                                System.out.println("[1] Update cinema detail");
+                                System.out.println("[2] Update seating layout");
+                                switch (sc.nextInt()) {
+                                    case 1 -> {
+                                        Cinema cinema = cinemas.selectCinema();
+                                        cinemas.updateCinema(cinema);
+                                    }
+                                    case 2 -> {
+                                        Cinema cinema = cinemas.selectCinema();
+                                        cinemas.updateCinemaSeating(cinema);
+                                    }
+                                    default -> {
+                                        System.out.println("Invalid option. Please try again.");
+                                    }
+                                }
                             }
                             case 4 -> { // REMOVE CINEMA
                                 Cinemas cinemas = new Cinemas();
@@ -245,12 +291,12 @@ public class Main {
                             }
                             case 2 -> { // UPDATE EXISTING MOVIE
                                 Movies movies = new Movies();
-                                Movie movie = movies.selectMovie();
+                                Movie movie = movies.selectMovie(true);
                                 movies.updateMovie(movie);
                             }
                             case 3 -> { // REMOVE MOVIE
                                 Movies movies = new Movies();
-                                Movie movie = movies.selectMovie();
+                                Movie movie = movies.selectMovie(true);
                                 movies.removeMovie(movie);
                             }
                             default -> System.out.println("Invalid option. Please try again.");
@@ -273,7 +319,7 @@ public class Main {
                             case 1 -> { // ADD NEW SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
                                 Movies movies = new Movies();
-                                Movie movie = movies.selectMovie();
+                                Movie movie = movies.selectMovie(true);
                                 showTimes.addShowtime(movie);
                             }
                             case 2 -> { // UPDATE EXISTING SHOWTIME

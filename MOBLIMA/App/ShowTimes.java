@@ -21,9 +21,9 @@ public class ShowTimes {
       }
 
     public void displayShowtimes(){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("All showtimes");
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -162,6 +162,10 @@ public class ShowTimes {
                 for(Ticket ticket : new_booking.getTickets()){
                     showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setOccupied();
                 }
+                //increment movie sales
+                Movies movies = new Movies();
+                movies.incrementScales(showTime.getMovie(), new_booking.getTickets().size());
+
                 booking_list.add(new_booking);
                 FileHelper.write(booking_list, "data/bookings.dat");
                 writeToShowtimeFile();
@@ -176,9 +180,9 @@ public class ShowTimes {
     }
 
     public void displayShowtimesByMovie(Movie movie){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Showtimes for " + movie.getTitle());
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -220,9 +224,9 @@ public class ShowTimes {
     }
 
     public void displayShowtimesByCinema(Cinema cinema){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Showtimes at " + cinema.getCineplex());
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -264,9 +268,9 @@ public class ShowTimes {
     }
 
     public ShowTime selectShowTime(){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("All showtimes");
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -301,7 +305,7 @@ public class ShowTimes {
     }
 
     public void addShowtime(Movie movie){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Adding new showtime for " + movie.getTitle());
         ShowTime showTime = new ShowTime(movie);
 
@@ -310,7 +314,7 @@ public class ShowTimes {
         showTime.setCinema(cinema);
         showTime.setSeats(cinema.getSeatLayout().clone());
 
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Enter movie date (DD/MM/YYYY): ");
         sc.skip("\\R?");
         while(true){
@@ -325,7 +329,7 @@ public class ShowTimes {
             }
         }
 
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Enter movie start time (HH:mm): ");
         sc.skip("\\R?");
         while(true){
@@ -348,7 +352,7 @@ public class ShowTimes {
     public void updateShowtime(ShowTime showTime){
         boolean edit = true;
         while(edit){
-            System.out.println("*".repeat(40));
+            System.out.println("▭".repeat(40));
             System.out.println("Updating " + showTime);
             System.out.println("Select field to edit");
             System.out.println("[1] Cinema ");
@@ -365,7 +369,7 @@ public class ShowTimes {
                     System.out.println("Cinema updated successfully.");
                 }
                 case 2 -> {
-                    System.out.println("*".repeat(40));
+                    System.out.println("▭".repeat(40));
                     System.out.println("Enter movie date (DD/MM/YYYY): ");
                     sc.skip("\\R?");
                     while (true) {
@@ -381,7 +385,7 @@ public class ShowTimes {
                     }
                 }
                 case 3 -> {
-                    System.out.println("*".repeat(40));
+                    System.out.println("▭".repeat(40));
                     System.out.println("Enter movie start time (HH:mm): ");
                     sc.skip("\\R?");
                     while (true) {
@@ -397,7 +401,7 @@ public class ShowTimes {
                     }
                 }
                 case 4 -> {
-                    System.out.println("*".repeat(40));
+                    System.out.println("▭".repeat(40));
                     System.out.println("REMOVED");
                 }
                 default -> {

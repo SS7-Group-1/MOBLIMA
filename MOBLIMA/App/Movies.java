@@ -1,7 +1,6 @@
 package MOBLIMA.App;
 
 import MOBLIMA.*;
-
 import java.util.*;
 
 public class Movies {
@@ -105,7 +104,7 @@ public class Movies {
         int print_count = 0;
         Map<String, Movie> movieMap = new HashMap<>();
         for (SortedMap.Entry<Movie, Float> entry : sortedMap.entrySet()) {
-            if (print_count != 5) {
+            if (print_count != 5 && entry.getKey().getStatus() != MovieStatus.END_OF_SHOWING) {
                 System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + String.format("%.2f", entry.getValue()) + ")");
                 movieMap.put(String.valueOf(print_count), entry.getKey());
             } else {
@@ -154,7 +153,7 @@ public class Movies {
         int print_count = 0;
         Map<String, Movie> movieMap = new HashMap<>();
         for (SortedMap.Entry<Movie, Integer> entry : sortedMap1.entrySet()) {
-            if (print_count != 5) {
+            if (print_count != 5 && entry.getKey().getStatus() != MovieStatus.END_OF_SHOWING) {
                 System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + entry.getValue() + " sales)");
                 movieMap.put(String.valueOf(print_count), entry.getKey());
             } else {
@@ -178,20 +177,41 @@ public class Movies {
         }
     }
 
-    public Movie selectMovie() {
+    public Movie selectMovie(boolean showEndOfShowing) {
         for (int i = 0; i < movie_list.size(); i++) {
+            if(movie_list.get(i).getStatus() == MovieStatus.END_OF_SHOWING && !showEndOfShowing) {
+                continue;
+            }
             System.out.println(" [" + (i + 1) + "] " + movie_list.get(i).getTitle());
         }
         System.out.print("Enter selection: ");
         int add_choice;
         while (true) {
             add_choice = sc.nextInt();
-            if (add_choice < 0 || add_choice > movie_list.size() + 1) {
+            if (add_choice <= 0 || add_choice > movie_list.size() + 1) {
                 System.out.println("Invalid option. Please try again.");
             } else {
                 return movie_list.get(add_choice - 1);
             }
         }
+    }
+
+    public void incrementScales(Movie movie, int sales) {
+        //get movie index by title
+        int index = -1;
+        for (int i = 0; i < movie_list.size(); i++) {
+            if (movie_list.get(i).getTitle().equals(movie.getTitle())) {
+                index = i;
+                break;
+            }
+        }
+        if(index == -1) {
+            System.out.println("Internal error");
+            return;
+        }
+
+        movie_list.get(index).addSales(movie.getSales() + sales);
+        FileHelper.write(movie_list, "data/movies.dat");
     }
 
     public void searchForMovie() {
@@ -214,7 +234,7 @@ public class Movies {
 
         // Show pretty header
         System.out.println("Add new movie");
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
 
         // Set movie title
         System.out.println("Movie title: ");
@@ -222,7 +242,7 @@ public class Movies {
         movie.setTitle(sc.nextLine());
 
         // Set movie status
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Movie status: ");
         System.out.println("[1] Coming Soon");
         System.out.println("[2] Preview");
@@ -245,19 +265,19 @@ public class Movies {
         }
 
         // Set movie synopsis
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Movie synopsis: ");
         sc.skip("\\R?");
         movie.setSynopsis(sc.nextLine());
 
         // Set movie director
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Movie director: ");
         sc.skip("\\R?");
         movie.setDirector(sc.nextLine());
 
         // Set movie casts
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         ArrayList<String> movie_cast = new ArrayList<>();
         boolean add_another = true;
         do {
@@ -273,7 +293,7 @@ public class Movies {
         movie.setCast(movie_cast);
 
         // Set ratings
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         ArrayList<Float> ratings_list = new ArrayList<>();
         Rating rating = new Rating();
         add_another = true;
@@ -291,7 +311,7 @@ public class Movies {
         movie.setRating(rating);
 
         // Set movie age
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Movie age rating: ");
         System.out.println("[1] G");
         System.out.println("[2] PG");
@@ -325,7 +345,7 @@ public class Movies {
             }
         }
         // Set movie reviews
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         ArrayList<String> movie_reviews = new ArrayList<>();
         Review review = new Review();
         add_another = true;
@@ -343,7 +363,7 @@ public class Movies {
         movie.setReview(review);
 
         // Set movie type
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Movie type: ");
         System.out.println("[1] 2D");
         System.out.println("[2] 3D");
@@ -368,7 +388,7 @@ public class Movies {
     public void updateMovie(Movie movie) {
         boolean edit = true;
         while (edit) {
-            System.out.println("*".repeat(40));
+            System.out.println("▭".repeat(40));
             System.out.println("Updating " + movie.getTitle());
             System.out.println("Select field to edit");
             System.out.println("[1] Title ");
@@ -378,15 +398,15 @@ public class Movies {
             System.out.println("[5] Type");
             System.out.print("Enter option: ");
             switch (sc.nextInt()) {
-                case 1:
-                    System.out.println("*".repeat(40));
+                case 1 -> {
+                    System.out.println("▭".repeat(40));
                     System.out.println("Enter new title: ");
                     sc.skip("\\R?");
                     movie.setTitle(sc.nextLine());
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     int add_choice;
-                    System.out.println("*".repeat(40));
+                    System.out.println("▭".repeat(40));
                     System.out.println("New movie status: ");
                     System.out.println("[1] Coming Soon");
                     System.out.println("[2] Preview");
@@ -407,25 +427,26 @@ public class Movies {
                             System.out.println("Invalid option. Please try again.");
                         }
                     }
-                    break;
-                case 3:
-                    System.out.println("*".repeat(40));
+                }
+                case 3 -> {
+                    System.out.println("▭".repeat(40));
                     System.out.println("Enter new synopsis: ");
                     sc.skip("\\R?");
                     movie.setSynopsis(sc.nextLine());
-                    break;
-                case 4:
-                    System.out.println("*".repeat(40));
+                }
+                case 4 -> {
+                    System.out.println("▭".repeat(40));
                     System.out.println("Enter new director: ");
                     sc.skip("\\R?");
                     movie.setDirector(sc.nextLine());
-                    break;
-                case 5:
-                    System.out.println("*".repeat(40));
+                }
+                case 5 -> {
+                    System.out.println("▭".repeat(40));
                     System.out.println("New movie type: ");
                     System.out.println("[1] 2D");
                     System.out.println("[2] 3D");
                     System.out.print("Enter option: ");
+                    int add_choice;
                     while (true) {
                         add_choice = sc.nextInt();
                         if (add_choice == 1) {
@@ -438,10 +459,11 @@ public class Movies {
                             System.out.println("Invalid option. Please try again.");
                         }
                     }
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Invalid option. Please try again.");
                     continue;
+                }
             }
             FileHelper.write(movie_list, "data/movie.dat");
             System.out.println("Movie updated successfully");
@@ -454,8 +476,30 @@ public class Movies {
     }
 
     public void removeMovie(Movie movie) {
-        movie_list.remove(movie);
-        FileHelper.write(movie_list, "movies.dat");
-        System.out.println("Movie successfully removed");
+        System.out.println("▭".repeat(40));
+        System.out.println("[1] Delete movie permanently");
+        System.out.println("[2] Set movie status to end of showing");
+        System.out.println("[0] Go back");
+        System.out.print("Enter option: ");
+        while(true){
+            switch (sc.nextInt()) {
+                case 0 -> {
+                    return;
+                }
+                case 1 -> {
+                    movie_list.remove(movie);
+                    FileHelper.write(movie_list, "movies.dat");
+                    System.out.println("Movie successfully removed");
+                    return;
+                }
+                case 2 -> {
+                    movie.setStatus(MovieStatus.END_OF_SHOWING);
+                    FileHelper.write(movie_list, "data/movie.dat");
+                    System.out.println("Movie status updated successfully");
+                    return;
+                }
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
     }
 }

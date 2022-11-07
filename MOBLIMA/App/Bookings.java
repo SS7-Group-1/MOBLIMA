@@ -2,14 +2,12 @@ package MOBLIMA.App;
 
 import MOBLIMA.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bookings {
     User user;
     ArrayList<BookingRecord> booking_record_list;
-    Scanner sc = new Scanner(System.in);
     public Bookings(){
         this.user = Account.UserDetail.user;
         this.booking_record_list = (ArrayList<BookingRecord>) FileHelper.read("data/bookings.dat");

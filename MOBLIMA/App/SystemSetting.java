@@ -1,15 +1,12 @@
 package MOBLIMA.App;
 
-import MOBLIMA.FileHelper;
 import MOBLIMA.Movie;
 import MOBLIMA.User;
-//import MOBLIMA.Tests.generateDataFiles;
 
 import java.io.*;
 
 import java.io.File;
 import java.util.*;
-import java.util.Map.Entry;
 
 
 public class SystemSetting {
@@ -97,25 +94,32 @@ public class SystemSetting {
         Scanner sc = new Scanner(System.in);
         try{
             FileWriter fw = new FileWriter("data/UserPermission.txt");
-            System.out.println("*".repeat(40));
+            System.out.println("▭".repeat(40));
             System.out.println("[1] Allow user to view top 5 movies by ratings only");
             System.out.println("[2] Allow user to view top 5 movies by sales only");
-            System.out.println("[3] Allow both");
+            System.out.println("[3] Allow both options");
+            System.out.println("[4] Disable both options");
+            System.out.println("Select an option");
 
             int choice = sc.nextInt();
-            switch(choice){
-                case 1:
+            switch (choice) {
+                case 1 -> {
                     fw.write('1');
                     System.out.println("User can only view top 5 movies by ratings");
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     fw.write('2');
-                    System.out.println("Usre can only view top 5 movies by sales");
-                    break;
-                case 3:
+                    System.out.println("User can only view top 5 movies by sales");
+                }
+                case 3 -> {
                     fw.write('0');
                     System.out.println("User can view top 5 movies by ratings or sales");
-                    break;
+                }
+                case 4 -> {
+                    fw.write('3');
+                    System.out.println("User cannot view top 5 by ratings or sales");
+                }
+                default -> System.out.println("Invalid option");
             }
             fw.close();
         } catch(IOException e){

@@ -53,6 +53,8 @@ public class Payment {
             }
         }
         if(amount > 0){
+            System.out.println("▭".repeat(40));
+            System.out.println("Give us your money");
             System.out.println("Card number:");
             sc.skip("\\R?");
             String credit_card = sc.nextLine();
@@ -113,10 +115,10 @@ public class Payment {
     }
 
     public void updateVoucherCode(){
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Select voucher to update");
         Voucher voucher = selectVoucher();
-        System.out.println("*".repeat(40));
+        System.out.println("▭".repeat(40));
         System.out.println("Updating " + voucher.getVoucherCode());
         System.out.println("Select field to edit");
         System.out.println("[1] Voucher code ");
