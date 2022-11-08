@@ -26,7 +26,7 @@ public class Movies {
      */
 
     public void displayMovies() {
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("| List of all movies |");
         IdentityHashMap<String, ArrayList<Integer>> moviesByStatus = new IdentityHashMap<>();
         for (int i = 0; i < movie_list.size(); i++) {
@@ -47,7 +47,7 @@ public class Movies {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + movie_count + "] View movie information or buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -68,7 +68,7 @@ public class Movies {
      */
 
     public void displayMovieInformation(Movie movie) {
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Title: " + movie.getTitle());
         System.out.println("Synopsis: " + movie.getSynopsis());
         System.out.println("Director: " + movie.getDirector());
@@ -90,7 +90,7 @@ public class Movies {
         if(movie.getStatus() == MovieStatus.PREVIEW || movie.getStatus() == MovieStatus.SHOWING){
             int choice = -1;
             while (choice != 0) {
-                System.out.println("▭".repeat(40));
+                System.out.println("=".repeat(40));
                 System.out.println("[1] Buy tickets for this movie");
                 System.out.println("[0] Go back");
                 System.out.print("Enter option: ");
@@ -113,7 +113,7 @@ public class Movies {
      * Functions that display movies sorted by their ratings (Top 5 Rating)
      */
     public void displayTop5rating() {
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("| Top 5 movies by rating |");
         HashMap<Movie, Float> Map = new HashMap<>();
         LinkedHashMap<Movie, Float> sortedMap = new LinkedHashMap<>();
@@ -152,7 +152,7 @@ public class Movies {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + print_count + "] View movie information or buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -171,7 +171,7 @@ public class Movies {
      * Function that display movies sorted by their sales (Top 5 Sales)
      */
     public void displayTop5sales() {
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Top 5 movies by sales");
         HashMap<Movie, Integer> map1 = new HashMap<>();
         LinkedHashMap<Movie, Integer> sortedMap1 = new LinkedHashMap<>();
@@ -204,7 +204,7 @@ public class Movies {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + print_count + "] View movie information or buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -270,7 +270,7 @@ public class Movies {
      * Function that searches for a movie using its title and display its information
      */
     public void searchForMovie() {
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("| Search for movie |");
         System.out.print("Enter movie title: ");
         String title = sc.nextLine();
@@ -292,7 +292,7 @@ public class Movies {
 
         // Show pretty header
         System.out.println("Add new movie");
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
 
         // Set movie title
         System.out.println("Movie title: ");
@@ -300,19 +300,19 @@ public class Movies {
         movie.setTitle(sc.nextLine());
 
         // Set movie synopsis
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Movie synopsis: ");
         sc.skip("\\R?");
         movie.setSynopsis(sc.nextLine());
 
         // Set movie director
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Movie director: ");
         sc.skip("\\R?");
         movie.setDirector(sc.nextLine());
 
         // Set movie casts
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         ArrayList<String> movie_cast = new ArrayList<>();
         boolean add_another = true;
         do {
@@ -328,7 +328,7 @@ public class Movies {
         movie.setCast(movie_cast);
 
         // Set ratings
-//        System.out.println("▭".repeat(40));
+//        System.out.println("=".repeat(40));
 //        ArrayList<Float> ratings_list = new ArrayList<>();
 //        Rating rating = new Rating();
 //        add_another = true;
@@ -346,7 +346,7 @@ public class Movies {
 //        movie.setRating(rating);
 
         // Set movie age
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Movie age rating: ");
         System.out.println("[1] G");
         System.out.println("[2] PG");
@@ -380,7 +380,7 @@ public class Movies {
             }
         }
         // Set movie reviews
-//        System.out.println("▭".repeat(40));
+//        System.out.println("=".repeat(40));
 //        ArrayList<String> movie_reviews = new ArrayList<>();
 //        Review review = new Review();
 //        add_another = true;
@@ -398,7 +398,7 @@ public class Movies {
 //        movie.setReview(review);
 
         // Set movie type
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Movie type: ");
         System.out.println("[1] 2D");
         System.out.println("[2] 3D");
@@ -417,7 +417,7 @@ public class Movies {
         }
 
         // Set movie status
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Movie status: ");
         System.out.println("[1] Coming Soon");
         System.out.println("[2] Preview");
@@ -451,7 +451,7 @@ public class Movies {
     public void updateMovie(Movie movie) {
         boolean edit = true;
         while (edit) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("Updating " + movie.getTitle());
             System.out.println("Select field to edit");
             System.out.println("[1] Title: " + movie.getTitle());
@@ -462,14 +462,14 @@ public class Movies {
             System.out.print("Enter option: ");
             switch (sc.nextInt()) {
                 case 1 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Enter new title: ");
                     sc.skip("\\R?");
                     movie.setTitle(sc.nextLine());
                 }
                 case 2 -> {
                     int add_choice;
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("New movie status: ");
                     System.out.println("[1] Coming Soon");
                     System.out.println("[2] Preview");
@@ -492,19 +492,19 @@ public class Movies {
                     }
                 }
                 case 3 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Enter new synopsis: ");
                     sc.skip("\\R?");
                     movie.setSynopsis(sc.nextLine());
                 }
                 case 4 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Enter new director: ");
                     sc.skip("\\R?");
                     movie.setDirector(sc.nextLine());
                 }
                 case 5 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("New movie type: ");
                     System.out.println("[1] 2D");
                     System.out.println("[2] 3D");
@@ -549,7 +549,7 @@ public class Movies {
      * @param movie - movie object to be removed
      */
     public void removeMovie(Movie movie) {
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("[1] Delete movie permanently");
         System.out.println("[2] Set movie status to end of showing");
         System.out.println("[0] Go back");
@@ -586,7 +586,7 @@ public class Movies {
      * @param movie - movie object for its rating to be added
      */
     public void addRating(Movie movie){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Add rating for " + movie.getTitle());
         System.out.print("Enter rating: ");
         while(true){
@@ -612,7 +612,7 @@ public class Movies {
      * @param movie - movie object to be added a review
      */
     public void addReview(Movie movie){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Add review for " + movie.getTitle());
         System.out.print("Enter review: ");
         sc.skip("\\R?");
@@ -630,19 +630,19 @@ public class Movies {
     }
 
     public void viewReviews(Movie movie){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Reviews for " + movie.getTitle());
         movie.getReview().printReviews();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
     }
     /**
      * Function that views the rating of a movie
      * @param movie - movie object for its rating to be viewed
      */
     public void viewRatings(Movie movie){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Ratings for " + movie.getTitle());
         movie.getRating().printRatings();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
     }
 }

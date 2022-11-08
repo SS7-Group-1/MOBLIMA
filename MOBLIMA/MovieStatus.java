@@ -10,36 +10,30 @@ public enum MovieStatus {
     /**
      * Movie is coming soon to Cinemas.
      */
-    COMING_SOON("Coming Soon", "··"),
+    COMING_SOON("Coming Soon"),
     /**
      * Movie can be previewed in Cinemas.
      */
-    PREVIEW("Preview", "◯◯"),
+    PREVIEW("Preview"),
     /**
      * Movie is currently showing in Cinemas.
      */
-    SHOWING("Showing", "▶▶"),
+    SHOWING("Showing"),
     /**
      * Movie is no longer showing in Cinemas.
      */
-    END_OF_SHOWING("End of showing", "✖✖");
+    END_OF_SHOWING("End of showing");
     /**
      * This movie's status.
      */
     private final String status;
-    /**
-     * This movie's status icon.
-     */
-    private final String icon;
 
     /**
      * Creates a MovieStatus class with attributes initialised.
      * @param stat This movie's status.
-     * @param icon This movie's status icon.
      */
-    MovieStatus(String stat, String icon){
+    MovieStatus(String stat){
         this.status = stat;
-        this.icon = icon;
     }
 
     /**

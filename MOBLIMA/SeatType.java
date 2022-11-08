@@ -10,11 +10,11 @@ public enum SeatType {
     /**
      * Seat Type: Standard Seat
      */
-    STANDARD("StandardSeat", "▢"),
+    STANDARD("StandardSeat", "O"),
     /**
      * Seat Type: Premium Seat
      */
-    PREMIUM("PremiumSeat", "★"),
+    PREMIUM("PremiumSeat", "P"),
     /**
      * Seat Type: Handicap Seat
      */

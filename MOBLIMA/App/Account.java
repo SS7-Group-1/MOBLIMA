@@ -43,7 +43,7 @@ public class Account {
         Scanner sc = new Scanner(System.in);
         boolean login = true;
         while(login){
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("| Login to MOBLIMA |");
             System.out.print("Email: ");
             String email = sc.next();
@@ -77,7 +77,7 @@ public class Account {
     public User register(){
         Scanner sc = new Scanner(System.in);
         User user = new User();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("| Create a MOBLIMA account |");
 
         System.out.print("Email: ");
@@ -113,7 +113,7 @@ public class Account {
      */
 
     public User selectAccount(){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("User List");
         for (int i = 0; i < user_list.size(); i++) {
             System.out.println(" [" + (i + 1) + "] " + user_list.get(i).getEmail() + (user_list.get(i).isAdmin() ? " (Admin)":""));
@@ -133,7 +133,7 @@ public class Account {
     public void updateAccount(){
         User user = UserDetail.user;
         String existingEmail = user.getEmail();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Update your account");
         System.out.println(" [1] Email: " + user.getEmail());
         System.out.println(" [2] Password: ********");

@@ -32,7 +32,7 @@ public class Payment {
      * @return total amount of money to be paid by user
      */
     public float pay(float amount){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Payment for $" + amount);
 
         System.out.println("Redeem voucher code? (y/N): ");
@@ -71,7 +71,7 @@ public class Payment {
             }
         }
         if(amount > 0){
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("Give us your money");
             System.out.println("Card number:");
             sc.skip("\\R?");
@@ -96,7 +96,7 @@ public class Payment {
      * Function that prints all voucher codes and their corresponding information
      */
     public void printAllVoucherCodes(){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Voucher codes");
         for (Voucher voucher: voucher_list){
             System.out.println(voucher.getVoucherCode() + ": $" + voucher.getAmount() + " (" + (voucher.unlimitedUses() ? "Unlimited uses" : voucher.getMaxUses() + " uses left") + ")");
@@ -109,7 +109,7 @@ public class Payment {
      */
     public void addVoucherCode(){
         Voucher voucher = new Voucher();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Add voucher code");
         System.out.print("Enter voucher code: ");
         String code = sc.nextLine();
@@ -144,10 +144,10 @@ public class Payment {
      * updates voucher.dat after updating voucher information
      */
     public void updateVoucherCode(){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Select voucher to update");
         Voucher voucher = selectVoucher();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Updating " + voucher.getVoucherCode());
         System.out.println("Select field to edit");
         System.out.println("[1] Voucher code ");
