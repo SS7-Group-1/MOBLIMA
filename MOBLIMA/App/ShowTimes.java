@@ -82,6 +82,7 @@ public class ShowTimes {
     public void bookShowtime(ShowTime showTime){
         System.out.println("=".repeat(40));
         System.out.println("New Booking for " + showTime.getMovie().getTitle()  + (showTime.getMovie().getMovieType() == MovieType.threeD ? " (3D)" : ""));
+        System.out.println(" on " + showTime.getDay() + ", " + showTime.getDate() + " at " + showTime.getTime());
         Cinemas cinemas = new Cinemas();
         Pricing pricing = new Pricing();
         BookingRecord new_booking = new BookingRecord();

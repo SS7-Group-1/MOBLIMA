@@ -249,7 +249,8 @@ public class Cinemas {
      */
     public void printSeatingLayout(Seat[][] seatLayout, boolean showSelection, Cinema cinema){
         System.out.println("=".repeat(40));
-        System.out.println("Seating layout for " + cinema.getCineplex() + "-" + cinema.getCinemaCode() + (cinema.isPlatinum() ? " (Platinum Cinema)" : ""));
+        System.out.println("Seats at " + cinema.getCineplex() + " - " + cinema.getCinemaCode() + (cinema.isPlatinum() ? " (Platinum Cinema)" : ""));
+        System.out.println();
         System.out.println(" ".repeat((seatLayout.length / 2) + 5) + "SCREEN");
         for (int i = 0; i < seatLayout.length; i++) {
             System.out.print(" " + ((char)(i + 65)) + "  ");
@@ -282,6 +283,7 @@ public class Cinemas {
         for (int i = 0; i < seatLayout[0].length;) {
             System.out.print(++i + " ");
         }
+        System.out.println();
         System.out.println();
         System.out.println("=".repeat(40));
     }
