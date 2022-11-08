@@ -8,6 +8,7 @@ import java.io.*;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -395,7 +396,7 @@ public class SystemSetting {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Name of Holiday");
         String holiday = sc.nextLine();
-        System.out.println("Enter Date to be set as a holiday in the format of YYYY-MM-DD");
+        System.out.println("Enter Date to be set as a holiday in the format of DD/MM/YYYY");
         String date = sc.nextLine();
 
         try {
@@ -449,15 +450,16 @@ public class SystemSetting {
      */
     public int UpdateHoliday()
     {
+        String EHoliday= HolidayName();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Holiday to update");
-        String EHoliday = sc.nextLine();
-        System.out.println("Enter Date to update");
+        System.out.println("Enter Date to update (dd/mm/yyyy)");
         String EDate = sc.nextLine();
+
 
         File oldFile = new File("data/date.txt");
         File newFile = new File("temp.txt");
         int count=0;
+
         try {
             FileWriter fw = new FileWriter("temp.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -500,9 +502,8 @@ public class SystemSetting {
      */
     public int DeleteHoliday()
     {
+        String DHoliday = HolidayName();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Holiday to Delete");
-        String DHoliday = sc.nextLine();
 
         File oldFile = new File("data/date.txt");
         File newFile = new File("temp.txt");
@@ -541,6 +542,44 @@ public class SystemSetting {
             System.out.println("Error");
         }
         return count;
+
+
+    }
+
+    /**
+     * Helper function that displays holiday names and allows user to select holiday
+     * @return Holiday name that was selected
+     */
+    public String HolidayName()
+    {
+        ArrayList<String> chok = new ArrayList<String>();
+        int i=1;
+        try {
+            File file = new File("data/date.txt");
+            Scanner x = new Scanner(file);
+            x.useDelimiter("[,\n]");
+
+            while (x.hasNextLine()) {
+                String data = x.nextLine();
+                String[] res = data.split(",");
+
+                String Holiday =res[0];
+                String date = res[1];
+
+                System.out.println("[" + i++ + "]" + Holiday + ", date: " + date);
+                chok.add(Holiday);
+            }
+            x.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Select Holiday");
+        String EHoliday = chok.get(sc.nextInt()-1);
+
+        return EHoliday;
 
 
     }

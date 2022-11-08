@@ -101,6 +101,20 @@ public class Cinemas {
         int rows = sc.nextInt();
         System.out.println("Enter number of columns: ");
         int cols = sc.nextInt();
+        ArrayList<Integer> aisle = new ArrayList<Integer>();
+        boolean add_another = true;
+        do {
+            System.out.println("Enter aisle location: ");
+            sc.skip("\\R?");
+            aisle.add(sc.nextInt());
+            System.out.println("Add another aisle? (y/N): ");
+            sc.skip("\\R?");
+            if (!sc.nextLine().equalsIgnoreCase("y")) {
+                add_another = false;
+            }
+        } while (add_another);
+        cinema.setAisle(aisle);
+
         cinema.setSeatingLayout(rows, cols);
         cinema_list.add(cinema);
         FileHelper.write(cinema_list, "data/cinemas.dat");
@@ -163,7 +177,7 @@ public class Cinemas {
                     boolean isPremium = type.equalsIgnoreCase("y");
                     cinema.setPlatinum(isPremium);
                     break;
-                case 4:
+                case 0:
                     return;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -204,6 +218,22 @@ public class Cinemas {
                     int rows = sc.nextInt();
                     System.out.println("Enter number of columns: ");
                     int cols = sc.nextInt();
+                    System.out.println("Enter number of aisles: ");
+                    System.out.println("=".repeat(40));
+
+                    ArrayList<Integer> aisle = new ArrayList<Integer>();
+                    boolean add_another = true;
+                    do {
+                        System.out.println("Enter aisle location: ");
+                        sc.skip("\\R?");
+                        aisle.add(sc.nextInt());
+                        System.out.println("Add another aisle? (y/N): ");
+                        sc.skip("\\R?");
+                        if (!sc.nextLine().equalsIgnoreCase("y")) {
+                            add_another = false;
+                        }
+                    } while (add_another);
+                    cinema.setAisle(aisle);
                     cinema.setSeatingLayout(rows, cols);
                     updateCinema(cinema);
                     System.out.println("Seat layout updated");
@@ -241,6 +271,7 @@ public class Cinemas {
                         edit = false;
                     }
                 }
+
                 default -> System.out.println("Invalid option. Please try again.");
             }
             FileHelper.write(cinema_list, "data/cinemas.dat");
@@ -258,7 +289,9 @@ public class Cinemas {
         System.out.println("Seats at " + cinema.getCineplex() + " - " + cinema.getCinemaCode() + (cinema.isPlatinum() ? " (Platinum Cinema)" : ""));
         System.out.println();
         System.out.println(" ".repeat((seatLayout.length / 2) + 5) + "SCREEN");
+        ArrayList<Integer> aisle =  cinema.getAisle();
         for (int i = 0; i < seatLayout.length; i++) {
+            int z=0;
             System.out.print(" " + ((char)(i + 65)) + "  ");
             for (int j = 0; j < seatLayout[i].length; j++) {
                     String seatIcon;
@@ -268,6 +301,11 @@ public class Cinemas {
                 }
                 else if(seatLayout[i][j].isSelected()) {
                     seatIcon = "S";
+                }
+                 if(z!=aisle.size()&&j== aisle.get(z))
+                {
+                    z++;
+                    System.out.print(" ");
                 }
                     System.out.print(seatIcon + " ");
             }
@@ -287,6 +325,13 @@ public class Cinemas {
         }
         System.out.print("    ");
         for (int i = 0; i < seatLayout[0].length;) {
+            for(int j=0;j<cinema.getAisle().size();j++)
+            {
+                if(i==aisle.get(j))
+                {
+                    System.out.print(" ");
+                }
+            }
             System.out.print(++i + " ");
         }
         System.out.println();

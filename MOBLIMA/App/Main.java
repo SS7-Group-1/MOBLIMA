@@ -96,6 +96,7 @@ public class Main {
 
             choice = sc.nextInt();
             switch (choice) {
+                case 0 -> {}
                 case 1 -> { // MOVIES LIST
                     int subChoice = -1;
                     while (subChoice != 0) {

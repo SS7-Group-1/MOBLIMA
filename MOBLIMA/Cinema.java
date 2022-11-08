@@ -1,6 +1,7 @@
 package MOBLIMA;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Cinema class
@@ -27,8 +28,15 @@ public class Cinema implements Serializable {
     private Seat[][] seatLayout;
 
     /**
+     * Aisle location
+     */
+    private ArrayList<Integer> aisle;
+
+    /**
      * Default Constructor.
      */
+
+
     public Cinema(){
     }
 
@@ -39,11 +47,12 @@ public class Cinema implements Serializable {
      * @param cinemaCode Unique Cinema code.
      * @param seatLayout Cinema seat layout.
      */
-    public Cinema(Cineplex cineplex, boolean isPlatinum, String cinemaCode, Seat[][] seatLayout) {
+    public Cinema(Cineplex cineplex, boolean isPlatinum, String cinemaCode, Seat[][] seatLayout,ArrayList<Integer> aisle) {
         this.cineplex = cineplex;
         this.isPlatinum = isPlatinum;
         this.cinemaCode = cinemaCode;
         this.seatLayout = seatLayout;
+        this.aisle= aisle;
     }
 
     /**
@@ -102,6 +111,15 @@ public class Cinema implements Serializable {
     }
 
     /**
+     * Accessor for aisle
+     * @return array list for aisle
+     */
+    public ArrayList<Integer> getAisle()
+    {
+        return this.aisle;
+    }
+
+    /**
      * Accessor for Cineplex.
      * @return String: Cineplex in String format.
      */
@@ -115,6 +133,15 @@ public class Cinema implements Serializable {
      */
     public void setCineplex(Cineplex cineplex) {
         this.cineplex = cineplex;
+    }
+
+    /**
+     * Mutator for aisle
+     * @param aisle aisle to change to
+     */
+    public void setAisle(ArrayList<Integer> aisle)
+    {
+        this.aisle=aisle;
     }
 
     @Override
