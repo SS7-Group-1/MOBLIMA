@@ -488,5 +488,6 @@ public class ShowTimes {
     public void removeFromShowtimeFile(ShowTime showTime){
         showtime_list.remove(showTime);
         FileHelper.write(showtime_list, "data/showtimes.dat");
+        System.out.println("Showtime successfully removed.");
     }
 }
