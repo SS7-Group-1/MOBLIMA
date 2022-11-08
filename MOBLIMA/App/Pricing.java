@@ -60,14 +60,14 @@ public class Pricing {
                     } else {
                         base -= pricing;
                     }
-                } else if (isPublicHoliday(date) && modifier.equals("PublicHoliday")) {
+                } /*else if (isPublicHoliday(date) && modifier.equals("PublicHoliday")) {
 
                     if (symbol.equals("+")) {
                         base += pricing;
                     } else {
                         base -= pricing;
                     }
-                }
+                }*/
 
                 x.close();
             }
