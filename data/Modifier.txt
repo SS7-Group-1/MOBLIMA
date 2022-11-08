@@ -1,5 +1,5 @@
 Base,+,10
-CHILD,-,1
+CHILD,-,2
 STANDARD,+,0
 SENIOR,-,2
 StandardCinema,+,0

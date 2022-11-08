@@ -180,9 +180,9 @@ public class SystemSetting {
         while (set)
         {
             System.out.println("Dear User, Please Select Option that you wish to view");
-            System.out.println("1: View all TicketConfiguration");
-            System.out.println("2: Configure Ticket Price");
-            System.out.println("3: To terminate programme");
+            System.out.println("[1] View all TicketConfiguration");
+            System.out.println("[2] Configure Ticket Price");
+            System.out.println("[3] Go Back");
             int choice = sc.nextInt();
             String EModifier=""; String EINT="";String ESymbol="";
             switch(choice)
@@ -192,7 +192,7 @@ public class SystemSetting {
                     break;
                 case 2:
                         System.out.println("Please Enter Modifier too be edited");
-                        System.out.println("[1] Adult / Child / Senior");
+                        System.out.println("[1] Standard / Child / Senior");
                         System.out.println("[2] Weekday / Weekends / Public Holiday");
                         System.out.println("[3] 2D / 3D");
                         System.out.println("[4] Standard / Premium Seats");
@@ -200,26 +200,26 @@ public class SystemSetting {
                         int pick = sc.nextInt();
                         switch (pick) {
                             case 1:
-                                System.out.println("Please select 1 for Adult");
-                                System.out.println("Please select 2 for Child");
-                                System.out.println("Please select 3 for Senior");
+                                System.out.println("Please select [1] for Standard");
+                                System.out.println("Please select [2] for Child");
+                                System.out.println("Please select [3] for Senior");
                                 int adult = sc.nextInt();
                                 switch (adult) {
                                     case 1:
-                                        EModifier = "Adult";
+                                        EModifier = "STANDARD";
                                         break;
                                     case 2:
-                                        EModifier = "Child";
+                                        EModifier = "CHILD";
                                         break;
                                     case 3:
-                                        EModifier = "Senior";
+                                        EModifier = "SENIOR";
                                         break;
                                 }
                                 break;
                             case 2:
-                                System.out.println("Please select 1 for Weekday");
-                                System.out.println("Please select 2 for Weekends");
-                                System.out.println("Please select 3 for Public Holiday");
+                                System.out.println("Please select [1] for Weekday");
+                                System.out.println("Please select [2] for Weekends");
+                                System.out.println("Please select [3] for Public Holiday");
                                 int day = sc.nextInt();
                                 switch (day) {
                                     case 1:
@@ -234,8 +234,8 @@ public class SystemSetting {
                                 }
                                 break;
                             case 3:
-                                System.out.println("Please select 1 for 2D");
-                                System.out.println("Please select 2 for 3D");
+                                System.out.println("Please select [1] for 2D");
+                                System.out.println("Please select [2] for 3D");
                                 int D = sc.nextInt();
                                 switch (D) {
                                     case 1:
@@ -247,8 +247,8 @@ public class SystemSetting {
                                 }
                                 break;
                             case 4:
-                                System.out.println("Please select 1 for Standard Seats");
-                                System.out.println("Please select 2 for Premium Seats");
+                                System.out.println("Please select [1] for Standard Seats");
+                                System.out.println("Please select [2] for Premium Seats");
                                 int seat = sc.nextInt();
                                 switch (seat) {
                                     case 1:
@@ -260,8 +260,8 @@ public class SystemSetting {
                                 }
                                 break;
                             case 5:
-                                System.out.println("Please select 1 for Standard Cinema");
-                                System.out.println("Please select 2 for Platinum Cinema");
+                                System.out.println("Please select [1] for Standard Cinema");
+                                System.out.println("Please select [2] for Platinum Cinema");
                                 int cin = sc.nextInt();
                                 switch (cin) {
                                     case 1:
@@ -275,8 +275,8 @@ public class SystemSetting {
                         }
 
                     System.out.println("Select Operations to be done on modifier");
-                    System.out.println("1) Addition");
-                    System.out.println("2) Subtraction");
+                    System.out.println("[1] Addition");
+                    System.out.println("[2] Subtraction");
                     int arith = sc.nextInt();
                     switch(arith)
                     {
@@ -303,7 +303,7 @@ public class SystemSetting {
 
                 case 3:
                     set= Boolean.FALSE;
-                    System.out.println("Terminating Programme");
+                    System.out.println("Go Back");
                     break;
             }
         }
@@ -376,7 +376,7 @@ public class SystemSetting {
                 String symbol = res[1];
                 String INT = res[2];
 
-                System.out.println("Modifier type is "+ modifier + ", Arithmetic symbol is " + symbol + ", Amount to be modified is "+ INT);
+                System.out.println("Modifier type is "+ modifier +" " + symbol + INT);
             }
             x.close();
         }
