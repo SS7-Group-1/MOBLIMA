@@ -32,11 +32,11 @@ public class Pricing {
         try { //Reading CSV file
             File file = new File("data/Modifier.txt");
             Scanner x = new Scanner(file);
-            x.useDelimiter("[\s\n]");
+            x.useDelimiter("[,\n]");
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
-                String[] res = data.split(" ");
+                String[] res = data.split(",");
 
                 String modifier = res[0];
                 String symbol = res[1];
@@ -60,17 +60,18 @@ public class Pricing {
                     } else {
                         base -= pricing;
                     }
-                } /*else if (isPublicHoliday(date) && modifier.equals("PublicHoliday")) {
+                } else if (isPublicHoliday(date) && modifier.equals("PublicHoliday")) {
 
                     if (symbol.equals("+")) {
                         base += pricing;
                     } else {
                         base -= pricing;
                     }
-                }*/
+                }
 
-                x.close();
             }
+            x.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,12 +106,12 @@ public class Pricing {
         try {
             File file = new File("data/date.txt");
             Scanner x = new Scanner(file);
-            x.useDelimiter("[\s\n]");
+            x.useDelimiter("[,\n]");
             String Edate = date.toString();
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
-                String[] res = data.split(" ");
+                String[] res = data.split(",");
 
                 String Holiday =res[0];
                 String check = res[1];

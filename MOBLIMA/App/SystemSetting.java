@@ -328,18 +328,18 @@ public class SystemSetting {
             //x.useDelimiter("[,\s\n]");
 
             while (x.hasNext()) {
-                /*String data = x.nextLine();
-                String[] res = data.split(",");*/
-                String modifier = x.next();
-                String symbol = x.next();
-                String INT = x.next();
+                String data = x.nextLine();
+                String[] res = data.split(",");
+                String modifier = res[0];
+                String symbol = res[1];
+                String INT = res[2];
 
                 if (modifier.equals(EModifier)) {
-                    pw.println(EModifier + " " + ESymbol + " " + EINT);
+                    pw.println(EModifier + "," + ESymbol + "," + EINT);
                     count = 1;
 
                 } else {
-                    pw.println(modifier + " " + symbol + " " + INT);
+                    pw.println(modifier + "," + symbol + "," + INT);
                 }
             }
                 x.close();
@@ -365,11 +365,11 @@ public class SystemSetting {
         try {
             File file = new File("data/Modifier.txt");
             Scanner x = new Scanner(file);
-            x.useDelimiter("[\s\n]");
+            x.useDelimiter("[,\n]");
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
-                String[] res = data.split(" ");
+                String[] res = data.split(",");
 
                 String modifier =res[0];
                 String symbol = res[1];
@@ -386,7 +386,7 @@ public class SystemSetting {
     }
 
     /**
-     * Funtion that allows the addition of public holiday into holiday text file
+     * Function that allows the addition of public holiday into holiday text file
      * @return 1 if successful , 0 if fail
      */
     public int AddHoliday()
@@ -403,7 +403,7 @@ public class SystemSetting {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
-            pw.println(holiday+" "+date);
+            pw.println(holiday+","+date);
             pw.flush();
             pw.close();
 
@@ -424,11 +424,11 @@ public class SystemSetting {
         try {
             File file = new File("data/date.txt");
             Scanner x = new Scanner(file);
-            x.useDelimiter("[\s\n]");
+            x.useDelimiter("[,\n]");
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
-                String[] res = data.split(" ");
+                String[] res = data.split(",");
 
                 String Holiday =res[0];
                 String date = res[1];
@@ -463,20 +463,20 @@ public class SystemSetting {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             Scanner x = new Scanner(oldFile);
-            //x.useDelimiter("[,\s\n]");
+            //x.useDelimiter(",");
 
             while (x.hasNext()) {
-                /*String data = x.nextLine();
-                String[] res = data.split(",");*/
-                String Holiday = x.next();
-                String Date = x.next();
+                String data = x.nextLine();
+                String[] res = data.split(",");
+                String Holiday = res[0];
+                String Date = res[1];
 
                 if (Holiday.equals(EHoliday)) {
-                    pw.println(EHoliday + " " + EDate);
+                    pw.println(EHoliday + "," + EDate);
                     count = 1;
 
                 } else {
-                    pw.println(Holiday + " " + Date);
+                    pw.println(Holiday + "," + Date);
                 }
             }
             x.close();
@@ -515,17 +515,17 @@ public class SystemSetting {
             //x.useDelimiter("[,\s\n]");
 
             while (x.hasNext()) {
-                /*String data = x.nextLine();
-                String[] res = data.split(",");*/
-                String Holiday = x.next();
-                String Date = x.next();
+                String data = x.nextLine();
+                String[] res = data.split(",");
+                String Holiday = res[0];
+                String Date = res[1];
 
                 if (Holiday.equals(DHoliday)) {
                     count =1;
                     continue;
 
                 } else {
-                    pw.println(Holiday + " " + Date);
+                    pw.println(Holiday + "," + Date);
                 }
             }
             x.close();
@@ -550,12 +550,12 @@ public class SystemSetting {
         try {
             File file = new File("data/date.txt");
             Scanner x = new Scanner(file);
-            x.useDelimiter("[\s\n]");
+            x.useDelimiter("[,\n]");
             String Edate = date.toString();
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
-                String[] res = data.split(" ");
+                String[] res = data.split(",");
 
                 String Holiday =res[0];
                 String check = res[1];
