@@ -27,7 +27,7 @@ public class SystemSetting {
 
         while(set)
         {
-             System.out.println("▭".repeat(40));
+             System.out.println("=".repeat(40));
                 System.out.println("│ System setting menu │");
                 System.out.println("[1] Manage ticket price");
                 System.out.println("[2] Show top 5 movies by rating");
@@ -61,7 +61,7 @@ public class SystemSetting {
                         case 6->{
                             int choice2 = -1;
                             while(choice2 != 0){
-                                System.out.println("▭".repeat(40));
+                                System.out.println("=".repeat(40));
                                 System.out.println("[1] View all vouchers");
                                 System.out.println("[2] Add voucher");
                                 System.out.println("[3] Update voucher");
@@ -91,7 +91,7 @@ public class SystemSetting {
                         case 7->{
                             int choice3 = 1;
                             while(choice3!=0) {
-                                System.out.println("▭".repeat(40));
+                                System.out.println("=".repeat(40));
                                 System.out.println("[1] View all Public Holiday");
                                 System.out.println("[2] Add Public Holiday");
                                 System.out.println("[3] Update Public Holiday");
@@ -136,7 +136,7 @@ public class SystemSetting {
         Scanner sc = new Scanner(System.in);
         try{
             FileWriter fw = new FileWriter("data/UserPermission.txt");
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1] Allow user to view top 5 movies by ratings only");
             System.out.println("[2] Allow user to view top 5 movies by sales only");
             System.out.println("[3] Allow both options");

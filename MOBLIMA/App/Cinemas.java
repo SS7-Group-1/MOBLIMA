@@ -60,7 +60,7 @@ public class Cinemas {
         Cinema cinema = new Cinema();
         // select cineplex
         //loop cineplex
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Cineplex list");
         int cineplex_count = 0;
         for (Cineplex cineplex : Cineplex.values()) {
@@ -115,10 +115,10 @@ public class Cinemas {
      */
     public void updateCinema(Cinema cinema){
         boolean edit = true;
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Updating " + cinema);
         while (edit) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("Select field to update");
             System.out.println("[1] Cineplex: " + cinema.getCineplex());
             System.out.println("[2] Cinema Code: " + cinema.getCinemaCode());
@@ -127,7 +127,7 @@ public class Cinemas {
             System.out.print("Select option: ");
             switch (sc.nextInt()) {
                 case 1:
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Cineplex list");
                     int cineplex_count = 0;
                     for (Cineplex cineplex : Cineplex.values()) {
@@ -197,7 +197,7 @@ public class Cinemas {
             System.out.println("[2] Update seat type");
             switch (sc.nextInt()) {
                 case 1 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Update seat layout");
                     System.out.println("Warning: This will reset all seats to normal");
                     System.out.println("Enter number of rows: ");
@@ -247,7 +247,7 @@ public class Cinemas {
      * @param showSelection - Parameter that shows the selected seats by the user
      */
     public void printSeatingLayout(Seat[][] seatLayout, boolean showSelection){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Seating layout");
         System.out.println(" ".repeat((seatLayout.length / 2) + 5) + "SCREEN");
         for (int i = 0; i < seatLayout.length; i++) {
@@ -264,13 +264,16 @@ public class Cinemas {
                     System.out.print(seatIcon + " ");
             }
             if(i == 0){
-                System.out.print("   ▢ Normal Seat");
+                System.out.print("   O - Normal Seat");
             }
             else if(i == 1){
-                System.out.print("   ▤ Premium Seat");
+                System.out.print("   P - Premium Seat");
             }
-            else if(i == 2 && showSelection){
-                System.out.print("   ▣ Selected Seat");
+            else if(i == 2){
+                System.out.print("   H - Handicap Seat");
+            }
+            else if(i == 3 && showSelection){
+                System.out.print("   S - Selected Seat");
             }
             System.out.println();
         }
@@ -279,7 +282,7 @@ public class Cinemas {
             System.out.print(++i + " ");
         }
         System.out.println();
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
     }
 
 }

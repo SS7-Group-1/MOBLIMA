@@ -32,7 +32,7 @@ public class Bookings {
      */
     public void viewRecords(){
         // view user booking records
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Your booking records");
         int record_count = 0;
         for (BookingRecord booking_record: booking_record_list){

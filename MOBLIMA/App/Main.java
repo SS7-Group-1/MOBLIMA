@@ -23,12 +23,12 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Welcome to Platinum Village");
         System.out.println("the leading movie theatre in Singapore");
 
         while (true) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1] Login");
             System.out.println("[2] Register");
             System.out.println("[3] Continue as guest");
@@ -75,7 +75,7 @@ public class Main {
 
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("│ Main Menu │");
             System.out.println("[1] Movies");
             System.out.println("[2] Showtimes");
@@ -99,7 +99,7 @@ public class Main {
                 case 1 -> { // MOVIES LIST
                     int subChoice = -1;
                     while (subChoice != 0) {
-                        System.out.println("▭".repeat(40));
+                        System.out.println("=".repeat(40));
                         System.out.println("│ Movies │");
                         System.out.println("[1] View all movies");
                         System.out.println("[2] Search for movie");
@@ -162,7 +162,7 @@ public class Main {
                 case 2 -> { // VIEW SHOWTIMES
                     int subChoice = -1;
                     while (subChoice != 0) {
-                        System.out.println("▭".repeat(40));
+                        System.out.println("=".repeat(40));
                         System.out.println("│ Showtimes │");
                         System.out.println("[1] View all showtimes");
                         System.out.println("[2] Search for showtimes by movie");
@@ -199,7 +199,7 @@ public class Main {
                         Movies movies = new Movies();
                         Movie movie = movies.selectMovie(false);
                         if (movie != null) {
-                            System.out.println("▭".repeat(40));
+                            System.out.println("=".repeat(40));
                             System.out.println("│ Reviews & Ratings │");
                             System.out.println("[1] View reviews");
                             System.out.println("[2] Add new review");
@@ -239,7 +239,7 @@ public class Main {
                 case 6 -> { // MANAGE CINEMAS
                     int subChoice = -1;
                     while (subChoice != 0) {
-                        System.out.println("▭".repeat(40));
+                        System.out.println("=".repeat(40));
                         System.out.println("│ Manage Cinemas │");
                         System.out.println("[1] View all cinemas");
                         System.out.println("[2] Add new cinema");
@@ -290,7 +290,7 @@ public class Main {
                 case 7 -> { // MANAGE MOVIES
                     int subChoice = -1;
                     while (subChoice != 0) {
-                        System.out.println("▭".repeat(40));
+                        System.out.println("=".repeat(40));
                         System.out.println("│ Manage Movies │");
                         System.out.println("[1] Add new movie");
                         System.out.println("[2] Update existing movie");
@@ -322,7 +322,7 @@ public class Main {
                 case 8 -> { // MANAGE SHOWTIMES
                     int subChoice = -1;
                     while (subChoice != 0) {
-                        System.out.println("▭".repeat(40));
+                        System.out.println("=".repeat(40));
                         System.out.println("│ Manage Showtimes │");
                         System.out.println("[1] Add new showtime");
                         System.out.println("[2] Update existing showtime");

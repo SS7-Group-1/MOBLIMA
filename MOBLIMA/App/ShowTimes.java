@@ -34,9 +34,9 @@ public class ShowTimes {
      * Function that Display all showtimes and allowing the purchasing of tickets
      */
     public void displayShowtimes(){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("All showtimes");
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -60,7 +60,7 @@ public class ShowTimes {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + showtime_count + "] Buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -103,9 +103,9 @@ public class ShowTimes {
                 ticket.setSeatType(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].getSeatType());
                 ticket.setSeatNumber(seat);
                 System.out.println("Ticket type: ");
-                System.out.println("[1] Adult ► $" + pricing.computePricing(TicketType.STANDARD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()));
-                System.out.println("[2] Child ► $" + pricing.computePricing(TicketType.CHILD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()));
-                System.out.println("[3] Senior ► $" + pricing.computePricing(TicketType.SENIOR, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()));
+                System.out.println("[1] Adult ($" + pricing.computePricing(TicketType.STANDARD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()) + ")");
+                System.out.println("[2] Child ($" + pricing.computePricing(TicketType.CHILD, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()) + ")");
+                System.out.println("[3] Senior ($" + pricing.computePricing(TicketType.SENIOR, showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType()) + ")");
                 int ticketType = sc.nextInt();
                 if(ticketType == 1){
                     ticket.setTicketType(TicketType.STANDARD);
@@ -123,7 +123,7 @@ public class ShowTimes {
                 float price = pricing.computePricing(ticket.getTicketType(), showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType());
                 new_booking.addPrice(price);
 
-                System.out.println("▭".repeat(40));
+                System.out.println("=".repeat(40));
                 System.out.println("Selected seats: " + new_booking.printSeats());
                 System.out.println("Total price: $" + new_booking.getTotalPrice());
                 System.out.println("Book another seat? (y/N): ");
@@ -143,7 +143,7 @@ public class ShowTimes {
 
             while(Account.UserDetail.user == null){
                 System.out.println("Please login or signup to continue");
-                System.out.println("▭".repeat(40));
+                System.out.println("=".repeat(40));
                 System.out.println("[1] Login");
                 System.out.println("[2] Register");
                 switch (sc.nextInt()) {
@@ -207,9 +207,9 @@ public class ShowTimes {
      * @param movie - Movie object to view all its correspoding showtime
      */
     public void displayShowtimesByMovie(Movie movie){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Showtimes for " + movie.getTitle());
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -235,7 +235,7 @@ public class ShowTimes {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + showtime_count + "] Buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -255,9 +255,9 @@ public class ShowTimes {
      * @param cinema - Cinema object to display all its correspoding showtimes
      */
     public void displayShowtimesByCinema(Cinema cinema){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Showtimes at " + cinema.getCineplex());
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -283,7 +283,7 @@ public class ShowTimes {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + showtime_count + "] Buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -303,9 +303,9 @@ public class ShowTimes {
      * @return selected showtime
      */
     public ShowTime selectShowTime(){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("All showtimes");
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
 
         int showtime_count = 0;
@@ -325,7 +325,7 @@ public class ShowTimes {
         }
         int choice = -1;
         while (choice != 0) {
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("[1-" + showtime_count + "] View movie information or buy tickets");
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
@@ -344,7 +344,7 @@ public class ShowTimes {
      * @param movie - Movie object to add a showtime to
      */
     public void addShowtime(Movie movie){
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Adding new showtime for " + movie.getTitle());
         ShowTime showTime = new ShowTime(movie);
 
@@ -353,7 +353,7 @@ public class ShowTimes {
         showTime.setCinema(cinema);
         showTime.setSeats(cinema.getSeatLayout().clone());
 
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Enter movie date (DD/MM/YYYY): ");
         sc.skip("\\R?");
         while(true){
@@ -368,7 +368,7 @@ public class ShowTimes {
             }
         }
 
-        System.out.println("▭".repeat(40));
+        System.out.println("=".repeat(40));
         System.out.println("Enter movie start time (HH:mm): ");
         sc.skip("\\R?");
         while(true){
@@ -396,7 +396,7 @@ public class ShowTimes {
     public void updateShowtime(ShowTime showTime){
         boolean edit = true;
         while(edit){
-            System.out.println("▭".repeat(40));
+            System.out.println("=".repeat(40));
             System.out.println("Updating " + showTime);
             System.out.println("Select field to edit");
             System.out.println("[1] Cinema: " + showTime.getCinema().getCineplex());
@@ -413,7 +413,7 @@ public class ShowTimes {
                     System.out.println("Cinema updated successfully.");
                 }
                 case 2 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Enter movie date (DD/MM/YYYY): ");
                     sc.skip("\\R?");
                     while (true) {
@@ -429,7 +429,7 @@ public class ShowTimes {
                     }
                 }
                 case 3 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("Enter movie start time (HH:mm): ");
                     sc.skip("\\R?");
                     while (true) {
@@ -445,7 +445,7 @@ public class ShowTimes {
                     }
                 }
                 case 4 -> {
-                    System.out.println("▭".repeat(40));
+                    System.out.println("=".repeat(40));
                     System.out.println("REMOVED");
                 }
                 default -> {
