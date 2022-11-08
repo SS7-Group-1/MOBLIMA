@@ -119,7 +119,6 @@ public class ShowTimes {
                 System.out.println("Seat " + seat + " added");
                 showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setSelected();
 
-
                 new_booking.addTicket(ticket);
                 float price = pricing.computePricing(ticket.getTicketType(), showTime.getCinema().isPlatinum(), LocalDate.from(showTime.getDateTime()), showTime.getMovie().getMovieType(), ticket.getSeatType());
                 new_booking.addPrice(price);
@@ -172,16 +171,23 @@ public class ShowTimes {
                 System.out.println("Your booking is confirmed!");
 
                 //deselect all seats
-                for(Ticket ticket : new_booking.getTickets()){
-                    showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setDeselected();
-                }
                 // add to booking record
                 for(Ticket ticket : new_booking.getTickets()){
+                    showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setDeselected();
                     showTime.getSeats()[ticket.getSeatNumber().charAt(0) - 65][Integer.parseInt(ticket.getSeatNumber().substring(1)) - 1].setOccupied();
                 }
+
                 //increment movie sales
                 Movies movies = new Movies();
                 movies.incrementScales(showTime.getMovie(), new_booking.getTickets().size());
+
+                for(int i = 0; i < showtime_list.size(); i++) {
+                    if(showtime_list.get(i).getShowTimeId().equals(showTime.getShowTimeId())) {
+                        showtime_list.set(i, showTime);
+                        break;
+                    }
+                }
+                FileHelper.write(showtime_list, "data/showtimes.dat");
 
                 booking_list.add(new_booking);
                 FileHelper.write(booking_list, "data/bookings.dat");

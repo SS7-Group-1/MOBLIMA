@@ -531,6 +531,7 @@ public class Movies {
             for(int i = 0; i < movie_list.size(); i++) {
                 if(movie_list.get(i).getTitle().equals(movie.getTitle())) {
                     movie_list.set(i, movie);
+                    break;
                 }
             }
             FileHelper.write(movie_list, "data/movies.dat");
