@@ -3,6 +3,8 @@ package MOBLIMA.App;
 import MOBLIMA.*;
 import java.util.*;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 /**
  *Class that handles all movies and their respective information
  * @since 2022-11-07
@@ -79,7 +81,7 @@ public class Movies {
         if (movie.getRating().getRatings().size() < 2) {
             System.out.println("Average Rating: N/A");
         } else {
-            System.out.println("Average Rating: " + String.format("%.2f", movie.getRating().getAverageRating()));
+            System.out.println("Average Rating: " + String.format("%.1f", movie.getRating().getAverageRating()));
         }
         if (movie.getRating().getRatings().size() == 0) {
             System.out.println("No reviews yet");
@@ -141,7 +143,7 @@ public class Movies {
         Map<String, Movie> movieMap = new HashMap<>();
         for (SortedMap.Entry<Movie, Float> entry : sortedMap.entrySet()) {
             if (print_count != 5 && entry.getKey().getStatus() != MovieStatus.END_OF_SHOWING) {
-                System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + String.format("%.2f", entry.getValue()) + ")");
+                System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle() + " (" + String.format("%.1f", entry.getValue()) + ")");
                 movieMap.put(String.valueOf(print_count), entry.getKey());
             } else {
                 break;
@@ -275,12 +277,67 @@ public class Movies {
         System.out.println("| Search for movie |");
         System.out.print("Enter movie title: ");
         String title = sc.nextLine();
+
+        HashMap<Movie, Integer> search_map = new HashMap<>();
+        LinkedHashMap<Movie, Integer> sortedMap1 = new LinkedHashMap<>();
+        ArrayList<Integer> list1 = new ArrayList<>();
+
+        //add to map.
+        int results = 0;
         for (Movie movie : movie_list) {
-            if (movie.getTitle().equals(title)) {
-                displayMovieInformation(movie);
+            int score = FuzzySearch.partialRatio(title,movie.getTitle());
+            if(score > 60) {
+                search_map.put(movie, score);
+                results++;
+            }
+        }
+        if(results == 0) {
+            System.out.println("No results found for \"" + title + "\"");
+            return;
+        }
+        else if(results == 1) {
+            for (Map.Entry<Movie, Integer> entry : search_map.entrySet()) {
+                displayMovieInformation(entry.getKey());
                 return;
             }
         }
+
+        System.out.println("=".repeat(40));
+        System.out.println("Multiple search results found for \"" + title + "\"");
+
+        for (Map.Entry<Movie, Integer> entry : search_map.entrySet()) {
+            list1.add(entry.getValue());
+        }
+        list1.sort(Collections.reverseOrder());
+        for (int num : list1) {
+            for (Map.Entry<Movie, Integer> entry : search_map.entrySet()) {
+                if (entry.getValue().equals(num)) {
+                    sortedMap1.put(entry.getKey(), num);
+                }
+            }
+        }
+        int print_count = 0;
+        Map<String, Movie> movieMap = new HashMap<>();
+        for (SortedMap.Entry<Movie, Integer> entry : sortedMap1.entrySet()) {
+            System.out.println(" [" + ++print_count + "] " + entry.getKey().getTitle());
+            movieMap.put(String.valueOf(print_count), entry.getKey());
+        }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("=".repeat(40));
+            System.out.println("[1-" + print_count + "] Select search result");
+            System.out.println("[0] Go back");
+            System.out.print("Enter option: ");
+            choice = sc.nextInt();
+            if (choice > 0 && choice <= print_count) {
+                Movie movie = movieMap.get(String.valueOf(choice));
+                displayMovieInformation(movie);
+                return;
+            } else if (choice != 0) {
+                System.out.println("Invalid option");
+            }
+        }
+
         System.out.println("Movie not found!");
     }
 

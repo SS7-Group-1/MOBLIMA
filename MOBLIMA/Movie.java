@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+/**
  * Movie Class.
  * @author SS7 Group 1
  * @version 1.0

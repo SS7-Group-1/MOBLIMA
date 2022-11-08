@@ -1,9 +1,6 @@
 /**
- * 
- */
-/**
- * @author Ryan
  *
  */
 module MOBLIMA {
+    requires fuzzywuzzy;
 }

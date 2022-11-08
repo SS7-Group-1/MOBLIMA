@@ -228,7 +228,12 @@ public class Cinemas {
                     }
                     cinema.getSeatLayout()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].setSeatType(seatType1);
 
-                    FileHelper.write(cinema_list, "data/cinemas.dat");
+                    //update
+                    for(int i =0; i<cinema_list.size(); i++){
+                        if(cinema_list.get(i).getCinemaCode().equals(cinema.getCinemaCode())){
+                            cinema_list.set(i, cinema);
+                        }
+                    }
                     printSeatingLayout(cinema.getSeatLayout(), false, cinema);
                     System.out.println("Update another seat? (y/N): ");
                     sc.skip("\\R?");
@@ -238,6 +243,7 @@ public class Cinemas {
                 }
                 default -> System.out.println("Invalid option. Please try again.");
             }
+            FileHelper.write(cinema_list, "data/cinemas.dat");
         }
     }
 
