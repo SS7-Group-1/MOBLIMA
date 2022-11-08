@@ -261,7 +261,7 @@ public class Cinemas {
                     seatIcon = "x";
                 }
                 else if(seatLayout[i][j].isSelected()) {
-                    seatIcon = "▣";
+                    seatIcon = "S";
                 }
                     System.out.print(seatIcon + " ");
             }
