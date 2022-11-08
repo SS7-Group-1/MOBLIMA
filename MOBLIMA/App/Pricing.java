@@ -34,6 +34,7 @@ public class Pricing {
             Scanner x = new Scanner(file);
             x.useDelimiter("[,\n]");
 
+            //System.out.println(ticketType.toString());
             while (x.hasNextLine()) {
                 String data = x.nextLine();
                 String[] res = data.split(",");
@@ -49,22 +50,30 @@ public class Pricing {
                 } else if (modifier.equals(movieType.toString()) || modifier.equals(seatType.getType()) || modifier.equals(ticketType.toString()) || modifier.equals(Day(date)))  //Calculating Price from Movietype, Seat type, Ticket type and Day of the week
                 {
                     if (symbol.equals("+")) {
+                        //System.out.println(modifier);
+                        //System.out.println(symbol);
+                        //System.out.println("Hit here1");
                         base += pricing;
                     } else {
                         base -= pricing;
+                        //System.out.println("Hit here2");
                     }
                 } else if ((isPlatinum && modifier.equals("PlatinumCinema")) || (!isPlatinum && modifier.equals("StandardCinema"))) //Calculating Price from type of cinema
                 {
                     if (symbol.equals("+")) {
+                        //System.out.println("Hit Platinum1");
                         base += pricing;
                     } else {
+                        //System.out.println("Hit platinum2");
                         base -= pricing;
                     }
                 } else if (isPublicHoliday(date) && modifier.equals("PublicHoliday")) {
 
                     if (symbol.equals("+")) {
+                        //System.out.println("Hit Public Holiday1");
                         base += pricing;
                     } else {
+                        //System.out.println("Hit publicholiday2");
                         base -= pricing;
                     }
                 }
@@ -100,6 +109,12 @@ public class Pricing {
             return "Weekend";
         }
     }
+
+    /**
+     * Function that check whether a date is a public holiday
+     * @param date - date to bechecked whether is a public holiday
+     * @return True if its public holiday , False if its not
+     */
 
     public Boolean isPublicHoliday(LocalDate date)
     {

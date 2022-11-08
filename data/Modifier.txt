@@ -1,7 +1,7 @@
 Base,+,10
-Child,-,1
-Adult,+,0
-Senior,-,2
+CHILD,-,1
+STANDARD,+,0
+SENIOR,-,2
 StandardCinema,+,0
 PlatinumCinema,+,10
 PublicHoliday,+,3
