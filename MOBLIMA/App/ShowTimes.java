@@ -37,7 +37,7 @@ public class ShowTimes {
         System.out.println("=".repeat(40));
         System.out.println("All showtimes");
         System.out.println("=".repeat(40));
-        Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()));
+        Map<String, List<ShowTime>> movie_group = showtime_list.stream().collect(Collectors.groupingBy(nigel -> nigel.getMovie().getTitle()  + (nigel.getMovie().getMovieType() == MovieType.threeD ? " (3D)" : "")));
 
         int showtime_count = 0;
         Map<Integer, ShowTime> showtimeMap = new HashMap<>();
@@ -216,7 +216,7 @@ public class ShowTimes {
         Map<Integer, ShowTime> showtimeMap = new HashMap<>();
         for (Map.Entry<String, List<ShowTime>> entry : movie_group.entrySet()) {
             if(entry.getKey().equals(movie.getTitle())){
-                System.out.println("■ " + entry.getKey());
+                System.out.println("■ " + entry.getKey()  + (movie.getMovieType() == MovieType.threeD ? " (3D)" : ""));
                 Map<String, List<ShowTime>> cinema_group =
                         entry.getValue().stream().collect(Collectors.groupingBy(nigel -> nigel.getCinema().getCineplex()));
 

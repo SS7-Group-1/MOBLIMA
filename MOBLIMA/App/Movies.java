@@ -71,6 +71,7 @@ public class Movies {
         System.out.println("=".repeat(40));
         System.out.println("Title: " + movie.getTitle());
         System.out.println("Synopsis: " + movie.getSynopsis());
+        System.out.println("Movie Type: " + movie.getMovieType());
         System.out.println("Director: " + movie.getDirector());
         System.out.println("Cast(s): ");
         movie.printCasts();
