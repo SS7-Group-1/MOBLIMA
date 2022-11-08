@@ -80,6 +80,7 @@ public class ShowTimes {
      * @param showTime - Show time that will be previewed
      */
     public void bookShowtime(ShowTime showTime){
+        System.out.println("=".repeat(40));
         System.out.println("New Booking for " + showTime.getMovie().getTitle()  + (showTime.getMovie().getMovieType() == MovieType.threeD ? " (3D)" : ""));
         Cinemas cinemas = new Cinemas();
         Pricing pricing = new Pricing();
