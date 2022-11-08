@@ -100,13 +100,6 @@ public class Account {
         String name = sc.next();
         user.setPhone(name);
 
-        System.out.print("Date of Birth (DD/MM/YYYY): ");
-        sc.skip("\\R?");
-        String dob = sc.next();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(dob, formatter);
-        user.setDateOfBirth(localDate);
-
         user_list.add(user);
         FileHelper.write(user_list, "data/users.dat");
         System.out.println("Account created!");
@@ -137,11 +130,68 @@ public class Account {
         }
     }
 
+    public void updateAccount(){
+        User user = UserDetail.user;
+        String existingEmail = user.getEmail();
+        System.out.println("▭".repeat(40));
+        System.out.println("Update your account");
+        System.out.println(" [1] Email: " + user.getEmail());
+        System.out.println(" [2] Password: ********");
+        System.out.println(" [3] Phone Number: " + user.getPhone());
+        System.out.println(" [0] Go back");
+        System.out.print("Enter selection: ");
+        int add_choice;
+        while (true) {
+            add_choice = sc.nextInt();
+            if (add_choice < 0 || add_choice > 6) {
+                System.out.println("Invalid option. Please try again.");
+            } else {
+                break;
+            }
+        }
+        switch (add_choice) {
+            case 1:
+                System.out.print("Enter new email: ");
+                sc.skip("\\R?");
+                String email = sc.nextLine();
+                for (User u : user_list) {
+                    if (u.getEmail().equals(email)) {
+                        System.out.println("Email already exists. Please try again");
+                        return;
+                    }
+                }
+                user.setEmail(email);
+                break;
+            case 2:
+                System.out.print("Enter new password: ");
+                sc.skip("\\R?");
+                String password = sc.nextLine();
+                user.setPassword(password);
+                break;
+            case 3:
+                System.out.print("Enter new phone number: ");
+                sc.skip("\\R?");
+                String phone = sc.nextLine();
+                user.setPhone(phone);
+                break;
+            case 0:
+                return;
+        }
+
+        for(int i = 0; i < user_list.size(); i++){
+            if(user_list.get(i).getEmail().equals(existingEmail)){
+                user_list.set(i, user);
+                FileHelper.write(user_list, "data/users.dat");
+                System.out.println("Account updated!");
+                return;
+            }
+        }
+    }
+
     /**
      * Functions that set whether a user is an admin
      * @param user - user object that will be used to set to admin
      */
-
     public void setUserRole(User user){
         System.out.print("Set " + user.getEmail() + " as an admin? (y/N)");
         sc.skip("\\R?");

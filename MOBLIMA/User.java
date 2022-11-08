@@ -28,10 +28,6 @@ public class User implements Serializable {
      */
     private ArrayList<BookingRecord> bookingRecords;
     /**
-     * birthdate of user
-     */
-    private LocalDate dateOfBirth;
-    /**
      * flag to denote if user is an admin or not an admin
      */
     private boolean isAdmin;
@@ -47,15 +43,13 @@ public class User implements Serializable {
      * @param email email of the user
      * @param phone phone number of the user
      * @param password password for user's account
-     * @param dateOfBirth birthdate of user
      * @param isAdmin flag to denote if user is an admin or not an admin
      * also initialises bookingRecords to a new array list
      */
-    public User(String email, String phone, String password, LocalDate dateOfBirth, boolean isAdmin) {
+    public User(String email, String phone, String password, boolean isAdmin) {
         this.email = email;
         this.phone = phone;
         this.password = password;
-        this.dateOfBirth = dateOfBirth;
         this.isAdmin = isAdmin;
         this.bookingRecords = new ArrayList<>();
     }
@@ -109,38 +103,6 @@ public class User implements Serializable {
     }
 
     /**
-     * Mutator for birthdate of user
-     * @param dateOfBirth birthdate of user
-     */
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    /**
-     * Accessor for birthdate of user
-     * @return dateOfBirth: birthdate of user
-     */
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    /**
-     * checks if user is a child (12 years old and below)
-     * @return boolean value to denote if user is a child
-     */
-    public boolean isChild() {
-        return dateOfBirth.isAfter(LocalDate.now().minusYears(12));
-    }
-
-    /**
-     * checks if user is a senior (60 years and above)
-     * @return boolean value to denote if user is a senior
-     */
-    public boolean isSenior() {
-        return dateOfBirth.isBefore(LocalDate.now().minusYears(60));
-    }
-
-    /**
      * returns booking records of user
      * @return bookingRecords: array list storing booking records of user
      */
@@ -171,5 +133,4 @@ public class User implements Serializable {
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
     }
-
 }

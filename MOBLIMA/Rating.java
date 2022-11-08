@@ -36,7 +36,6 @@ public class Rating implements Serializable {
      */
     public void addRating(Float rat){
         ratings.add(rat);
-        System.out.println("Rating successfully added");
     }
 
     /**
@@ -46,8 +45,13 @@ public class Rating implements Serializable {
     public Float getAverageRating(){
         Float sum=0.0f;
 
+        int total_count = 0;
         for (Float rating : ratings) {
+            total_count++;
             sum += rating;
+        }
+        if(total_count == 0){
+            return 0.0f;
         }
 
         return sum/ ratings.size();
@@ -57,8 +61,13 @@ public class Rating implements Serializable {
      * Print out all existing movie's ratings.
      */
     public void printRatings(){
+        int total_count = 0;
         for (Float aFloat : ratings) {
             System.out.println(aFloat);
+            total_count++;
+        }
+        if(total_count == 0){
+            System.out.println("No ratings yet!");
         }
     }
 

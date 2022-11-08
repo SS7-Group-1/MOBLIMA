@@ -42,4 +42,12 @@ public enum MovieStatus {
         this.icon = icon;
     }
 
+    /**
+     * Accessor for movie status.
+     * @return Movie's status.
+     */
+    @Override
+    public String toString() {
+        return status;
+    }
 }

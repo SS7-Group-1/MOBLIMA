@@ -52,4 +52,13 @@ public enum Cineplex {
     Cineplex(String name){
         this.name = name;
     }
+
+    /**
+     * Accessor for Cinema name.
+     * @return String: Cinema name.
+     */
+    @Override
+    public String toString(){
+        return name;
+    }
 }

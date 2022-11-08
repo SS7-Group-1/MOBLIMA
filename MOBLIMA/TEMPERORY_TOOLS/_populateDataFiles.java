@@ -428,10 +428,8 @@ public class _populateDataFiles {
 
     public static void populateUsers(){
         ArrayList<User> user_list = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-
-        user_list.add(new User("user@moblima.com", "87456874", "password", LocalDate.parse("18/09/1990", formatter), false));
-        user_list.add(new User("admin@moblima.com", "95447824", "password", LocalDate.parse("18/09/1990", formatter), true));
+        user_list.add(new User("user@moblima.com", "87456874", "password", false));
+        user_list.add(new User("admin@moblima.com", "95447824", "password", true));
 
         FileHelper.write(user_list, "data/users.dat");
     }

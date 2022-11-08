@@ -44,8 +44,13 @@ public class Review implements Serializable {
      * to print all reviews of the movie
      */
     public void printReviews(){
+        int total_count = 0;
         for (String review : reviews) {
+            total_count++;
             System.out.println(" - " + review);
+        }
+        if(total_count == 0){
+            System.out.println("No reviews yet!");
         }
     }
 

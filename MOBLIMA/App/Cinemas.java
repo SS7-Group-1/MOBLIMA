@@ -17,7 +17,7 @@ public class Cinemas {
 
     /**
      * Default Constructor
-     * Initialises an array list of Cinema Objects by reading from cinema.dat
+     * Initialises an array list of Cinema Objects by reading from cinemas.dat
      */
     public Cinemas(){
         this.cinema_list = (ArrayList<Cinema>) FileHelper.read("data/cinemas.dat");
@@ -110,7 +110,7 @@ public class Cinemas {
     /**
      * Function that allows the update of Cinemas
      * Allows update of Cinemas' Cineplex , Cinema Code and Premium Seats
-     * Updated Cinema will be written back into cinema.dat
+     * Updated Cinema will be written back into cinemas.dat
      * @param cinema - cinema object to be updated
      */
     public void updateCinema(Cinema cinema){
@@ -120,9 +120,10 @@ public class Cinemas {
         while (edit) {
             System.out.println("▭".repeat(40));
             System.out.println("Select field to update");
-            System.out.println("[1] Cineplex");
-            System.out.println("[2] Cinema Code");
-            System.out.println("[3] Premium status");
+            System.out.println("[1] Cineplex: " + cinema.getCineplex());
+            System.out.println("[2] Cinema Code: " + cinema.getCinemaCode());
+            System.out.println("[3] Premium status: " + cinema.isPlatinum());
+            System.out.println("[0] Exit");
             System.out.print("Select option: ");
             switch (sc.nextInt()) {
                 case 1:
@@ -162,23 +163,25 @@ public class Cinemas {
                     boolean isPremium = type.equalsIgnoreCase("y");
                     cinema.setPlatinum(isPremium);
                     break;
+                case 4:
+                    return;
                 default:
                     System.out.println("Invalid option. Please try again.");
                     continue;
             }
-            FileHelper.write(cinema_list, "data/cinema.dat");
+            FileHelper.write(cinema_list, "data/cinemas.dat");
         }
     }
 
     /**
      * Allows the removal of Cinema
-     * writes back updated cinema list without removed cinema into cinema.dat
+     * writes back updated cinema list without removed cinema into cinemas.dat
      * @param cinema - cinema object to be removed
      */
 
     public void removeCinema(Cinema cinema){
         cinema_list.remove(cinema);
-        FileHelper.write(cinema_list, "data/cinema.dat");
+        FileHelper.write(cinema_list, "data/cinemas.dat");
     }
 
     /**
@@ -190,8 +193,7 @@ public class Cinemas {
         boolean edit = true;
         while (edit) {
             printSeatingLayout(cinema.getSeatLayout(), false);
-            System.out.println("▭".repeat(40));
-            System.out.println("[1] Update cinema size");
+            System.out.println("[1] Update cinema size: " + cinema.getSeatLayout().length + "rows, " + cinema.getSeatLayout()[0].length + "columns");
             System.out.println("[2] Update seat type");
             switch (sc.nextInt()) {
                 case 1 -> {
@@ -212,14 +214,21 @@ public class Cinemas {
                     System.out.println("Select seat number (e.g. E1): ");
                     sc.skip("\\R?");
                     String seat = sc.nextLine();
-                    System.out.println("Select seat type: WORK IN PROGRESS");
+                    System.out.println("Select seat type:");
+                    System.out.println("[1] Normal");
+                    System.out.println("[2] Wheelchair");
+                    System.out.println("[3] Premium");
+                    System.out.print("Select option: ");
                     sc.skip("\\R?");
-                    String type = sc.nextLine();
-                    boolean isPremium = type.equalsIgnoreCase("p");
+                    int seatType = sc.nextInt();
+                    SeatType seatType1 = SeatType.STANDARD;
+                    switch (seatType){
+                        case 2 -> seatType1 = SeatType.HANDICAP;
+                        case 3 -> seatType1 = SeatType.PREMIUM;
+                    }
+                    cinema.getSeatLayout()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].setSeatType(seatType1);
 
-                    //cinema.setSeatPremium(seat.charAt(0) - 65, Integer.parseInt(seat.substring(1)) - 1, isPremium);
-
-                    FileHelper.write(cinema_list, "data/cinema.dat");
+                    FileHelper.write(cinema_list, "data/cinemas.dat");
                     printSeatingLayout(cinema.getSeatLayout(), false);
                     System.out.println("Update another seat? (y/N): ");
                     sc.skip("\\R?");
