@@ -6,6 +6,8 @@ import MOBLIMA.User;
 import java.io.*;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -543,12 +545,13 @@ public class SystemSetting {
 
     }
 
-    public Boolean isPublicHoliday(String date)
+    public Boolean isPublicHoliday(LocalDate date)
     {
         try {
             File file = new File("data/date.txt");
             Scanner x = new Scanner(file);
             x.useDelimiter("[\s\n]");
+            String Edate = date.toString();
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
@@ -557,7 +560,7 @@ public class SystemSetting {
                 String Holiday =res[0];
                 String check = res[1];
 
-                if(check.equals(date))
+                if(check.equals(Edate))
                 {
                     return Boolean.TRUE;
                 }

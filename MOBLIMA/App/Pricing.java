@@ -24,11 +24,11 @@ public class Pricing {
      * @param seatType
      * @return ticket pricing
      */
-    public float computePricing(TicketType ticketType, boolean isPlatinum, LocalDate date, MovieType movieType, SeatType seatType){
+    public float computePricing(TicketType ticketType, boolean isPlatinum, LocalDate date, MovieType movieType, SeatType seatType) {
 
         // Read base price
-        int price =0; //Total Price
-        int base =0;
+        int price = 0; //Total Price
+        int base = 0;
         try { //Reading CSV file
             File file = new File("data/Modifier.txt");
             Scanner x = new Scanner(file);
@@ -38,54 +38,47 @@ public class Pricing {
                 String data = x.nextLine();
                 String[] res = data.split(" ");
 
-                String modifier =res[0];
+                String modifier = res[0];
                 String symbol = res[1];
                 String INT = res[2];
 
                 int pricing = Integer.parseInt(INT);
 
-                if(modifier.equals("Base"))
+                if (modifier.equals("Base")) {
+                    base = pricing; //Getting the base Price of object
+                } else if (modifier.equals(movieType.toString()) || modifier.equals(seatType.getType()) || modifier.equals(ticketType.toString()) || modifier.equals(Day(date)))  //Calculating Price from Movietype, Seat type, Ticket type and Day of the week
                 {
-                    base=pricing; //Getting the base Price of object
-                }
-
-                else if(modifier.equals(movieType.toString())||modifier.equals(seatType.getType())||modifier.equals(ticketType.toString())||modifier.equals(Day(date)))  //Calculating Price from Movietype, Seat type, Ticket type and Day of the week
-                {
-                    if(symbol.equals("+"))
-                    {
+                    if (symbol.equals("+")) {
                         base += pricing;
+                    } else {
+                        base -= pricing;
                     }
-                    else
-                    {
+                } else if ((isPlatinum && modifier.equals("PlatinumCinema")) || (!isPlatinum && modifier.equals("StandardCinema"))) //Calculating Price from type of cinema
+                {
+                    if (symbol.equals("+")) {
+                        base += pricing;
+                    } else {
+                        base -= pricing;
+                    }
+                } else if (isPublicHoliday(date) && modifier.equals("PublicHoliday")) {
+
+                    if (symbol.equals("+")) {
+                        base += pricing;
+                    } else {
                         base -= pricing;
                     }
                 }
 
-                    else if ((isPlatinum&&modifier.equals("PlatinumCinema"))||(!isPlatinum&&modifier.equals("StandardCinema"))) //Calculating Price from type of cinema
-                    {
-                        if(symbol.equals("+"))
-                        {
-                            base += pricing;
-                        }
-                        else
-                        {
-                            base -= pricing;
-                        }
-                    }
-
-                }
-
-            x.close();
-        }
-
-        catch(Exception e)
-        {
+                x.close();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
         return base;
     }
+
 
     /**
      * Function that returns the Day of the week (Weekday , Weekend) from date object
@@ -105,5 +98,35 @@ public class Pricing {
         {
             return "Weekend";
         }
+    }
+
+    public Boolean isPublicHoliday(LocalDate date)
+    {
+        try {
+            File file = new File("data/date.txt");
+            Scanner x = new Scanner(file);
+            x.useDelimiter("[\s\n]");
+            String Edate = date.toString();
+
+            while (x.hasNextLine()) {
+                String data = x.nextLine();
+                String[] res = data.split(" ");
+
+                String Holiday =res[0];
+                String check = res[1];
+
+                if(check.equals(Edate))
+                {
+                    return Boolean.TRUE;
+                }
+
+            }
+            x.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Boolean.FALSE;
     }
 }
