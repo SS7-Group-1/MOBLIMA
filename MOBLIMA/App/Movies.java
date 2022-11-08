@@ -40,7 +40,6 @@ public class Movies {
 
             moviesByStatus.get(status).add(i);
 
-
         }
         int movie_count = 0;
         IdentityHashMap<Integer, Integer> movieMap = new IdentityHashMap<>();
@@ -390,13 +389,15 @@ public class Movies {
         ArrayList<String> movie_cast = new ArrayList<>();
         boolean add_another = true;
         do {
-            System.out.println("Enter a movie cast: ");
+            System.out.println(movie_cast.size() == 0 ? "Enter a movie cast: " : "Enter another movie cast: ");
             sc.skip("\\R?");
             movie_cast.add(sc.nextLine());
-            System.out.println("Add another cast? (y/N): ");
-            sc.skip("\\R?");
-            if (!sc.nextLine().equalsIgnoreCase("y")) {
-                add_another = false;
+            if(movie_cast.size() > 1){
+                System.out.println("Add another cast? (y/N): ");
+                sc.skip("\\R?");
+                if (!sc.nextLine().equalsIgnoreCase("y")) {
+                    add_another = false;
+                }
             }
         } while (add_another);
         movie.setCast(movie_cast);
@@ -533,6 +534,7 @@ public class Movies {
             System.out.println("[3] Synopsis: " + movie.getSynopsis());
             System.out.println("[4] Director: " + movie.getDirector());
             System.out.println("[5] Type: " + movie.getMovieType());
+            System.out.println("[6] Cast: " + movie.getCast());
             System.out.print("Enter option: ");
             switch (sc.nextInt()) {
                 case 1 -> {
@@ -596,6 +598,24 @@ public class Movies {
                             System.out.println("Invalid option. Please try again.");
                         }
                     }
+                }
+                case 6 -> {
+                    System.out.println("=".repeat(40));
+                    ArrayList<String> movie_cast = new ArrayList<>();
+                    boolean add_another = true;
+                    do {
+                        System.out.println(movie_cast.size() == 0 ? "Enter a movie cast: " : "Enter another movie cast: ");
+                        sc.skip("\\R?");
+                        movie_cast.add(sc.nextLine());
+                        if(movie_cast.size() > 1){
+                            System.out.println("Add another cast? (y/N): ");
+                            sc.skip("\\R?");
+                            if (!sc.nextLine().equalsIgnoreCase("y")) {
+                                add_another = false;
+                            }
+                        }
+                    } while (add_another);
+                    movie.setCast(movie_cast);
                 }
                 default -> {
                     System.out.println("Invalid option. Please try again.");

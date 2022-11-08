@@ -6,6 +6,7 @@ import MOBLIMA.TicketType;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -119,10 +120,13 @@ public class Pricing {
     public Boolean isPublicHoliday(LocalDate date)
     {
         try {
+
+
+
             File file = new File("data/date.txt");
             Scanner x = new Scanner(file);
             x.useDelimiter("[,\n]");
-            String Edate = date.toString();
+
 
             while (x.hasNextLine()) {
                 String data = x.nextLine();
@@ -131,7 +135,10 @@ public class Pricing {
                 String Holiday =res[0];
                 String check = res[1];
 
-                if(check.equals(Edate))
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(check, formatter); //converting Edate to local date format
+
+                if(localDate.isEqual(date))
                 {
                     return Boolean.TRUE;
                 }

@@ -53,50 +53,51 @@ public class _populateDataFiles {
                 seats[i][j] = new Seat(SeatType.STANDARD, i, j);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.LIDO, false, "LD1", seats));
-        cinema_list.add(new Cinema(Cineplex.LIDO, false, "LD2", seats));
-        cinema_list.add(new Cinema(Cineplex.LIDO, false, "LD3", seats));
+        ArrayList<Integer> aisle= new ArrayList<>();
+        cinema_list.add(new Cinema(Cineplex.LIDO, false, "LD1", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.LIDO, false, "LD2", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.LIDO, false, "LD3", seats,aisle));
         seats = new Seat[7][9];
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
                 seats[i][j] = new Seat(SeatType.STANDARD, i, j);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.PAYA_LEBAR_QUARTER, false, "PQ1", seats));
-        cinema_list.add(new Cinema(Cineplex.PAYA_LEBAR_QUARTER, false, "PQ2", seats));
-        cinema_list.add(new Cinema(Cineplex.PAYA_LEBAR_QUARTER, false, "PQ3", seats));
+        cinema_list.add(new Cinema(Cineplex.PAYA_LEBAR_QUARTER, false, "PQ1", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.PAYA_LEBAR_QUARTER, false, "PQ2", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.PAYA_LEBAR_QUARTER, false, "PQ3", seats,aisle));
         seats = new Seat[7][8];
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 8; j++) {
                 seats[i][j] = new Seat(SeatType.STANDARD, i, j);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.NEX, false, "NX1", seats));
-        cinema_list.add(new Cinema(Cineplex.NEX, false, "NX2", seats));
-        cinema_list.add(new Cinema(Cineplex.NEX, false, "NX3", seats));
+        cinema_list.add(new Cinema(Cineplex.NEX, false, "NX1", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.NEX, false, "NX2", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.NEX, false, "NX3", seats,aisle));
         seats = new Seat[4][6];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
                 seats[i][j] = new Seat(SeatType.STANDARD, i, j);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.NEX, true, "NXP", seats));
+        cinema_list.add(new Cinema(Cineplex.NEX, true, "NXP", seats,aisle));
         seats = new Seat[8][9];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
                 seats[i][j] = new Seat(SeatType.STANDARD, i, j);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "JW1", seats));
-        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "JW2", seats));
-        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "JW3", seats));
+        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "JW1", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "JW2", seats,aisle));
+        cinema_list.add(new Cinema(Cineplex.JEWEL, false, "JW3", seats,aisle));
         seats = new Seat[5][6];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 6; j++) {
                 seats[i][j] = new Seat(SeatType.STANDARD, i, j);
             }
         }
-        cinema_list.add(new Cinema(Cineplex.JEWEL, true, "JWP", seats));
+        cinema_list.add(new Cinema(Cineplex.JEWEL, true, "JWP", seats,aisle));
         FileHelper.write(cinema_list, "data/cinemas.dat");
 
         showTimeCinema1 = cinema_list.get(0);
