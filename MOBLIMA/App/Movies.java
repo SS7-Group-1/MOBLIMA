@@ -35,8 +35,8 @@ public class Movies {
             String status = movie_list.get(i).getStatus().toString();
             if (!moviesByStatus.containsKey(status) && movie_list.get(i).getStatus() != MovieStatus.END_OF_SHOWING) {
                 moviesByStatus.put(status, new ArrayList<>());
+                moviesByStatus.get(status).add(i);
             }
-            moviesByStatus.get(status).add(i);
         }
         int movie_count = 0;
         IdentityHashMap<Integer, Integer> movieMap = new IdentityHashMap<>();

@@ -1,12 +1,11 @@
 package MOBLIMA.App;
 
 import MOBLIMA.FileHelper;
-import MOBLIMA.Movie;
-import MOBLIMA.User;
 import MOBLIMA.Voucher;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Vector;
 
 /**
  * Class that handles all the payment of a movie
@@ -73,15 +72,30 @@ public class Payment {
         if(amount > 0){
             System.out.println("=".repeat(40));
             System.out.println("Give us your money");
-            System.out.println("Card number:");
-            sc.skip("\\R?");
-            String credit_card = sc.nextLine();
+            boolean awaitCc = true;
+            while(awaitCc){
+                System.out.println("Card number:");
+                sc.skip("\\R?");
+                String credit_card = sc.nextLine();
+                if(ccIsValid(credit_card)){
+                    awaitCc = false;
+                    System.out.println("Card type: " + getIssuer(credit_card));
+                }
+                else {
+                    System.out.println("Invalid card number. Try again? (Y/n)");
+                    sc.skip("\\R?");
+                    if (sc.nextLine().equalsIgnoreCase("n")) {
+                        System.out.println("Transaction cancelled");
+                        return -1;
+                    }
+                }
+            }
 
             System.out.println("CVV");
             sc.skip("\\R?");
             String pin = sc.nextLine();
 
-            System.out.println("Expiry date:");
+            System.out.println("Expiry date: (MM/YY)");
             sc.skip("\\R?");
             String expiry_date = sc.nextLine();
             System.out.println("Payment successful.");
@@ -90,6 +104,62 @@ public class Payment {
             System.out.println("No payment required.");
         }
         return amount;
+    }
+
+    /*
+     * Function to get credit card issuer
+     */
+    public String getIssuer(String number) {
+        Vector<Integer> ccNumber = new Vector<>();
+        //copy gets an object returned casted as Vector<Integer> from the clone method
+        //copy = (Vector<Integer>) ccNumber.clone();
+        for (int i = 0; i < number.length(); i++) {
+            ccNumber.add(Integer.parseInt(String.valueOf(number.charAt(i))));
+        }
+        if(ccNumber.size() == 15)
+            if(ccNumber.elementAt(0) == 3 && ccNumber.elementAt(1) == 4 || ccNumber.elementAt(0) == 3 && ccNumber.elementAt(1) == 7)
+                return "American Express";
+            else
+                return "Unknown Card";
+        else if(ccNumber.size() == 13)
+            return "VISA";
+        else if(ccNumber.size() == 14)
+            return "Diner's Club";
+        else if(ccNumber.size() == 16) {
+            if(ccNumber.elementAt(0) == 4)
+                return "VISA";
+            else if(ccNumber.elementAt(0) == 5 && ccNumber.elementAt(1) >= 1 && ccNumber.elementAt(1) <= 5)
+                return "MasterCard";
+            else if(ccNumber.elementAt(0) == 6 && ccNumber.elementAt(1) == 0 && ccNumber.elementAt(2) == 1 && ccNumber.elementAt(3) == 1)
+                return "Discover";
+            else
+                return "Unknown Card";
+        }
+        else
+            return "Unknown Card";
+    }
+
+    /*
+     * Function to check if credit card number is valid
+     */
+    public boolean ccIsValid(String ccNumber) {
+        Vector<Integer> copy = new Vector<>();
+        for (int i = 0; i < ccNumber.length(); i++) {
+            copy.add(Integer.parseInt(String.valueOf(ccNumber.charAt(i))));
+        }
+        int temp = copy.size() % 2;
+        for(int i = 0; i < copy.size(); i += 2) {
+            if(copy.elementAt(i) * 2 > 9)
+                temp = copy.elementAt(i) * 2 - 9;
+            else
+                temp = copy.elementAt(i) * 2;
+            copy.setElementAt(temp, i);
+        }
+        int sum = 0;
+        for(int x : copy) {
+            sum += x;
+        }
+        return sum % 10 == 0;
     }
 
     /**

@@ -96,6 +96,7 @@ public class Main {
 
             choice = sc.nextInt();
             switch (choice) {
+                case 0 -> {}
                 case 1 -> { // MOVIES LIST
                     int subChoice = -1;
                     while (subChoice != 0) {
@@ -341,12 +342,12 @@ public class Main {
                             }
                             case 2 -> { // UPDATE EXISTING SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
-                                ShowTime showTime = showTimes.selectShowTime();
+                                ShowTime showTime = showTimes.selectShowTime(false);
                                 showTimes.updateShowtime(showTime);
                             }
                             case 3 -> { // REMOVE SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
-                                ShowTime showTime = showTimes.selectShowTime();
+                                ShowTime showTime = showTimes.selectShowTime(false);
                                 showTimes.removeFromShowtimeFile(showTime);
                             }
                             default -> System.out.println("Invalid option. Please try again.");
