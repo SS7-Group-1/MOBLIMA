@@ -134,7 +134,15 @@ public class Main {
                             }
                             case 1 -> { // VIEW ALL MOVIES
                                 Movies movies = new Movies();
-                                movies.displayMovies();
+                                if (Account.UserDetail.user != null && Account.UserDetail.user.isAdmin()){
+                                    System.out.println("I am admin");
+                                    movies.displayMovies(1);
+                                }
+                                else{
+                                    System.out.println("I am guest");
+                                    movies.displayMovies(0);
+                                }
+
                             }
                             case 2 -> { // SEARCH FOR MOVIE
                                 Movies movies = new Movies();

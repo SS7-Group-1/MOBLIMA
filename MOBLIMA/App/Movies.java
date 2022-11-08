@@ -27,25 +27,41 @@ public class Movies {
      *Function that displays currently available movies and allows users to purchase tickets
      */
 
-    public void displayMovies() {
+    public void displayMovies(int user_flag) {
         System.out.println("=".repeat(40));
         System.out.println("| List of all movies |");
         IdentityHashMap<String, ArrayList<Integer>> moviesByStatus = new IdentityHashMap<>();
         for (int i = 0; i < movie_list.size(); i++) {
             String status = movie_list.get(i).getStatus().toString();
-            if (!moviesByStatus.containsKey(status) && movie_list.get(i).getStatus() != MovieStatus.END_OF_SHOWING) {
+            // && movie_list.get(i).getStatus() != MovieStatus.END_OF_SHOWING
+            if (!moviesByStatus.containsKey(status)) {
                 moviesByStatus.put(status, new ArrayList<>());
-                moviesByStatus.get(status).add(i);
             }
+
+            moviesByStatus.get(status).add(i);
+
+
         }
         int movie_count = 0;
         IdentityHashMap<Integer, Integer> movieMap = new IdentityHashMap<>();
         for (Map.Entry<String, ArrayList<Integer>> entry : moviesByStatus.entrySet()) {
-            System.out.println("(" + entry.getKey() + ")");
-            for (Integer i : entry.getValue()) {
-                System.out.println(" [" + ++movie_count + "] " + movie_list.get(i).getTitle());
-                movieMap.put(movie_count, i);
+            if (user_flag == 1){
+                System.out.println("(" + entry.getKey() + ")");
+                for (Integer i : entry.getValue()) {
+                    System.out.println(" [" + ++movie_count + "] " + movie_list.get(i).getTitle());
+                    movieMap.put(movie_count, i);
+                }
             }
+            else{
+                if (entry.getKey().equals("End of showing") == false){
+                    System.out.println("(" + entry.getKey() + ")");
+                    for (Integer i : entry.getValue()) {
+                        System.out.println(" [" + ++movie_count + "] " + movie_list.get(i).getTitle());
+                        movieMap.put(movie_count, i);
+                    }
+                }
+            }
+
         }
         int choice = -1;
         while (choice != 0) {
