@@ -192,7 +192,7 @@ public class Cinemas {
     public void updateCinemaSeating(Cinema cinema) {
         boolean edit = true;
         while (edit) {
-            printSeatingLayout(cinema.getSeatLayout(), false);
+            printSeatingLayout(cinema.getSeatLayout(), false, cinema);
             System.out.println("[1] Update cinema size: " + cinema.getSeatLayout().length + "rows, " + cinema.getSeatLayout()[0].length + "columns");
             System.out.println("[2] Update seat type");
             switch (sc.nextInt()) {
@@ -207,7 +207,7 @@ public class Cinemas {
                     cinema.setSeatingLayout(rows, cols);
                     updateCinema(cinema);
                     System.out.println("Seat layout updated");
-                    printSeatingLayout(cinema.getSeatLayout(), false);
+                    printSeatingLayout(cinema.getSeatLayout(), false, cinema);
                     edit = false;
                 }
                 case 2 -> {
@@ -229,7 +229,7 @@ public class Cinemas {
                     cinema.getSeatLayout()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].setSeatType(seatType1);
 
                     FileHelper.write(cinema_list, "data/cinemas.dat");
-                    printSeatingLayout(cinema.getSeatLayout(), false);
+                    printSeatingLayout(cinema.getSeatLayout(), false, cinema);
                     System.out.println("Update another seat? (y/N): ");
                     sc.skip("\\R?");
                     if (!sc.nextLine().equalsIgnoreCase("y")) {
@@ -244,11 +244,12 @@ public class Cinemas {
     /**
      * Allows the Printing of Seating Layout for users to see
      * @param seatLayout - Array of Seat type to be used to print seating layout
+     * @param cinema - Cinema which the seating layout belongs to
      * @param showSelection - Parameter that shows the selected seats by the user
      */
-    public void printSeatingLayout(Seat[][] seatLayout, boolean showSelection){
+    public void printSeatingLayout(Seat[][] seatLayout, boolean showSelection, Cinema cinema){
         System.out.println("=".repeat(40));
-        System.out.println("Seating layout");
+        System.out.println("Seating layout for " + cinema.getCineplex() + "-" + cinema.getCinemaCode() + (cinema.isPlatinum() ? " (Platinum Cinema)" : ""));
         System.out.println(" ".repeat((seatLayout.length / 2) + 5) + "SCREEN");
         for (int i = 0; i < seatLayout.length; i++) {
             System.out.print(" " + ((char)(i + 65)) + "  ");

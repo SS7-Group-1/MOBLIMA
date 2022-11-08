@@ -89,7 +89,7 @@ public class ShowTimes {
         sc.skip("\\R?");
         boolean selectSeat = true;
         while(selectSeat){
-            cinemas.printSeatingLayout(showTime.getSeats(), true);
+            cinemas.printSeatingLayout(showTime.getSeats(), true, showTime.getCinema());
             System.out.print("Select seat to book: ");
             String seat = sc.nextLine();
             if(showTime.getSeats()[seat.charAt(0) - 65][Integer.parseInt(seat.substring(1)) - 1].isOccupied()){
@@ -135,7 +135,7 @@ public class ShowTimes {
             }
         }
 
-        cinemas.printSeatingLayout(showTime.getSeats(), true);
+        cinemas.printSeatingLayout(showTime.getSeats(), true, showTime.getCinema());
         System.out.println("Selected seats: " + new_booking.printSeats());
         System.out.println("Total price: $" + new_booking.getTotalPrice());
         System.out.println("Confirm booking? (y/N): ");
