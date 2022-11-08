@@ -377,7 +377,7 @@ public class Movies {
             System.out.println(movie_cast.size() == 0 ? "Enter a movie cast: " : "Enter another movie cast: ");
             sc.skip("\\R?");
             movie_cast.add(sc.nextLine());
-            if(movie_cast.size() < 2){
+            if(movie_cast.size() > 1){
                 System.out.println("Add another cast? (y/N): ");
                 sc.skip("\\R?");
                 if (!sc.nextLine().equalsIgnoreCase("y")) {
@@ -592,7 +592,7 @@ public class Movies {
                         System.out.println(movie_cast.size() == 0 ? "Enter a movie cast: " : "Enter another movie cast: ");
                         sc.skip("\\R?");
                         movie_cast.add(sc.nextLine());
-                        if(movie_cast.size() < 2){
+                        if(movie_cast.size() > 1){
                             System.out.println("Add another cast? (y/N): ");
                             sc.skip("\\R?");
                             if (!sc.nextLine().equalsIgnoreCase("y")) {
