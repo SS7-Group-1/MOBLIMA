@@ -1,7 +1,0 @@
-timing,movie
-James bond 007,1000
-minions,1430
-minions,1630
-James bond 007,1800
-minions,2230
-avatar,2345
