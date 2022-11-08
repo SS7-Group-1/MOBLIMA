@@ -304,7 +304,7 @@ public class ShowTimes {
      * Function that allows user to select ShowTime
      * @return selected showtime
      */
-    public ShowTime selectShowTime(){
+    public ShowTime selectShowTime(boolean isBooking){
         System.out.println("=".repeat(40));
         System.out.println("All showtimes");
         System.out.println("=".repeat(40));
@@ -328,7 +328,7 @@ public class ShowTimes {
         int choice = -1;
         while (choice != 0) {
             System.out.println("=".repeat(40));
-            System.out.println("[1-" + showtime_count + "] View movie information or buy tickets");
+            System.out.println("[1-" + showtime_count + "] " + (isBooking ? "View movie information or buy tickets" : "Select showtime"));
             System.out.println("[0] Go back");
             System.out.print("Enter option: ");
             choice = sc.nextInt();

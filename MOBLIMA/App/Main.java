@@ -341,12 +341,12 @@ public class Main {
                             }
                             case 2 -> { // UPDATE EXISTING SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
-                                ShowTime showTime = showTimes.selectShowTime();
+                                ShowTime showTime = showTimes.selectShowTime(false);
                                 showTimes.updateShowtime(showTime);
                             }
                             case 3 -> { // REMOVE SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
-                                ShowTime showTime = showTimes.selectShowTime();
+                                ShowTime showTime = showTimes.selectShowTime(false);
                                 showTimes.removeFromShowtimeFile(showTime);
                             }
                             default -> System.out.println("Invalid option. Please try again.");
