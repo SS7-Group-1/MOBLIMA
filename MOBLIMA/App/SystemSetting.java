@@ -467,8 +467,8 @@ public class SystemSetting {
         if(choice ==1)
         {
             System.out.println("Enter New Holiday Name");
+            sc.skip("\\R?");
             String NHoliday= sc.nextLine();
-            System.out.println("Hit");
             File oldFile = new File("data/date.txt");
             File newFile = new File("temp.txt");
 
@@ -487,6 +487,7 @@ public class SystemSetting {
 
                     if (Holiday.equals(EHoliday)) {
                         pw.println(NHoliday + "," + Date);
+                        System.out.println("Holiday Name editied successfully");
                         count = 1;
 
                     } else {
@@ -510,6 +511,7 @@ public class SystemSetting {
         else if (choice ==2)
         {
             System.out.println("Enter Date to update (dd/mm/yyyy)");
+            sc.skip("\\R?");
             String EDate = sc.nextLine();
 
 
@@ -531,6 +533,7 @@ public class SystemSetting {
 
                     if (Holiday.equals(EHoliday)) {
                         pw.println(EHoliday + "," + EDate);
+                        System.out.println("Date Modified successfully");
                         count = 1;
 
                     } else {
