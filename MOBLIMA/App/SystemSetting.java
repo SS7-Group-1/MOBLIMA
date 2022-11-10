@@ -9,6 +9,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 /**
@@ -29,10 +30,10 @@ public class SystemSetting {
         while(set)
         {
              System.out.println("=".repeat(40));
-                System.out.println("│ System setting menu │");
+                System.out.println("│ System Setting Menu │");
                 System.out.println("[1] Manage ticket price");
-                System.out.println("[2] Show top 5 movies by rating");
-                System.out.println("[3] Show top 5 movies by sales");
+                System.out.println("[2] Show top 5 movie by rating");
+                System.out.println("[3] Show top 5 movie by sales");
                 System.out.println("[4] Configure User Top 5 permission");
                 System.out.println("[5] Configure User Role");
                 System.out.println("[6] Manage vouchers");
@@ -179,7 +180,8 @@ public class SystemSetting {
         Boolean set = Boolean.TRUE;
         while (set)
         {
-            System.out.println("Dear User, Please Select Option that you wish to view");
+            System.out.println("=".repeat(40));
+            System.out.println("| Ticket Price Menu |");
             System.out.println("[1] View all TicketConfiguration");
             System.out.println("[2] Configure Ticket Price");
             System.out.println("[3] Go Back");
@@ -376,7 +378,7 @@ public class SystemSetting {
                 String symbol = res[1];
                 String INT = res[2];
 
-                System.out.println("Modifier type is "+ modifier +" " + symbol + INT);
+                System.out.println(modifier + " price: " + symbol + INT);
             }
             x.close();
         }
@@ -393,18 +395,28 @@ public class SystemSetting {
     public int AddHoliday()
     {
         int count =1;
+        String date;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Name of Holiday");
         String holiday = sc.nextLine();
         System.out.println("Enter Date to be set as a holiday in the format of DD/MM/YYYY");
-        String date = sc.nextLine();
-
+        sc.skip("\\R?");
+        while (true) {
+            try {
+                date = sc.nextLine();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(date, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date. Please try again.");
+            }
+        }
         try {
             FileWriter fw = new FileWriter("data/date.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
-            pw.println(holiday+","+date);
+            pw.println(holiday+","+ date);
             pw.flush();
             pw.close();
 
@@ -453,8 +465,18 @@ public class SystemSetting {
         String EHoliday= HolidayName();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Date to update (dd/mm/yyyy)");
-        String EDate = sc.nextLine();
-
+        String EDate;
+        sc.skip("\\R?");
+        while (true) {
+            try {
+                EDate = sc.nextLine();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(EDate, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date. Please try again.");
+            }
+        }
 
         File oldFile = new File("data/date.txt");
         File newFile = new File("temp.txt");

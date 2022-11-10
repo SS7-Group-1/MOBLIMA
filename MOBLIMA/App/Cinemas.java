@@ -318,9 +318,13 @@ public class Cinemas {
             else if(i == 2){
                 System.out.print("   H - Handicap Seat");
             }
-            else if(i == 3 && showSelection){
+            else if (i == 3){
+                System.out.print("   X - Seat Taken");
+            }
+            else if(i == 4 && showSelection){
                 System.out.print("   S - Selected Seat");
             }
+
             System.out.println();
         }
         System.out.print("    ");
