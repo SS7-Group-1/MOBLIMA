@@ -5,6 +5,7 @@ import MOBLIMA.App.SystemSetting;
 
 public class systemsettingTest {
     public static void main(String[] args) {
-
+    SystemSetting chok = new SystemSetting();
+    chok.DisplayMenu();
     }
 }

@@ -392,12 +392,17 @@ public class SystemSetting {
      */
     public int AddHoliday()
     {
+
         int count =1;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Name of Holiday");
         String holiday = sc.nextLine();
         System.out.println("Enter Date to be set as a holiday in the format of DD/MM/YYYY");
         String date = sc.nextLine();
+        if(CheckDup(holiday,date)==Boolean.TRUE)
+        {
+            return 0;
+        }
 
         try {
             FileWriter fw = new FileWriter("data/date.txt", true);
@@ -414,6 +419,7 @@ public class SystemSetting {
             count =0;
             System.out.println("Error");
         }
+        System.out.println("Entry added successfully");
         return count;
     }
 
@@ -452,47 +458,99 @@ public class SystemSetting {
     {
         String EHoliday= HolidayName();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Date to update (dd/mm/yyyy)");
-        String EDate = sc.nextLine();
-
-
-        File oldFile = new File("data/date.txt");
-        File newFile = new File("temp.txt");
+        System.out.println("Editing Holiday Name or Date?");
+        System.out.println("[1] Editing Name");
+        System.out.println("[2] Editing Date");
         int count=0;
+        int choice = sc.nextInt();
 
-        try {
-            FileWriter fw = new FileWriter("temp.txt", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            Scanner x = new Scanner(oldFile);
-            //x.useDelimiter(",");
-
-            while (x.hasNext()) {
-                String data = x.nextLine();
-                String[] res = data.split(",");
-                String Holiday = res[0];
-                String Date = res[1];
-
-                if (Holiday.equals(EHoliday)) {
-                    pw.println(EHoliday + "," + EDate);
-                    count = 1;
-
-                } else {
-                    pw.println(Holiday + "," + Date);
-                }
-            }
-            x.close();
-            pw.flush();
-            pw.close();
-            oldFile.delete();
-            File dump = new File("data/date.txt");
-            newFile.renameTo(dump);
-
-        }
-        catch(Exception e)
+        if(choice ==1)
         {
-            System.out.println("Error");
+            System.out.println("Enter New Holiday Name");
+            String NHoliday= sc.nextLine();
+            System.out.println("Hit");
+            File oldFile = new File("data/date.txt");
+            File newFile = new File("temp.txt");
+
+            try {
+                FileWriter fw = new FileWriter("temp.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                Scanner x = new Scanner(oldFile);
+                //x.useDelimiter(",");
+
+                while (x.hasNext()) {
+                    String data = x.nextLine();
+                    String[] res = data.split(",");
+                    String Holiday = res[0];
+                    String Date = res[1];
+
+                    if (Holiday.equals(EHoliday)) {
+                        pw.println(NHoliday + "," + Date);
+                        count = 1;
+
+                    } else {
+                        pw.println(Holiday + "," + Date);
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File("data/date.txt");
+                newFile.renameTo(dump);
+
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error");
+            }
         }
+
+        else if (choice ==2)
+        {
+            System.out.println("Enter Date to update (dd/mm/yyyy)");
+            String EDate = sc.nextLine();
+
+
+            File oldFile = new File("data/date.txt");
+            File newFile = new File("temp.txt");
+
+            try {
+                FileWriter fw = new FileWriter("temp.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                Scanner x = new Scanner(oldFile);
+                //x.useDelimiter(",");
+
+                while (x.hasNext()) {
+                    String data = x.nextLine();
+                    String[] res = data.split(",");
+                    String Holiday = res[0];
+                    String Date = res[1];
+
+                    if (Holiday.equals(EHoliday)) {
+                        pw.println(EHoliday + "," + EDate);
+                        count = 1;
+
+                    } else {
+                        pw.println(Holiday + "," + Date);
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File("data/date.txt");
+                newFile.renameTo(dump);
+
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error");
+            }
+        }
+
         return count;
     }
 
@@ -523,6 +581,7 @@ public class SystemSetting {
 
                 if (Holiday.equals(DHoliday)) {
                     count =1;
+                    System.out.println("Entry Deleted Successfully");
                     continue;
 
                 } else {
@@ -580,9 +639,54 @@ public class SystemSetting {
         String EHoliday = chok.get(sc.nextInt()-1);
 
         return EHoliday;
+    }
 
+    /**
+     * Helper function that checks for duplicated entry either by holiday name / date
+     * @param HName - Holiday name to check for duplicated entry
+     * @param date - date to check for duplicated entry
+     * @return True should it  have duplicate / false if no duplcate
+     */
+    public Boolean CheckDup(String HName,String date)
+    {
+        ArrayList<String> duplicateHoliday = new ArrayList<String>();
+        ArrayList<String> duplicateDate = new ArrayList<String>();
+
+        try {
+            File file = new File("data/date.txt");
+            Scanner x = new Scanner(file);
+            x.useDelimiter("[,\n]");
+
+            while (x.hasNextLine()) {
+                String data = x.nextLine();
+                String[] res = data.split(",");
+                String Holiday =res[0];
+                String Calendar = res[1];
+                duplicateHoliday.add(Holiday);
+                duplicateDate.add(Calendar);
+
+            }
+            x.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        for(int i =0;i< duplicateHoliday.size();i++)
+        {
+          if(HName.equals(duplicateHoliday.get(i)) || date.equals(duplicateDate.get(i)))
+          {
+              System.out.println("Duplicated entry");
+              return Boolean.TRUE;
+          }
+
+        }
+        return Boolean.FALSE;
 
     }
+
+
 
 
 }
