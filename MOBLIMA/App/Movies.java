@@ -686,10 +686,10 @@ public class Movies {
                 for(int i = 0; i < movie_list.size(); i++){
                     if(movie_list.get(i).getTitle().equals(movie.getTitle())){
                         movie_list.get(i).getRating().addRating(rating);
-                        movie_list.get(10).getRating().printRatings();
+                        movie_list.get(i).getRating().printRatings();
                         FileHelper.write(movie_list, "data/movies.dat");
                         System.out.println("Rating successfully added");
-                        break;
+                        return;
                     }
                 }
             } else {

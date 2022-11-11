@@ -169,7 +169,7 @@ public class ShowTimes {
                 LocalDateTime now = LocalDateTime.now();
                 String transactionID = showTime.getCinema().getCinemaCode() + now.format(formatter);
                 new_booking.setTransactionID(transactionID);
-                System.out.println("Transaction ID " + "123456789");
+                System.out.println("Transaction ID " + transactionID);
                 System.out.println("Your booking is confirmed!");
 
                 //deselect all seats
@@ -399,7 +399,7 @@ public class ShowTimes {
         boolean edit = true;
         while(edit){
             System.out.println("=".repeat(40));
-            System.out.println("Updating " + showTime);
+            System.out.println("Updating " + showTime.getMovie().getTitle());
             System.out.println("Select field to edit");
             System.out.println("[1] Cinema: " + showTime.getCinema().getCineplex());
             System.out.println("[2] Date: " + showTime.getDate());

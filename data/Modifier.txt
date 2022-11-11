@@ -1,6 +1,6 @@
 Base,+,10
 CHILD,-,2
-STANDARD,+,0
+STANDARD,+,1
 SENIOR,-,2
 StandardCinema,+,0
 PlatinumCinema,+,10

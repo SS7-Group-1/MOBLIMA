@@ -9,6 +9,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 /**
@@ -29,7 +30,7 @@ public class SystemSetting {
         while(set)
         {
              System.out.println("=".repeat(40));
-                System.out.println("│ System setting menu │");
+                System.out.println("│ System Setting Menu │");
                 System.out.println("[1] Manage ticket price");
                 System.out.println("[2] Show top 5 movies by rating");
                 System.out.println("[3] Show top 5 movies by sales");
@@ -179,7 +180,8 @@ public class SystemSetting {
         Boolean set = Boolean.TRUE;
         while (set)
         {
-            System.out.println("Dear User, Please Select Option that you wish to view");
+            System.out.println("=".repeat(40));
+            System.out.println("| Ticket Price Menu |");
             System.out.println("[1] View all TicketConfiguration");
             System.out.println("[2] Configure Ticket Price");
             System.out.println("[3] Go Back");
@@ -376,7 +378,7 @@ public class SystemSetting {
                 String symbol = res[1];
                 String INT = res[2];
 
-                System.out.println("Modifier type is "+ modifier +" " + symbol + INT);
+                System.out.println(modifier + " price: " + symbol + INT);
             }
             x.close();
         }
@@ -394,11 +396,22 @@ public class SystemSetting {
     {
 
         int count =1;
+        String date;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Name of Holiday");
         String holiday = sc.nextLine();
         System.out.println("Enter Date to be set as a holiday in the format of DD/MM/YYYY");
-        String date = sc.nextLine();
+        sc.skip("\\R?");
+        while (true) {
+            try {
+                date = sc.nextLine();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(date, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date. Please try again.");
+            }
+        }
         if(CheckDup(holiday,date)==Boolean.TRUE)
         {
             return 0;
@@ -487,7 +500,7 @@ public class SystemSetting {
 
                     if (Holiday.equals(EHoliday)) {
                         pw.println(NHoliday + "," + Date);
-                        System.out.println("Holiday Name editied successfully");
+                        System.out.println("Holiday Name edited successfully");
                         count = 1;
 
                     } else {
@@ -511,8 +524,18 @@ public class SystemSetting {
         else if (choice ==2)
         {
             System.out.println("Enter Date to update (dd/mm/yyyy)");
+            String EDate;
             sc.skip("\\R?");
-            String EDate = sc.nextLine();
+            while (true) {
+                try {
+                    EDate = sc.nextLine();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(EDate, formatter);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date. Please try again.");
+                }
+            }
 
 
             File oldFile = new File("data/date.txt");
@@ -628,7 +651,7 @@ public class SystemSetting {
                 String Holiday =res[0];
                 String date = res[1];
 
-                System.out.println("[" + i++ + "]" + Holiday + ", date: " + date);
+                System.out.println("[" + i++ + "] " + Holiday + ": date: " + date);
                 chok.add(Holiday);
             }
             x.close();
