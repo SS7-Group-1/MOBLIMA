@@ -687,6 +687,7 @@ public class Movies {
                     if(movie_list.get(i).getTitle().equals(movie.getTitle())){
                         movie_list.get(i).getRating().addRating(rating);
                         movie_list.get(i).getRating().printRatings();
+                        System.out.println("Average rating: " + String.format("%.1f", movie.getRating().getAverageRating()));
                         FileHelper.write(movie_list, "data/movies.dat");
                         System.out.println("Rating successfully added");
                         return;
@@ -734,6 +735,7 @@ public class Movies {
         System.out.println("=".repeat(40));
         System.out.println("Ratings for " + movie.getTitle());
         movie.getRating().printRatings();
+        System.out.println("Average rating: " + String.format("%.1f", movie.getRating().getAverageRating()));
         System.out.println("=".repeat(40));
     }
 }
