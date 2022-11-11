@@ -80,6 +80,11 @@ public class Account {
         System.out.println("=".repeat(40));
         System.out.println("| Create a MOBLIMA account |");
 
+        System.out.print("Name: ");
+        String name = sc.next();
+        user.setName(name);
+
+        sc.skip("\\R?");
         System.out.print("Email: ");
         String email = sc.next();
         for (User u : user_list) {
@@ -97,8 +102,8 @@ public class Account {
 
         System.out.print("Phone Number: ");
         sc.skip("\\R?");
-        String name = sc.next();
-        user.setPhone(name);
+        String number = sc.next();
+        user.setPhone(number);
 
         user_list.add(user);
         FileHelper.write(user_list, "data/users.dat");

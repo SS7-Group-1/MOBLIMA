@@ -429,8 +429,8 @@ public class _populateDataFiles {
 
     public static void populateUsers(){
         ArrayList<User> user_list = new ArrayList<>();
-        user_list.add(new User("user@moblima.com", "87456874", "password", false));
-        user_list.add(new User("admin@moblima.com", "95447824", "password", true));
+        user_list.add(new User("user@moblima.com", "User", "87456874", "password", false));
+        user_list.add(new User("admin@moblima.com", "Admin", "95447824", "password", true));
 
         FileHelper.write(user_list, "data/users.dat");
     }

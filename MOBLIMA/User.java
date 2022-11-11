@@ -16,6 +16,10 @@ public class User implements Serializable {
      */
     private String email;
     /**
+     * Name of user
+     */
+    private String name;
+    /**
      * phone number of the user
      */
     private String phone;
@@ -46,8 +50,9 @@ public class User implements Serializable {
      * @param isAdmin flag to denote if user is an admin or not an admin
      * also initialises bookingRecords to a new array list
      */
-    public User(String email, String phone, String password, boolean isAdmin) {
+    public User(String email, String name, String phone, String password, boolean isAdmin) {
         this.email = email;
+        this.name = name;
         this.phone = phone;
         this.password = password;
         this.isAdmin = isAdmin;
@@ -79,6 +84,11 @@ public class User implements Serializable {
     }
 
     /**
+     * Accessor for name of the user
+     * @return name: name of the user
+     */
+    public String getName(){ return name; };
+    /**
      * Mutator for email of the user
      * @param email email of the user
      */
@@ -102,6 +112,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    /**
+     * Mutator for user's name
+     * @param name user's name
+     */
+    public void setName(String name){ this.name = name; }
     /**
      * returns booking records of user
      * @return bookingRecords: array list storing booking records of user
