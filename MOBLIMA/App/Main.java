@@ -134,7 +134,12 @@ public class Main {
                             }
                             case 1 -> { // VIEW ALL MOVIES
                                 Movies movies = new Movies();
-                                movies.displayMovies();
+                                if (Account.UserDetail.user != null && Account.UserDetail.user.isAdmin()){
+                                    movies.displayMovies(1);
+                                }
+                                else{
+                                    movies.displayMovies(0);
+                                }
                             }
                             case 2 -> { // SEARCH FOR MOVIE
                                 Movies movies = new Movies();
