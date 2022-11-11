@@ -1,5 +1,7 @@
 package MOBLIMA.App;
 
+import MOBLIMA.Interface.ConfigurationInt;
+import MOBLIMA.Interface.View;
 import MOBLIMA.Movie;
 import MOBLIMA.User;
 
@@ -7,7 +9,6 @@ import java.io.*;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -16,13 +17,13 @@ import java.util.*;
  * Class where the staff controls the administrative side of the cinema
  */
 
-public class SystemSetting {
+public class SystemSetting implements View, ConfigurationInt {
     ArrayList<Movie> movie_list = new ArrayList<>();
 
     /**
      * Function that act as a display Menu for staff to do the necessary adjustment
      */
-    public void DisplayMenu()
+    public void displayMenu()
     {
         Boolean set = Boolean.TRUE;
         Scanner sc = new Scanner(System.in);
@@ -106,13 +107,13 @@ public class SystemSetting {
                                         ViewHoliday();
                                     }
                                     case 2 -> {
-                                        AddHoliday();
+                                        add();
                                     }
                                     case 3 -> {
-                                        UpdateHoliday();
+                                        update();
                                     }
                                     case 4 -> {
-                                        DeleteHoliday();
+                                        remove();
                                     }
                                     case 0 -> set = Boolean.FALSE;
                                     default -> System.out.println("Invalid option");
@@ -392,7 +393,7 @@ public class SystemSetting {
      * Function that allows the addition of public holiday into holiday text file
      * @return 1 if successful , 0 if fail
      */
-    public int AddHoliday()
+    public int add()
     {
 
         int count =1;
@@ -467,7 +468,7 @@ public class SystemSetting {
      * Function that allows holidays to be updated
      * @return 1 if successful, 0 if unsuccessful
      */
-    public int UpdateHoliday()
+    public int update()
     {
         String EHoliday= HolidayName();
         Scanner sc = new Scanner(System.in);
@@ -584,7 +585,7 @@ public class SystemSetting {
      * Function that deletes holiday
      * @return 1 if true ,  0 if false
      */
-    public int DeleteHoliday()
+    public int remove()
     {
         String DHoliday = HolidayName();
         Scanner sc = new Scanner(System.in);

@@ -1,6 +1,8 @@
 package MOBLIMA.App;
 
 import MOBLIMA.*;
+import MOBLIMA.Interface.ConfigurationVoid;
+import MOBLIMA.Interface.View;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
  * @since 2022-11-08
  * @author Lim Jia Wei
  */
-public class ShowTimes {
+public class ShowTimes implements View, ConfigurationVoid {
     ArrayList<ShowTime> showtime_list;
     ArrayList<BookingRecord> booking_list;
     Scanner sc = new Scanner(System.in);
@@ -33,7 +35,7 @@ public class ShowTimes {
     /**
      * Function that Display all showtimes and allowing the purchasing of tickets
      */
-    public void displayShowtimes(){
+    public void displayMenu(){
         System.out.println("=".repeat(40));
         System.out.println("All showtimes");
         System.out.println("=".repeat(40));
@@ -489,5 +491,17 @@ public class ShowTimes {
         showtime_list.remove(showTime);
         FileHelper.write(showtime_list, "data/showtimes.dat");
         System.out.println("Showtime successfully removed.");
+    }
+
+    public void add(){
+
+    }
+
+    public void update(){
+
+    }
+
+    public void remove(){
+
     }
 }
