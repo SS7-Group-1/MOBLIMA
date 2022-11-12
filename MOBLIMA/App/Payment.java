@@ -189,7 +189,7 @@ public class Payment {
                 return;
             }
         }
-        voucher.setVoucherCode(sc.nextLine());
+        voucher.setVoucherCode(code);
         System.out.println("Enter voucher amount: ");
         sc.skip("\\R?");
         voucher.setAmount(sc.nextFloat());
@@ -270,7 +270,7 @@ public class Payment {
         Voucher voucher = selectVoucher();
         voucher_list.remove(voucher);
         FileHelper.write(voucher_list, "data/vouchers.dat");
-        System.out.print("Voucher removed");
+        System.out.println("Voucher removed");
     }
 
     /**

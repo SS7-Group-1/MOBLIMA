@@ -13,7 +13,6 @@ import java.util.Scanner;
  * @author Lim Jia Wei
  * @version 1.5
  * @since 2022-11-07
- *
  */
 public class Account {
     ArrayList<User> user_list;

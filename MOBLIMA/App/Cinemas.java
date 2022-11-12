@@ -196,6 +196,7 @@ public class Cinemas {
     public void removeCinema(Cinema cinema){
         cinema_list.remove(cinema);
         FileHelper.write(cinema_list, "data/cinemas.dat");
+        System.out.println(cinema.toString() + "removed successfully!");
     }
 
     /**
