@@ -3,6 +3,7 @@ package MOBLIMA.App;
 import MOBLIMA.*;
 import java.util.*;
 
+import MOBLIMA.Interface.View;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 /**
@@ -11,7 +12,7 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
  * @author Lim Jia Wei
  * @version 1.3
  */
-public class Movies {
+public class Movies{
     ArrayList<Movie> movie_list;
     Scanner sc = new Scanner(System.in);
 

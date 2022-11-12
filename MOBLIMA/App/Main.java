@@ -181,7 +181,7 @@ public class Main {
                             }
                             case 1 -> { // VIEW ALL SHOWTIMES
                                 ShowTimes showtimes = new ShowTimes();
-                                showtimes.displayShowtimes();
+                                showtimes.displayMenu();
                             }
                             case 2 -> { // SEARCH FOR SHOWTIMES BY MOVIE
                                 Movies movies = new Movies();
@@ -259,11 +259,11 @@ public class Main {
                             }
                             case 1 -> { // VIEW ALL CINEMAS
                                 Cinemas cinemas = new Cinemas();
-                                cinemas.displayCinemas();
+                                cinemas.displayMenu();
                             }
                             case 2 -> { // ADD NEW CINEMA
                                 Cinemas cinemas = new Cinemas();
-                                cinemas.addCinema();
+                                cinemas.add();
                             }
                             case 3 -> { // UPDATE CINEMA DETAILS
                                 Cinemas cinemas = new Cinemas();
@@ -273,7 +273,7 @@ public class Main {
                                 switch (sc.nextInt()) {
                                     case 1 -> {
                                         Cinema cinema = cinemas.selectCinema();
-                                        cinemas.updateCinema(cinema);
+                                        cinemas.update(cinema);
                                     }
                                     case 2 -> {
                                         Cinema cinema = cinemas.selectCinema();
@@ -348,12 +348,18 @@ public class Main {
                             case 2 -> { // UPDATE EXISTING SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
                                 ShowTime showTime = showTimes.selectShowTime(false);
-                                showTimes.updateShowtime(showTime);
+                                if (showTime != null){
+                                    showTimes.updateShowtime(showTime);
+                                }
+
                             }
                             case 3 -> { // REMOVE SHOWTIME
                                 ShowTimes showTimes = new ShowTimes();
                                 ShowTime showTime = showTimes.selectShowTime(false);
-                                showTimes.removeFromShowtimeFile(showTime);
+                                if (showTime != null)
+                                {
+                                    showTimes.removeFromShowtimeFile(showTime);
+                                }
                             }
                             default -> System.out.println("Invalid option. Please try again.");
                         }
@@ -361,7 +367,7 @@ public class Main {
                 }
                 case 9 -> { // CONFIGURE SYSTEM SETTINGS
                     SystemSetting test = new SystemSetting();
-                    test.DisplayMenu();
+                    test.displayMenu();
                 }
                 default -> System.out.println("Invalid option");
             }

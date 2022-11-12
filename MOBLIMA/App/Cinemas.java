@@ -1,6 +1,8 @@
 package MOBLIMA.App;
 
 import MOBLIMA.*;
+import MOBLIMA.Interface.ConfigurationVoid;
+import MOBLIMA.Interface.View;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ import java.util.Scanner;
  * @author Lim Jia Wei
  * @version 1.5
  */
-public class Cinemas {
+public class Cinemas implements View , ConfigurationVoid {
     ArrayList<Cinema> cinema_list;
     Scanner sc = new Scanner(System.in);
 
@@ -44,7 +46,7 @@ public class Cinemas {
     /**
      * Function that displays all available Cinema
      */
-    public void displayCinemas(){
+    public void displayMenu(){
         for (Cinema cinema: cinema_list){
             System.out.println(cinema);
         }
@@ -56,7 +58,7 @@ public class Cinemas {
      * Added Cinema will be written back into cinemas.dat
      */
 
-    public void addCinema(){
+    public void add(){
         Cinema cinema = new Cinema();
         // select cineplex
         //loop cineplex
@@ -127,7 +129,7 @@ public class Cinemas {
      * Updated Cinema will be written back into cinemas.dat
      * @param cinema - cinema object to be updated
      */
-    public void updateCinema(Cinema cinema){
+    public void update(Cinema cinema){
         boolean edit = true;
         System.out.println("=".repeat(40));
         System.out.println("Updating " + cinema);
@@ -236,7 +238,7 @@ public class Cinemas {
                     } while (add_another);
                     cinema.setAisle(aisle);
                     cinema.setSeatingLayout(rows, cols);
-                    updateCinema(cinema);
+                    update(cinema);
                     System.out.println("Seat layout updated");
                     printSeatingLayout(cinema.getSeatLayout(), false, cinema);
                     edit = false;
@@ -341,6 +343,14 @@ public class Cinemas {
         System.out.println();
         System.out.println();
         System.out.println("=".repeat(40));
+    }
+
+    public void update(){
+
+    }
+
+    public void remove(){
+
     }
 
 }
