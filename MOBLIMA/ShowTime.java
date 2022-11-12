@@ -69,7 +69,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get showTimeId
-     * @return
+     * @return the showTimeId
      */
     public String getShowTimeId() {
         return showTimeId;
@@ -92,7 +92,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get the seatings for a showtime of a movie
-     * @return
+     * @return the seatings for a showtime of a movie
      */
     public Seat[][] getSeats(){
         return seats;
@@ -118,7 +118,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get the movie object created using a Movie class
-     * @return
+     * @return the movie object created using a Movie class
      */
     public Movie getMovie() {
         return movie;
@@ -126,7 +126,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get the cinema object created using a Cinema class
-     * @return
+     * @return cinema object created using a Cinema class
      */
     public Cinema getCinema() {
         return cinema;
@@ -143,7 +143,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get the dateTime object created using LocalDateTime class
-     * @return
+     * @return LocalDateTime dateTime, which returns the date and the time of the showtime
      */
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -151,7 +151,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Mutator to set the dateTime object created using LocalDateTime class
-     * @param dateTime
+     * @param dateTime set the dateTime object for showtime
      */
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
@@ -175,7 +175,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get the date in the format of "dd MMM yy"
-     * @return
+     * @return String date which returns the date of the showtime
      */
     public String getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy");
@@ -184,7 +184,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Mutator to change the date
-     * @param date
+     * @param date date of showtime
      */
     public void setDate(LocalDate date) {
         this.dateTime = LocalDateTime.of(date, dateTime.toLocalTime());
@@ -192,7 +192,7 @@ public class ShowTime implements Serializable {
 
     /**
      * Accessor to get the day
-     * @return
+     * @return String day which returns day of showtime
      */
     public String getDay() {
         String day = dateTime.getDayOfWeek().toString();

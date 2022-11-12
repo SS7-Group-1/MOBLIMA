@@ -19,6 +19,10 @@ import java.util.Scanner;
  * @since 2022-11-07
  */
 public class Main {
+    /**
+     * main method
+     * @param args arguments that are being passed in
+     */
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

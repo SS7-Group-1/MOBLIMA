@@ -121,7 +121,7 @@ public class BookingRecord implements Serializable {
 
     /**
      * Accessor for all Tickets made in transaction.
-     * @return ArrayList<Ticket>: Array of Tickets.
+     * @return ArrayList(Ticket): Array of Tickets.
      */
     public ArrayList<Ticket> getTickets() {
         return tickets;

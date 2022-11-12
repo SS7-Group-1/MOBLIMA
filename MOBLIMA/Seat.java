@@ -39,6 +39,9 @@ public class Seat implements Serializable {
     /**
      * creates a new Seat with seatType, row, col initialised to the arguments passed in
      * also initialises isSelected and isOccupied to false
+     * @param seatType type of seat
+     * @param row row of seat
+     * @param col column of seat
      */
     public Seat(SeatType seatType, int row, int col){
         this.isSelected=false;

@@ -25,9 +25,9 @@ public class Movies{
     }
 
     /**
-     *Function that displays currently available movies and allows users to purchase tickets
+     * Function that displays currently available movies and allows users to purchase tickets
+     * @param user_flag to indicate if user is an admin or a movie-goer
      */
-
     public void displayMovies(int user_flag) {
         System.out.println("=".repeat(40));
         System.out.println("| List of all movies |");
@@ -722,6 +722,10 @@ public class Movies{
         }
     }
 
+    /**
+     * to view reviews of movie
+     * @param movie Movie object created
+     */
     public void viewReviews(Movie movie){
         System.out.println("=".repeat(40));
         System.out.println("Reviews for " + movie.getTitle());

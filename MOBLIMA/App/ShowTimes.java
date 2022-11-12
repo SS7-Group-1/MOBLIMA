@@ -302,8 +302,10 @@ public class ShowTimes implements View, ConfigurationVoid {
         }
     }
 
+
     /**
      * Function that allows user to select ShowTime
+     * @param isBooking whether user is booking or not booking
      * @return selected showtime
      */
     public ShowTime selectShowTime(boolean isBooking){
@@ -485,7 +487,7 @@ public class ShowTimes implements View, ConfigurationVoid {
 
     /**
      * Function that removes a showtime from showtimes.dat
-     * @param showTime
+     * @param showTime - showTime to be removed from showtimes.dat
      */
     public void removeFromShowtimeFile(ShowTime showTime){
         showtime_list.remove(showTime);

@@ -48,6 +48,7 @@ public class User implements Serializable {
      * @param phone phone number of the user
      * @param password password for user's account
      * @param isAdmin flag to denote if user is an admin or not an admin
+     * @param name name of User
      * also initialises bookingRecords to a new array list
      */
     public User(String email, String name, String phone, String password, boolean isAdmin) {

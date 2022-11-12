@@ -106,8 +106,10 @@ public class Payment {
         return amount;
     }
 
-    /*
+    /**
      * Function to get credit card issuer
+     * @param number credit card number
+     * @return String to check if credit card is valid or invalid
      */
     public String getIssuer(String number) {
         Vector<Integer> ccNumber = new Vector<>();
@@ -139,8 +141,10 @@ public class Payment {
             return "Unknown Card";
     }
 
-    /*
+    /**
      * Function to check if credit card number is valid
+     * @param ccNumber credit card number
+     * @return boolean to indicate if credit card number is valid or invalid
      */
     public boolean ccIsValid(String ccNumber) {
         Vector<Integer> copy = new Vector<>();

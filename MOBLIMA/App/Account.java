@@ -22,6 +22,9 @@ public class Account {
      * User class as an attribute in Account class
      */
     public class UserDetail {
+        /**
+         * user: object created using User class
+         */
         public static User user;
     }
 
@@ -134,6 +137,9 @@ public class Account {
         }
     }
 
+    /**
+     * method to update account
+     */
     public void updateAccount(){
         User user = UserDetail.user;
         String existingEmail = user.getEmail();

@@ -41,11 +41,12 @@ public class Cinema implements Serializable {
     }
 
     /**
-     *Creates a Cinema class with attributes initialised.
+     *
      * @param cineplex Cineplex that this Cinema belongs to.
      * @param isPlatinum Whether Cinema is a platinum suite or not.
      * @param cinemaCode Unique Cinema code.
      * @param seatLayout Cinema seat layout.
+     * @param aisle aisle located at cinema seats
      */
     public Cinema(Cineplex cineplex, boolean isPlatinum, String cinemaCode, Seat[][] seatLayout,ArrayList<Integer> aisle) {
         this.cineplex = cineplex;

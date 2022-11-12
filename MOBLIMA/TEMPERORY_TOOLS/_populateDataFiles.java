@@ -8,7 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * class to populate data files
+ */
 public class _populateDataFiles {
+    /**
+     * main method to be called
+     * @param args arguments to be passed in
+     */
     public static void main(String args[]) {
         System.out.println("Use this function to generate new cinema.dat and movie.dat files if needed");
         System.out.println("Confirm to overwrite all data files to default values? (y/N): ");
@@ -45,6 +52,9 @@ public class _populateDataFiles {
     static Movie showTimeMovie4;
     static Movie showTimeMovie5;
 
+    /**
+     * method to populate cinemas stored in files
+     */
     public static void populateCinemas() {
         ArrayList<Cinema> cinema_list = new ArrayList<>();
         Seat[][] seats = new Seat[6][8];
@@ -107,6 +117,9 @@ public class _populateDataFiles {
         showTimeCinema5 = cinema_list.get(9);
     }
 
+    /**
+     * method to populate movies stored in files
+     */
     public static void populateMovies() {
         ArrayList<Movie> movie_list = new ArrayList<>();
         Movie movie;
@@ -400,6 +413,9 @@ public class _populateDataFiles {
         FileHelper.write(movie_list, "data/movies.dat");
     }
 
+    /**
+     * method to populate showtimes stored in files
+     */
     public static void populateShowTimes(){
         ArrayList<ShowTime> showTime_list = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
@@ -427,6 +443,9 @@ public class _populateDataFiles {
         FileHelper.write(showTime_list, "data/showtimes.dat");
     }
 
+    /**
+     * method to populate users stored in files
+     */
     public static void populateUsers(){
         ArrayList<User> user_list = new ArrayList<>();
         user_list.add(new User("user@moblima.com", "User", "87456874", "password", false));
@@ -435,6 +454,9 @@ public class _populateDataFiles {
         FileHelper.write(user_list, "data/users.dat");
     }
 
+    /**
+     * method to populate vouchers available
+     */
     public static void populateVouchers(){
         ArrayList<Voucher> voucher_list = new ArrayList<>();
         voucher_list.add(new Voucher("UNLIMITED2OFF", 2f, -1));

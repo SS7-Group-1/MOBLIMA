@@ -18,11 +18,11 @@ import java.util.Scanner;
 public class Pricing {
     /**
      * Function that tabulates the ticket pricing
-     * @param ticketType
+     * @param ticketType - type of ticket
      * @param isPlatinum - Boolean that determines whether a cinema is Platinum or not
      * @param date -  date of watching movie
-     * @param movieType
-     * @param seatType
+     * @param movieType - type of movie
+     * @param seatType - type of seat
      * @return ticket pricing
      */
     public float computePricing(TicketType ticketType, boolean isPlatinum, LocalDate date, MovieType movieType, SeatType seatType) {

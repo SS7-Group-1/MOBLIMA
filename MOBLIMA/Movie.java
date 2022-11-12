@@ -222,7 +222,7 @@ public class Movie implements Serializable {
 
     /**
      * Accessor for movie's casts.
-     * @return ArrayList<String> :Movie's casts.
+     * @return ArrayList(String) :Movie's casts.
      */
     public ArrayList<String> getCast() {
         return cast;

@@ -16,8 +16,10 @@ import java.util.*;
 /**
  * Class where the staff controls the administrative side of the cinema
  */
-
 public class SystemSetting implements View, ConfigurationInt {
+    /**
+     * ArrayList that stores all movies
+     */
     ArrayList<Movie> movie_list = new ArrayList<>();
 
     /**

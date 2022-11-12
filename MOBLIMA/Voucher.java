@@ -128,7 +128,6 @@ public class Voucher implements Serializable {
     }
 
     /**
-     *
      * @return boolean value to denote if voucher has unlimited uses
      */
     public Boolean unlimitedUses(){

@@ -56,7 +56,7 @@ public class Review implements Serializable {
 
     /**
      * Mutator to set reviews to reviews (array list)
-     * @param reviews
+     * @param reviews to set reviews to reviews (array list)
      */
     public void setReviews(ArrayList<String> reviews) {
         this.reviews = reviews;

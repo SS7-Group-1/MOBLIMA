@@ -73,7 +73,7 @@ public class Rating implements Serializable {
 
     /**
      * Accessor for movie's ratings.
-     * @return ArrayList<Float>: Array of ratings.
+     * @return ArrayList(Float): Array of ratings.
      */
     public ArrayList<Float> getRatings() {
         return ratings;
